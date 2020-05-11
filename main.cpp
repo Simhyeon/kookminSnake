@@ -1,9 +1,5 @@
 #include <ncurses.h>
 #include "commons.hpp"
-#include "player.hpp"
-#include "physics.hpp"
-#include "renderer.hpp"
-#include "scoreboard.hpp"
 
 int main(void) {
 
