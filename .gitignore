@@ -1,6 +1,8 @@
 # ignore all objects files
 *.o
+obj/
 # ignore files beging edited
 *~
 # ignore binary file
+./Snake_game
 Snake_game
