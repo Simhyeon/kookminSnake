@@ -1,0 +1,6 @@
+# ignore all objects files
+*.o
+# ignore files beging edited
+*~
+# ignore binary file
+Snake_game
