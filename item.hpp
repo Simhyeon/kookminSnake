@@ -4,13 +4,21 @@
 #include <vector>
 #include "commons.hpp"
 
+enum class ITEMTYPE{
+	NONE,
+	GOODIES,
+	POISON,
+};
+
 class ItemSystem{
 private:
-	std::vector<Position> items;
+	std::vector<Position> goodies;
+	std::vector<Position> poison;
+
+	void consume_item(int x, int y);
 public:
-	bool at_item(int x, int y);
-	void set_item(int x, int y);
-	bool consume_item(int x, int y);
+	ITEMTYPE peak_item(int x, int y);
+	void set_item(int x, int y, ITEMTYPE);
 };
 
 #endif
