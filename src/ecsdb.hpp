@@ -10,23 +10,24 @@ class ECSDB{
 private:
 	bool player_death;
 	std::vector<PlayerBody> snake;
-	const std::vector<Position> walls;
-	std::vector<Position> portals;
-	std::vector<Position> goodies;
-	std::vector<Position> poison;
+	const PosVc walls;
+	PosVc empty;
+	PosVc portals;
+	PosVc goodies;
+	PosVc poison;
 
 	std::queue<char> console_inputs; // Placeholder
 public:
 	ECSDB();
 
+	std::vector<PlayerBody>& get_snake();
 	const bool get_death();
-	const auto get_snake();
-	const auto get_walls();
-	const auto get_portals();
-	const auto get_goodies();
-	const auto get_posions();
+	const PosVc& get_walls();
+	const PosVc& get_portals();
+	const PosVc& get_goodies();
+	const PosVc& get_posions();
 
-	const auto get_inputs(); // Placeholder
+	const std::queue<char> get_inputs(); // Placeholder
 
 	void set_death(bool value);
 	void set_snake(bool increment);
