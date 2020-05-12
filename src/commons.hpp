@@ -32,7 +32,7 @@ class Position{
 			return std::pair<int, int>(x_pos,y_pos);
 		}
 
-		bool operator==(Position& pos){
+		bool operator==(Position& pos) const{
 			if (x_pos == pos.get_x() && y_pos == pos.get_y()){
 				return true;
 			} else {
@@ -40,7 +40,7 @@ class Position{
 			}
 		}
 
-		bool operator==(const Position& pos){
+		bool operator==(const Position& pos) const{
 			if (x_pos == pos.get_x() && y_pos == pos.get_y()){
 				return true;
 			} else {
