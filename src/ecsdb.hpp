@@ -8,9 +8,10 @@
 
 class ECSDB{
 private:
+	const int width, height;
 	bool player_death;
 	std::vector<PlayerBody> snake;
-	const PosVc walls;
+	PosVc walls;
 	PosVc empty;
 	PosVc portals;
 	PosVc goodies;
