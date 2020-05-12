@@ -2,8 +2,6 @@
 #include "commons.hpp"
 #include "playerbody.hpp"
 
-// Should be modified. I definitely think this is not really a great idea
-// Empty를 일일히 만들고 검사해야 한다는게 너무 손해가 막심하다. 
 void ItemSystem::spawn_goodies(PosVc& empty, PosVc& goodies){
 	// Get random number from size of empty
 	// Add goodies to area and add to vector and remove from empty
