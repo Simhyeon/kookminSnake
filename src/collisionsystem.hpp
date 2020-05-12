@@ -3,10 +3,13 @@
 
 #include "commons.hpp"
 #include "ecsdb.hpp"
+#include "playerbody.hpp"
 
-class Physics{
+class CollisionSystem{
+private:
+	bool DetectCollision(const PosVc& wallas, PlayerBody& head);
 public:
-	void DetectCollision(ECSDB&);
+	void Process(ECSDB&);
 };
 
 #endif
