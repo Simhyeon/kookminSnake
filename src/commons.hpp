@@ -20,6 +20,10 @@ enum class KEYINPUT{
 	LEFT = 1,
 };
 
+class Time{
+
+};
+
 // Consider making assignment operator and comparison operator.
 class Position{
 	private:
@@ -32,14 +36,7 @@ class Position{
 			return std::pair<int, int>(x_pos,y_pos);
 		}
 
-		bool operator==(Position& pos) const{
-			if (x_pos == pos.get_x() && y_pos == pos.get_y()){
-				return true;
-			} else {
-				return false;
-			}
-		}
-
+		// Temporary 
 		bool operator==(const Position& pos) const{
 			if (x_pos == pos.get_x() && y_pos == pos.get_y()){
 				return true;
@@ -48,15 +45,11 @@ class Position{
 			}
 		}
 
-		// Make this operator complete
-//		Position operator+=(const Position& pos){
-//			
-//		}
-
-		int get_x() const{
+		const int get_x() const{
 			return x_pos;
 		}
-		int get_y() const{
+
+		const int get_y() const{
 			return y_pos;
 		}
 
