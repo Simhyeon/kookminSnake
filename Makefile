@@ -7,7 +7,7 @@ SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 EXE := Snake_game
 
-all: $(EXE)
+all: clean $(EXE)
 
 ${EXE} : ${OBJ}
 	${CC} ${CFLAG} $^ ${LDLIBS} -o $@

@@ -37,3 +37,9 @@ make
 - System은 로직을 담당
 
 ### Readme 수정 필요
+
+### 문서화
+
+#### 사용한 툴 : doxygen
+
+#### 문서화 서식: javadoc 
