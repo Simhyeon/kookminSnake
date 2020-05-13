@@ -28,7 +28,7 @@ public:
 	std::vector<PlayerBody>& get_snake();
 	const bool get_death();
 	const PosVc& get_walls();
-	const PosVc& get_portals();
+	const Portal& get_portal();
 	const ItmVc& get_growth();
 	const ItmVc& get_posion();
 

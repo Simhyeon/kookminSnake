@@ -61,9 +61,9 @@ private:
 	 * @param head PlayerBody 인스턴스 중에서 머리에 해당하는 인스턴스
 	 * @param goodies goodies 아이템이 저장되어 있는 벡터
 	 * @param poison poison 아이템이 저장되어 있는 벡터
-	 * @return 상호작용한 아이템의 타입. 만약 없다면 NONE을 리턴한다.
+	 * @return 상호작용한 아이템의 타입과 인덱스. 만약 없다면 NONE을 리턴한다.
 	 */
-	ITEMTYPE check_item_interaction(PlayerBody& head, const ItmVc& goodies, const ItmVc& poison);
+	std::pair<ITEMTYPE, int> check_item_interaction(PlayerBody& head, const ItmVc& goodies, const ItmVc& poison);
 
 	/** \brief 아이템을 적용하면서 플레이어 꼬리를 생성할 포지션을 계산하는 함수
 	 *

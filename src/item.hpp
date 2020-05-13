@@ -17,7 +17,6 @@ class Item{
 private:
 	Time timestamp;
 	Position pos;
-	ITEMTYPE type;
 friend class ItemSystem;
 };
 

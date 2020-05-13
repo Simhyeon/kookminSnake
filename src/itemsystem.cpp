@@ -1,5 +1,6 @@
 #include "itemsystem.hpp"
 #include "commons.hpp"
+#include "item.hpp"
 #include "playerbody.hpp"
 
 void ItemSystem::spawn_goodies(PosVc& empty, ItmVc& goodies){
@@ -20,20 +21,24 @@ void ItemSystem::remove_poison(int entity_index){
 
 };
 
-ITEMTYPE ItemSystem::check_item_interaction(PlayerBody& head, const ItmVc& goodies, const ItmVc& poison){
+std::pair<ITEMTYPE, int> ItemSystem::check_item_interaction(PlayerBody& head, const ItmVc& goodies, const ItmVc& poison){
+	int counter = 0;
 	for(Item item: goodies){
 		if(item.pos == head.get_pos()){
-			return ITEMTYPE::INC;			
+			return std::pair<ITEMTYPE, int>(ITEMTYPE::INC, counter);
 		}
+		counter++;
 	}
 
+	counter = 0;
 	for (Item item: poison){
 		if(item.pos == head.get_pos()){
-			return ITEMTYPE::DEC;			
+			return std::pair<ITEMTYPE, int>(ITEMTYPE::DEC, counter);
 		}
+		counter++;
 	}
 
-	return ITEMTYPE::NONE;
+	return std::pair<ITEMTYPE, int>(ITEMTYPE::NONE, -1);
 };
 
 Position ItemSystem::get_following_position(PlayerBody& parent) {
@@ -43,9 +48,9 @@ Position ItemSystem::get_following_position(PlayerBody& parent) {
 }
 
 void ItemSystem::process(ECSDB& db){
-	ITEMTYPE item_type = check_item_interaction(db.get_snake()[0], db.get_growth(), db.get_posion());
+	auto result = check_item_interaction(db.get_snake()[0], db.get_growth(), db.get_posion());
 
-	switch (item_type) {
+	switch (result.first) {
 		case ITEMTYPE::DEC: {
 			db.get_snake().pop_back();
 			break;
