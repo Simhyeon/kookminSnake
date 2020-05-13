@@ -1,5 +1,5 @@
-#ifndef PORTAL_H
-#define PORTAL_H
+#ifndef PORTALSYS_H
+#define PORTALSYS_H
 
 #include "ecsdb.hpp"
 #include "commons.hpp"
