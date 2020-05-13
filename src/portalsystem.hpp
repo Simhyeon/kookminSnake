@@ -7,6 +7,7 @@
 
 class PortalSystem{
 private:
+	const double portal_time = 5.0;
 	void jump_snake();
 	void set_portal();
 	void remove_portal();

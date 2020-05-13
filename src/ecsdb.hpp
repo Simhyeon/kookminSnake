@@ -11,7 +11,6 @@
 class ECSDB{
 private:
 	Time runtime;
-	const int item_size = 3;
 	const int width, height;
 	bool player_death;
 	std::vector<PlayerBody> snake;

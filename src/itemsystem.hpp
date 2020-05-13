@@ -19,6 +19,17 @@
  */
 class ItemSystem{
 private:
+
+	/** \brief 최대 아이템 개수 
+	 *
+	 */
+	const int item_size = 3;
+
+	/** \brief 아이템의 지속시간  
+	 *
+	 */
+	const double item_time = 5;
+
 	/** \brief 플레이어 몸체를 늘려주는 아이템을 생성하는 함수
 	 *
 	 * @param empty goodies을 생성할 위치를 저장한 변수
