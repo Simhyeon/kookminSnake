@@ -1,23 +1,35 @@
 #include "playersystem.hpp"
-#include "commons.hpp"
 #include "playerbody.hpp"
 
-void PlayerBodySystem::change_direction(DIRECTION direction, PlayerBody& head){
+bool PlayerBodySystem::change_direction(DIRECTION direction, PlayerBody& head){
 	if (head.get_direction() == direction) {
-		return;
+		return false;
 	} else if (static_cast<int>(head.get_direction()) == -static_cast<int>(direction))  {
-		// Reverse direction input given. 
-		// Kill or ignore
-		return;
+		return true;
 	} else {
 		head.set_direction(direction);
+		return false;
+	}
+}
+
+bool PlayerBodySystem::check_length(int size) {
+	if (size < min_length) {
+		return true;
+	} else {
+		return false;
 	}
 }
 
 void PlayerBodySystem::process(ECSDB& db) {
-	auto dirct =  get_console_input(db.get_inputs().front()); // placeholder
+	if (check_length(db.get_snake().size())){
+		db.set_death(true);
+		return;
+	}
+	auto dirct = get_console_input(db.get_inputs().front()); // placeholder
 	if (dirct.first) {
-		change_direction(dirct.second, db.get_snake()[0]);
+		if (change_direction(dirct.second, db.get_snake()[0])) { // Problem == true
+			db.set_death(true);
+		}
 	}
 	move(db.get_snake());
 }

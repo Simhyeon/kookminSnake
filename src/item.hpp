@@ -15,8 +15,11 @@ enum class ITEMTYPE{
 
 class Item{
 private:
-	Time timestamp;
+	long timestamp;
 	Position pos;
+public:
+	Item();
+	Item(Position);
 friend class ItemSystem;
 };
 

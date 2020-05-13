@@ -5,9 +5,11 @@
 
 class Portal{
 private:
-	Time timestamp;
-	Position first;
-	Position second;
+	const long timestamp;
+	const Position first;
+	const Position second;
+public:
+	Portal(Position, Position);
 
 friend class PortalSystem;
 };

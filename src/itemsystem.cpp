@@ -1,44 +1,44 @@
 #include "itemsystem.hpp"
-#include "commons.hpp"
 #include "item.hpp"
 #include "playerbody.hpp"
+#include <algorithm>
 
-void ItemSystem::spawn_goodies(PosVc& empty, ItmVc& goodies){
-	// Get random number from size of empty
-	// Add goodies to area and add to vector and remove from empty
+void ItemSystem::spawn_growth(PosVc& empty, ItmVc& growth){
+	int idx = Util::get_rand(0, empty.size() -1);
+	growth.push_back(Item(empty[idx]));
+	empty.erase(empty.begin() + idx);
 }
 
 void ItemSystem::spawn_poison(PosVc& empty, ItmVc& poison){
-	// Get random number from size of empty
-	// Add poision to area and add to vector and remove from empty
+	int idx = Util::get_rand(0, empty.size() -1);
+	poison.push_back(Item(empty[idx]));
+	empty.erase(empty.begin() + idx);
 }
 
-void ItemSystem::remove_goodies(int entity_index){
-
+void ItemSystem::remove_growth(ItmVc& growth){
+	growth.erase(std::remove_if(growth.begin(), growth.end(), [this](Item& item) { return Util::get_time() - item.timestamp >= item_time; }), growth.end());
 };
 
-void ItemSystem::remove_poison(int entity_index){
-
+void ItemSystem::remove_poison(ItmVc& poison){
+	poison.erase(std::remove_if(poison.begin(), poison.end(), [this](Item& item) { return Util::get_time() - item.timestamp >= item_time; }), poison.end());
 };
 
-std::pair<ITEMTYPE, int> ItemSystem::check_item_interaction(PlayerBody& head, const ItmVc& goodies, const ItmVc& poison){
-	int counter = 0;
-	for(Item item: goodies){
-		if(item.pos == head.get_pos()){
-			return std::pair<ITEMTYPE, int>(ITEMTYPE::INC, counter);
+ITEMTYPE ItemSystem::check_item_interaction(PlayerBody& head, ItmVc& growth, ItmVc& poison){
+	for(auto it = growth.begin(); it != growth.end(); it++){
+		if((*it).pos == head.get_pos()){	
+			growth.erase(it);
+			return ITEMTYPE::INC;
 		}
-		counter++;
 	}
 
-	counter = 0;
-	for (Item item: poison){
-		if(item.pos == head.get_pos()){
-			return std::pair<ITEMTYPE, int>(ITEMTYPE::DEC, counter);
+	for(auto it = poison.begin(); it != poison.end(); it++){
+		if((*it).pos == head.get_pos()){
+			poison.erase(it);
+			return ITEMTYPE::DEC;
 		}
-		counter++;
 	}
 
-	return std::pair<ITEMTYPE, int>(ITEMTYPE::NONE, -1);
+	return ITEMTYPE::NONE;
 };
 
 Position ItemSystem::get_following_position(PlayerBody& parent) {
@@ -48,9 +48,9 @@ Position ItemSystem::get_following_position(PlayerBody& parent) {
 }
 
 void ItemSystem::process(ECSDB& db){
-	auto result = check_item_interaction(db.get_snake()[0], db.get_growth(), db.get_posion());
+	ITEMTYPE result = check_item_interaction(db.get_snake()[0], db.get_growth(), db.get_posion());
 
-	switch (result.first) {
+	switch (result) {
 		case ITEMTYPE::DEC: {
 			db.get_snake().pop_back();
 			break;
