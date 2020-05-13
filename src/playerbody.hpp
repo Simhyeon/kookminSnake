@@ -13,7 +13,7 @@ public:
 	PlayerBody(DIRECTION, Position);
 	const DIRECTION get_direction();
 	void set_direction(DIRECTION);
-	const Position get_pos();
+	const Position get_pos() const;
 	void increment_pos(int x, int y);
 	void set_pos(const Position);
 	void set_pos(int x, int y);
