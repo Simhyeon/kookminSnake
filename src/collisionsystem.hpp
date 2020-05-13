@@ -7,7 +7,7 @@
 
 class CollisionSystem{
 private:
-	bool DetectCollision(const PosVc& wallas, PlayerBody& head);
+	bool DetectCollision(const PosVc& wallas, const std::vector<PlayerBody>& bodies);
 public:
 	void Process(ECSDB&);
 };
