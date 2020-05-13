@@ -1,5 +1,5 @@
-#ifndef ITEM_H
-#define ITEM_H
+#ifndef ITEMSYS_H
+#define ITEMSYS_H
 
 #include <vector>
 #include "ecsdb.hpp"
@@ -12,15 +12,6 @@
  * 아이템 시스템과 아이템타입 열거형을 정의한 헤더 파일
  */
 
-/** \brief 아이템 효과를 보여주는 아이템 타입
- *
- * 증가하는 경우에는 INC(1),\n 감소하는 경우에는 DEC(-1)\n 아무것도 없다면 NONE(0)이다.
- */
-enum class ITEMTYPE{
-	NONE	= 0,
-	INC		= 1,
-	DEC 	=-1,
-};
 
 /** \brief 아이템을 처리하는 시스템
  *
@@ -33,14 +24,14 @@ private:
 	 * @param empty goodies을 생성할 위치를 저장한 변수
 	 * @param goodies 생성된 goodies 위치를 저장할 변수
 	 */
-	void spawn_goodies(PosVc& empty, PosVc& goodies);
+	void spawn_goodies(PosVc& empty, ItmVc& goodies);
 
 	/** \brief 플레이어 몸체를 줄여주는 아이템을 생성하는 함수
 	 *
 	 * @param empty poison을 생성할 위치를 저장한 변수
 	 * @param poison 생성된 poison 위치를 저장할 변수
 	 */
-	void spawn_poison(PosVc& empty, PosVc& poison);
+	void spawn_poison(PosVc& empty, ItmVc& poison);
 
 	/** \brief 시간이 지난 goodies 아이템을 지우는 함수
 	 *
@@ -61,7 +52,7 @@ private:
 	 * @param poison poison 아이템이 저장되어 있는 벡터
 	 * @return 상호작용한 아이템의 타입. 만약 없다면 NONE을 리턴한다.
 	 */
-	ITEMTYPE check_item_interaction(PlayerBody& head, const PosVc& goodies, const PosVc& poison);
+	ITEMTYPE check_item_interaction(PlayerBody& head, const ItmVc& goodies, const ItmVc& poison);
 
 	/** \brief 아이템을 적용하면서 플레이어 꼬리를 생성할 포지션을 계산하는 함수
 	 *

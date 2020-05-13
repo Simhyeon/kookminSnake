@@ -2,12 +2,12 @@
 #include "commons.hpp"
 #include "playerbody.hpp"
 
-void ItemSystem::spawn_goodies(PosVc& empty, PosVc& goodies){
+void ItemSystem::spawn_goodies(PosVc& empty, ItmVc& goodies){
 	// Get random number from size of empty
 	// Add goodies to area and add to vector and remove from empty
 }
 
-void ItemSystem::spawn_poison(PosVc& empty, PosVc& poison){
+void ItemSystem::spawn_poison(PosVc& empty, ItmVc& poison){
 	// Get random number from size of empty
 	// Add poision to area and add to vector and remove from empty
 }
@@ -20,15 +20,15 @@ void ItemSystem::remove_poison(int entity_index){
 
 };
 
-ITEMTYPE ItemSystem::check_item_interaction(PlayerBody& head, const PosVc& goodies, const PosVc& poison){
-	for(Position pos: goodies){
-		if(pos == head.get_pos()){
+ITEMTYPE ItemSystem::check_item_interaction(PlayerBody& head, const ItmVc& goodies, const ItmVc& poison){
+	for(Item item: goodies){
+		if(item.pos == head.get_pos()){
 			return ITEMTYPE::INC;			
 		}
 	}
 
-	for (Position pos: poison){
-		if(pos == head.get_pos()){
+	for (Item item: poison){
+		if(item.pos == head.get_pos()){
 			return ITEMTYPE::DEC;			
 		}
 	}
@@ -43,7 +43,7 @@ Position ItemSystem::get_following_position(PlayerBody& parent) {
 }
 
 void ItemSystem::process(ECSDB& db){
-	ITEMTYPE item_type = check_item_interaction(db.get_snake()[0], db.get_goodies(), db.get_posions());
+	ITEMTYPE item_type = check_item_interaction(db.get_snake()[0], db.get_growth(), db.get_posion());
 
 	switch (item_type) {
 		case ITEMTYPE::DEC: {
