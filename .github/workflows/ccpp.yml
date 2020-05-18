@@ -12,9 +12,23 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: configure dependencies
-      run: sudo apt-get install -y libncurses5-dev libncursesw5-dev
 
     - uses: actions/checkout@v2
+    
+    - name: configure dependencies
+      run: sudo apt-get install -y libncurses5-dev libncursesw5-dev doxygen
+    
     - name: make
       run: make
+
+    - name: compile doxygen
+      run: cd doc && doxygen doc_config
+      
+    - name: Copy via ssh
+      uses: garygrossgarten/github-action-scp@v0.6.0  
+      with:
+          local: doc/html
+          remote: /var/www/kookminsnake
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.PASSWORD }}
