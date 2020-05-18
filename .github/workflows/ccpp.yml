@@ -28,7 +28,7 @@ jobs:
       uses: garygrossgarten/github-action-scp@v0.6.0  
       with:
           local: doc/html
-          remote: /var/www/kookminsnake
+          remote: /var/www/kookminsnake.duckdns.org
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
