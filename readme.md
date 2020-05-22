@@ -40,6 +40,7 @@ make
 - 데이터 집약적 설계
 - Struct of array 가 아닌 array of Struct 구조를 채용
 - 가급적 O(1) (constant) 시간으로 데이터에 접근하도록 하게 설계
+![ecs abstract](./dod_comparison_colorless.png)
 
 #### Entity Component System 디자인 (ECS)
 - 데이터 지향 디자인의 대표적인 구현 방법
