@@ -33,7 +33,14 @@ make
 
 ## 참고 이미지
 
-![snake gif](./design_document/test.gif)
+- 단순히 움직이는 것(temporary 브랜치)
+
+![snake gif](./design_document/test.gif) 
+
+- 아이템을 먹는 것(temporary 브랜치)
+
+![snake and item gif](./design_document/test_item.gif)
+
 
 ## 프로젝트 내용
 
