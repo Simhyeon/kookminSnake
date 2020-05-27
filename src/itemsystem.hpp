@@ -6,6 +6,9 @@
 #include "commons.hpp"
 #include "playerbody.hpp"
 
+// 아이템을 먹는 순간엔 증가하지 않는 문제가 있다. 
+
+
 /** \brief 아이템을 처리하는 시스템
  *
  * 아이템의 생성, 소멸과 아이템 효과의 적용을 처리하는 시스템
