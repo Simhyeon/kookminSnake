@@ -5,6 +5,7 @@
 #include <vector>
 #include <chrono>
 #include <cstdlib>
+#include <iostream>
 
 /** \file 여러 곳에서 쓰이는 클래스, 함수들을 모아놓은 헤더 파일
  *
@@ -61,15 +62,21 @@ class Position{
 		int y_pos;
 	public:
 		Position(int x = 0, int y = 0);
+		Position(const Position&);
 
 		std::pair<int, int> get_position();
 
 		// Temporary 
+		Position& operator=(const Position& lhs);
 		bool operator==(const Position& pos) const;
-		const int get_x() const;
-		const int get_y() const;
-		void increment(int x, int y);};
 
+		Position& operator+=(const Position& pos);
+		int get_x() const;
+		int get_y() const;
+		void increment(int x, int y);
+		int get_manhattan(const Position&) const;
+	friend std::ostream& operator<<(std::ostream&, const Position&);
+};
 // Aliases
 using PosVc=std::vector<Position>;
 
