@@ -45,6 +45,8 @@ private:
 	 * @return 상호작용 여부와, 상호작용했다면 그 끝(end)의 위치 값을 가지는 pair 값
 	 */
 	std::pair<bool, Position> check_portal_interaction(const PlayerBody& head,const Portal& portal);
+
+	bool check_gate_possesion(std::vector<PlayerBody>& pos);
 public:	
 	/** \brief 포탈 시스템을 작동시키는 함수
 	 *

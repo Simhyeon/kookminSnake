@@ -25,11 +25,14 @@ DIRECTION PortalSystem::get_direction(Position destination, int width, int heigh
 	}
 }
 
+// 현재 wall의 위치를 관리하는 functionality가 없는 상황이다. 
+// portal이 생겼다고 해도 wall의 정보가 사라지지 않는다. 
+// 이건 ecsdb에서 임시로 만든 constructor에서도 동일한 상황이다. 
 Portal PortalSystem::regen_portal(const PosVc& walls) {
 	int first, second;
 	first = Util::get_rand(0, walls.size() - 1);
 	second = Util::get_rand(0, walls.size() - 1);
-	while (first != second) {
+	while (first != second && walls[first].get_manhattan(walls[second]) > 2) {
 		second = Util::get_rand(0, walls.size() - 1);
 	}
 	return Portal(walls[first], walls[second]);
@@ -46,11 +49,23 @@ std::pair<bool, Position> PortalSystem::check_portal_interaction(const PlayerBod
 }
 
 void PortalSystem::process(ECSDB & db) {
-	if (Util::get_time() - db.get_portal().timestamp >= portal_time) {
-		regen_portal(db.get_walls());
+	if (Util::get_time() - db.get_portal().timestamp >= portal_time 
+			&& !check_gate_possesion(db.get_snake())) {
+		db.set_portal(regen_portal(db.get_walls()));
 	}
+
 	auto result = check_portal_interaction(db.get_head(), db.get_portal());
+
 	if (result.first){
 		jump_snake(db.get_head(), result.second, get_direction(result.second, db.get_measure().first, db.get_measure().second));
 	}
+}
+
+bool PortalSystem::check_gate_possesion(std::vector<PlayerBody>& pos){
+	for (auto it = pos.begin(); it != pos.end() - 1; it++){
+		if ( it->get_pos().get_manhattan((it+1)->get_pos()) > 1){
+			return true;
+		}
+	}
+	return false;
 }
