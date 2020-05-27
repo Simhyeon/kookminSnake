@@ -20,6 +20,9 @@ private:
 public:
 	Item();
 	Item(Position);
+	long get_time();
+	Position get_pos();
+	bool operator==(const Item& rhs) const;
 friend class ItemSystem;
 };
 
