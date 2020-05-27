@@ -6,3 +6,5 @@ obj/
 # ignore binary file
 ./Snake_game
 Snake_game
+Snake_game_Debug
+./Snake_game_Debug
