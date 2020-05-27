@@ -1,13 +1,15 @@
 CC := g++
-CFLAG := -Wall -W
+CFLAG := 
+DFLAG := -Wall -W -g
 LDLIBS := -lncurses
 SRC_DIR := src
 OBJ_DIR := obj
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 EXE := Snake_game
+DEBUG := Snake_game_Debug
 
-all: clean $(EXE)
+all: $(EXE)
 
 ${EXE} : ${OBJ}
 	${CC} ${CFLAG} $^ ${LDLIBS} -o $@
@@ -27,4 +29,15 @@ uninstall :
 clean : 
 	@$(RM) -r $(OBJ_DIR)
 
-.PHONY: all clean
+Debug : clean $(DEBUG)
+
+${DEBUG} : ${OBJ}
+	${CC} ${DFLAG} $^ ${LDLIBS} -o $@
+
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+	${CC} ${DFLAG} -c $< -o $@
+
+$(OBJ_DIR):
+	@mkdir $@
+
+.PHONY: all clean Debug
