@@ -5,11 +5,14 @@
 
 class Portal{
 private:
-	const long timestamp;
-	const Position first;
-	const Position second;
+	long timestamp;
+	Position first;
+	Position second;
 public:
-	Portal(Position, Position);
+	Portal(const Position&, const Position&);
+	//Portal(const Position&, const Position&);
+	Portal(const Portal&);
+	Portal& operator=(Portal&);
 
 friend class PortalSystem;
 };
