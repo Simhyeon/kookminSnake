@@ -12,3 +12,10 @@ Portal& Portal::operator=(Portal& port){
 	second = port.second;
 	return *this;
 }
+Position Portal::get_first_pos(){
+	return first;
+}
+
+Position Portal::get_second_pos(){
+	return second;
+}

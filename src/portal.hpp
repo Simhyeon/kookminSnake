@@ -13,6 +13,8 @@ public:
 	//Portal(const Position&, const Position&);
 	Portal(const Portal&);
 	Portal& operator=(Portal&);
+	Position get_first_pos();
+	Position get_second_pos();
 
 friend class PortalSystem;
 };
