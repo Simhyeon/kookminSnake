@@ -41,6 +41,10 @@ make
 
 ![snake and item gif](./design_document/test_item.gif)
 
+- 게이트를 타고 이동하는 것(temporary 브랜치)
+
+![snake and item gif](./design_document/test_gate.gif)
+
 
 ## 프로젝트 내용
 
