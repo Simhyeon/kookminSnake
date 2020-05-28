@@ -26,7 +26,11 @@ ECSDB::ECSDB() : start_time(Util::get_time()), portal(Position(-1, -1), Position
 
 	for (int j =0; j < height; j++){
 		for (int i =0; i < width; i++){
-			if (j == 0 || j == height-1)	{
+			if (i == 0 && (j == height -1 || j == 0) ){
+				snake_map[i][j] = 'H';
+			} else if (i == width -1 && (j == height -1 || j ==0)){
+				snake_map[i][j] = 'H';
+			} else if (j == 0 || j == height-1)	{
 				snake_map[i][j] = '*';
 				walls.push_back(Position(i,j));
 			} else {
@@ -75,7 +79,11 @@ void ECSDB::update_snake_map(){
 	// Set all walls
 	for (int j =0; j < height; j++){
 		for (int i =0; i < width; i++){
-			if (j == 0 || j == height-1)	{
+			if (i == 0 && (j == height -1 || j == 0) ){
+				snake_map[i][j] = 'H';
+			} else if (i == width -1 && (j == height -1 || j ==0)){
+				snake_map[i][j] = 'H';
+			} else if (j == 0 || j == height-1)	{
 				snake_map[i][j] = '*';
 			} else {
 				snake_map[0][j] = '*';

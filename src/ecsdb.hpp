@@ -18,12 +18,12 @@ private:
 	/** \brief 게임 화면의 너비
 	 *	점수판의 크기와 너비와 동일하다.
 	 */
-	static constexpr int width = 10;
+	static constexpr int width = 20;
 
 	/** \brief 게임 화면의 크기
 	 *	점수판의 크기와 너비와 동일하다.
 	 */
-	static constexpr int height = 10;
+	static constexpr int height = 20;
 
 	/** \brief 플레이어의 죽음 여부를 저장하는 변수
 	 *	

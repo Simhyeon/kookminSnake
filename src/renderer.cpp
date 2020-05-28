@@ -6,7 +6,7 @@ void Renderer::process(ECSDB & ecsdb){
 	int height = ecsdb.get_measure().first;
 	for (int i =0; i< width; i++){
 		for (int j =0; j< height; j++){
-			std::cout << ecsdb.snake_map[j][i] << "";
+			std::cout << ecsdb.snake_map[j][i] << " ";
 		}
 		std::cout << "\n";
 	}
