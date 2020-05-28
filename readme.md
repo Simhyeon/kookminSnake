@@ -50,7 +50,7 @@ make
 
 ### 기본 로직
 
-중간 보고서 참조 : [중간보고서](https://kookminSnake.duckdns.org/ref/)
+중간 보고서 참조 : [중간보고서](https://kookminSnake.duckdns.org/ref/cpp_mid_report.pdf)
 
 #### 데이터 지향 디자인
 - 런타임 오버헤드를 최소화
