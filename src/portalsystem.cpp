@@ -33,7 +33,7 @@ Portal PortalSystem::regen_portal(const PosVc& walls) {
 	int first, second;
 	first = Util::get_rand(0, walls.size() - 1);
 	second = Util::get_rand(0, walls.size() - 1);
-	while (first != second && walls[first].get_manhattan(walls[second]) > 2) {
+	while (first == second || walls[first].get_manhattan(walls[second]) < 2) {
 		second = Util::get_rand(0, walls.size() - 1);
 	}
 	return Portal(walls[first], walls[second]);
