@@ -1,15 +1,12 @@
 #include "playersystem.hpp"
 #include "playerbody.hpp"
 
-bool PlayerBodySystem::change_direction(DIRECTION direction, PlayerBody& head){
-	if (head.get_direction() == direction) {
-		return false;
-	} else if (static_cast<int>(head.get_direction()) == -static_cast<int>(direction))  {
-		return true;
-	} else {
-		head.set_direction(direction);
-		return false;
-	}
+void PlayerBodySystem::change_direction(DIRECTION direction, std::vector<PlayerBody>& bodies){
+	int counter = 0;
+	for(PlayerBody& item: bodies){
+  		item.push_direction(direction);
+		counter++;
+    }
 }
 
 bool PlayerBodySystem::check_length(int size) {
@@ -25,13 +22,17 @@ void PlayerBodySystem::process(ECSDB& db) {
 		db.set_death(true);
 		return;
 	}
-	auto dirct = get_console_input(db.get_inputs().front()); // placeholder
-	if (dirct.first) {
-		if (change_direction(dirct.second, db.get_snake()[0])) { // Problem == true
-			db.set_death(true);
-		}
+
+	DIRECTION next = db.last_direction;
+
+	if (static_cast<int>(db.last_direction) != -static_cast<int>(next)){
+		change_direction(next, db.get_snake());
+	} else {
+		db.set_death(true);
 	}
+
 	move(db.get_snake());
+	// Update method should be changed according to new data structure
 	db.update_snake_map();
 }
 
@@ -41,17 +42,9 @@ std::pair<bool, DIRECTION> PlayerBodySystem::get_console_input(char input) {
 }
 
 void PlayerBodySystem::move(std::vector<PlayerBody>& bodies){
-	PlayerBody parent = bodies[0];
-	PlayerBody cache;
-
-	int dirct = static_cast<int>(bodies[0].get_direction());
-	bodies[0].increment_pos(dirct%2, -dirct/2);
-
-	// Should check if operation is optimal and change Position class implementation accordingly.
-	for(auto it = bodies.begin() + 1; it != bodies.end(); it++) {
-		cache = (*it);
-		(*it).set_pos(parent.get_pos());
-		(*it).set_direction(parent.get_direction());
-		parent = cache;
+	std::cout << "Move called\n";
+	for (PlayerBody& body : bodies){
+		int dirct = static_cast<int>(body.pop_direction());
+		body.increment_pos(dirct%2, -dirct/2);
 	}
 }

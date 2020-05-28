@@ -13,12 +13,15 @@ private:
 
 	const int min_length = 3;
 
+	bool check_valid_direction(DIRECTION direction, PlayerBody& head);
+
 	/** \brief 방향을 바꾸는 함수
 	 * @param direction 머리에 설정할 방향값
 	 * @param head 방향을 바꿀 머리
 	 * @return 방향 전화에 실패한 경우 참을 리턴, 실패시의 페널티는 죽음
 	 */
-	bool change_direction(DIRECTION direction, PlayerBody& head);
+	// 변경된 queue로 수정하자. 
+	void change_direction(DIRECTION direction, std::vector<PlayerBody>& bodies);
 
 	/** \brief 플레이어를 이동시키는 함수
 	 * @param bodies 이동할 모든 PlayerBody 값
