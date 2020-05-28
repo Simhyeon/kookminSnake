@@ -15,7 +15,7 @@ constexpr int ECSDB::height;
 // Functions	
 // Constructor
 // Currently for Debuggin
-ECSDB::ECSDB() : start_time(Util::get_time()), portal(Position(0, 1), Position(1,1)){
+ECSDB::ECSDB() : start_time(Util::get_time()), portal(Position(-1, -1), Position(-1,-1)){
 	// Make this as function for fuck's sake
 	for (int i =0; i < width; i++){
 		for (int j =0; j < height; j++){
@@ -27,11 +27,11 @@ ECSDB::ECSDB() : start_time(Util::get_time()), portal(Position(0, 1), Position(1
 	for (int j =0; j < height; j++){
 		for (int i =0; i < width; i++){
 			if (j == 0 || j == height-1)	{
-				snake_map[i][j] = 'w';
+				snake_map[i][j] = '*';
 				walls.push_back(Position(i,j));
 			} else {
-				snake_map[0][j] = 'w';
-				snake_map[width-1][j] = 'w';
+				snake_map[0][j] = '*';
+				snake_map[width-1][j] = '*';
 				walls.push_back(Position(0,j));
 				walls.push_back(Position(width-1,j));
 				break;
@@ -44,12 +44,6 @@ ECSDB::ECSDB() : start_time(Util::get_time()), portal(Position(0, 1), Position(1
 			switch (snake_map[i][j]){
 				case '`':
 					empty.push_back(Position(i,j));
-					break;
-				case 'w':
-					break;
-				case '#':
-					break;
-				case '@':
 					break;
 				default:
 					break;
@@ -71,24 +65,30 @@ void ECSDB::update_snake_map(){
 	
 	// Set all items
 	for (auto it = growth.begin(); it != growth.end(); it++){
-		snake_map[(*it).get_pos().get_x()][(*it).get_pos().get_y()] = '+';
+		snake_map[(*it).get_pos().get_x()][(*it).get_pos().get_y()] = 'P';
 	}
 
 	for (auto it = poison.begin(); it != poison.end(); it++){
-		snake_map[(*it).get_pos().get_x()][(*it).get_pos().get_y()] = '-';
+		snake_map[(*it).get_pos().get_x()][(*it).get_pos().get_y()] = 'X';
 	}
 
 	// Set all walls
 	for (int j =0; j < height; j++){
 		for (int i =0; i < width; i++){
 			if (j == 0 || j == height-1)	{
-				snake_map[i][j] = 'w';
+				snake_map[i][j] = '*';
 			} else {
-				snake_map[0][j] = 'w';
-				snake_map[width-1][j] = 'w';
+				snake_map[0][j] = '*';
+				snake_map[width-1][j] = '*';
 				break;
 			}
 		}
+	}
+
+	// Set portals
+	if (portal.get_first_pos().get_x() != -1){ // 포탈이 아직 없지 않을 때 
+		snake_map[portal.get_first_pos().get_x()][portal.get_first_pos().get_y()] = 'O';
+		snake_map[portal.get_second_pos().get_x()][portal.get_second_pos().get_y()] = 'O';
 	}
 
 	// Set all player characters

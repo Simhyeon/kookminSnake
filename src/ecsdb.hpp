@@ -68,6 +68,9 @@ public:
 	 */
 	char snake_map[width][height];
 
+	// 나중에 private로 옮겨야 한다.
+	DIRECTION last_direction = DIRECTION::DOWN; // 썩 건전치 않은 초기화
+
 	ECSDB();
 
 	const long get_time() const;
