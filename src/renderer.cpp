@@ -11,4 +11,5 @@ void Renderer::process(ECSDB & ecsdb){
 		std::cout << "\n";
 	}
 	std::cout << "Length : " << ecsdb.get_snake().size() << "\n";
+	std::cout << "Last direction : " << static_cast<int>(ecsdb.last_direction) << "\n";
 }

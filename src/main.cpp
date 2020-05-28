@@ -26,7 +26,9 @@ int main(void) {
 	std::cin >> flag;
 	std::cin >> count;
 	for (int i = count; i > 0; i--){
-		ecsdb.get_snake().push_back(PlayerBody(DIRECTION::DOWN, Position(5, i)));
+		unsigned int size = ecsdb.get_snake().size();
+		std::cout << "Assigning size with " << size << "\n" ;
+		ecsdb.get_snake().push_back(PlayerBody( Position(5, i), DIRECTION::DOWN, size));
 	}
 	ecsdb.update_snake_map();
 
@@ -40,25 +42,22 @@ int main(void) {
 
 		std::cin >> input;	
 		switch (input) {
-			case 'w' : {
-				ecsdb.get_snake()[0].set_direction(DIRECTION::UP);
+			case 'w' : 
+				ecsdb.last_direction = DIRECTION::UP;
 				break;
-			}
 
-			case 'a' : {
-				ecsdb.get_snake()[0].set_direction(DIRECTION::LEFT);
+			case 'a' : 
+				ecsdb.last_direction = DIRECTION::LEFT;
 				break;
-			}
 
-			case 's' : {
-				ecsdb.get_snake()[0].set_direction(DIRECTION::DOWN);
+			case 's' : 
+				ecsdb.last_direction = DIRECTION::DOWN;
 				break;
-			}
 
-			case 'd' : {
-				ecsdb.get_snake()[0].set_direction(DIRECTION::RIGHT);
+			case 'd' : 
+				ecsdb.last_direction = DIRECTION::RIGHT;
 				break;
-			}
+			
 			default:
 			   break;
 		}
