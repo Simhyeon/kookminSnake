@@ -31,7 +31,7 @@ private:
 	 * @param destination 이동시킬 포탈의 위치
 	 * @param direction 플레이어 머리에 새로 할당할 방향값
 	 */
-	void jump_snake(PlayerBody& head, Position destination, DIRECTION direction);
+	void jump_snake(PlayerBody& body, Position destination, DIRECTION direction);
 
 	/** \brief 포탈을 재생성하는 함수
 	 * @param walls 포탈을 생설할 벽의 위치
@@ -39,14 +39,13 @@ private:
 	 */
 	Portal regen_portal(const PosVc& walls);
 
+	// 주석 수정 필요
 	/** \brief 포탈 상호작용을 검사하는 함수
 	 * @param head 상호작용을 검사할 머리 PlayerBody 값
 	 * @param portal 검사할 포탈 컴포넌트
 	 * @return 상호작용 여부와, 상호작용했다면 그 끝(end)의 위치 값을 가지는 pair 값
 	 */
-	std::pair<bool, Position> check_portal_interaction(const PlayerBody& head,const Portal& portal);
-
-	bool check_gate_possesion(std::vector<PlayerBody>& pos);
+	std::pair<Position, int> check_portal_interaction(std::vector<PlayerBody>& bodies, const Portal& portal);
 public:	
 	/** \brief 포탈 시스템을 작동시키는 함수
 	 *
