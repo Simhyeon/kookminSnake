@@ -13,6 +13,9 @@ long Util::get_time() {
     long duration = value.count();
 	return duration;
 }
+int Util::get_dir_int(DIRECTION dir){
+	return static_cast<int>(dir);
+}
 
 Position::Position(int x , int y): x_pos(x), y_pos(y){};
 Position::Position(const Position& pos): x_pos(pos.get_x()), y_pos(pos.get_y()){};

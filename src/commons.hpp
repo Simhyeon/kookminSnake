@@ -7,6 +7,16 @@
 #include <cstdlib>
 #include <iostream>
 
+/** \brief 방향값을 나타내는 열거형 
+ *
+ */
+enum class DIRECTION{
+	UP = 2,
+	RIGHT = 1,
+	DOWN = -2,
+	LEFT = -1
+};
+
 /** \file 여러 곳에서 쓰이는 클래스, 함수들을 모아놓은 헤더 파일
  *
  */
@@ -31,17 +41,9 @@ public:
 	 * @return epoch 시간값을 초로 나타낸것
 	 */
 	static long get_time();
+	static int get_dir_int(DIRECTION dir);
 };
 
-/** \brief 방향값을 나타내는 열거형 
- *
- */
-enum class DIRECTION{
-	UP = 2,
-	RIGHT = 1,
-	DOWN = -2,
-	LEFT = -1
-};
 
 // 2 -> 0, 1 : value/2(0) -> y, value %2(1) | -> x; -=value/2 , -=value%2 * 3 
 // 1 -> 1, 0 value/2 -> y, value %2 		|-> x; -=value/2 , -=value%2 * 3
