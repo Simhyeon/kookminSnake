@@ -8,12 +8,11 @@
 #include <iostream>
 
 // 현재 스폰 구조는 3개를 무조건 꽉꽉 채우는 구조다. 
+// 그것도 한번에 지운뒤 한 번씩 차례차례 추가한다. 
 // 3개가 아니면 무조건 칸을 채운다.
-
 void ItemSystem::spawn_growth(PosVc& empty, ItmVc& growth){
 	if (growth.size() >= item_size){return;}
 	int idx = Util::get_rand(0, empty.size() -1);
-	growth.push_back(Item(empty[idx]));
 	growth.push_back(Item(empty[idx]));
 	empty.erase(empty.begin() + idx);
 }
@@ -69,9 +68,11 @@ void ItemSystem::process(ECSDB& db){
 		}
 
 		case ITEMTYPE::INC: {
-			// Make sure former_tail is referenced
 			PlayerBody& former_tail = db.get_snake().back();
-			PlayerBody new_tail = PlayerBody(former_tail.get_direction() ,get_following_position(former_tail));
+			PlayerBody new_tail = PlayerBody(get_following_position(former_tail), former_tail.get_queue());
+
+			new_tail.push_direction_front(former_tail.get_direction());
+
 			db.get_snake().push_back(new_tail);
 			db.remove_empty(new_tail.get_pos());
 			break;
