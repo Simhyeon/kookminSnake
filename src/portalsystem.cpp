@@ -25,16 +25,19 @@ DIRECTION PortalSystem::get_direction(Position destination, ECSDB& db){
 	} 
 
 	// TODO Modify more
-	std::pair<Position, DIRECTION> target[] = {
+	constexpr int len = 4;
+	std::pair<Position, DIRECTION> target[4] = {
 		std::pair<Position, DIRECTION>(	Util::get_modified_pos(destination, DIRECTION::UP),		DIRECTION::UP	),
 		std::pair<Position, DIRECTION>(	Util::get_modified_pos(destination, DIRECTION::RIGHT),	DIRECTION::RIGHT),
 		std::pair<Position, DIRECTION>(	Util::get_modified_pos(destination, DIRECTION::LEFT),	DIRECTION::LEFT	),
 		std::pair<Position, DIRECTION>(	Util::get_modified_pos(destination, DIRECTION::DOWN),	DIRECTION::DOWN	),
 	};
 
-	for (auto pair : target){
-		if (db.get_empty(pair.first) == FILL::EMPTY){
-			return pair.second;
+	PosVc walls = db.get_walls();
+	walls.insert(walls.end(), db.get_iwalls().begin(), db.get_iwalls().end());
+	for (int i =0; i<len; i++){
+		if (std::find_if(walls.begin(), walls.end(), [&](const Position& wall){return wall == target[i].first;}) == walls.end()){
+			return target[i].second;
 		}
 	}
 
@@ -43,6 +46,7 @@ DIRECTION PortalSystem::get_direction(Position destination, ECSDB& db){
 }
 
 Portal PortalSystem::regen_portal(const Portal& portal, PosVc& walls) {
+	std::cout << "Regening portal\n";
 	int first, second;
 	int wall_size = walls.size();
 	Position first_pos, second_pos;
@@ -50,23 +54,17 @@ Portal PortalSystem::regen_portal(const Portal& portal, PosVc& walls) {
 	
 	first_pos = Position(walls[first]);
 
-	std::cout << "Swapping\n";
-	std::cout << walls[wall_size] << "\n";
-	std::cout << walls[first] << "\n";
-	std::swap(walls[first], walls[wall_size]);
-	std::cout << walls[first] << "\n";
+	std::swap(walls[first], walls[wall_size-1]);
 	walls.pop_back();
 	wall_size = walls.size();
 
 	second = Util::get_rand(0, walls.size() - 1);
-
 	while (walls[first].get_manhattan(walls[second]) < 2) {
 		second = Util::get_rand(0, walls.size() - 1);
 	}
-	std::cout << "After while\n";
 
 	second_pos = Position(walls[second]);
-	std::swap(walls[first], walls[wall_size]);
+	std::swap(walls[second], walls[wall_size-1]);
 	walls.pop_back();
 
 	// 포탈 위치에 있던 position을 다시 wall로 집어넣는다. 
@@ -105,7 +103,7 @@ void PortalSystem::process(ECSDB & db) {
 			get_direction(result.first, db);
 
 		Position destination = Util::get_modified_pos(result.first, portal_dir);
-		jump_snake(db.get_mut_snake()[result.second], result.first);
+		jump_snake(db.get_mut_snake()[result.second], destination);
 		db.set_empty(destination, FILL::FILL);
 		db.set_last_direction(portal_dir);
 
