@@ -8,28 +8,27 @@
 #include "collisionsystem.hpp"
 #include "itemsystem.hpp"
 #include "portalsystem.hpp"
+#include "filemanager.hpp"
 
 #include <iostream>
 
 int main(void) {
 
 	// Init
-	ECSDB ecsdb;
 	Renderer rend;	
 	PlayerBodySystem pbs;
 	CollisionSystem cos;
 	ItemSystem its;
 	PortalSystem pos;
+	FileManager fpp;
+
+	fpp.load_ppm("gate_test.ppm");
+	ECSDB ecsdb(fpp.width, fpp.height, fpp.color_map, DIRECTION::UP);
 
 	int count;
 	char flag;
 	std::cin >> flag;
 	std::cin >> count;
-	for (int i = count; i > 0; i--){
-		unsigned int size = ecsdb.get_snake().size();
-		std::cout << "Assigning size with " << size << "\n" ;
-		ecsdb.get_snake().push_back(PlayerBody( Position(5, i), DIRECTION::DOWN, size));
-	}
 	ecsdb.update_snake_map();
 
 	// Main Loop
@@ -43,29 +42,33 @@ int main(void) {
 		std::cin >> input;	
 		switch (input) {
 			case 'w' : 
-				ecsdb.last_direction = DIRECTION::UP;
+				ecsdb.set_last_direction(DIRECTION::UP);
 				break;
 
 			case 'a' : 
-				ecsdb.last_direction = DIRECTION::LEFT;
+				ecsdb.set_last_direction(DIRECTION::LEFT);
 				break;
 
 			case 's' : 
-				ecsdb.last_direction = DIRECTION::DOWN;
+				ecsdb.set_last_direction(DIRECTION::DOWN);
 				break;
 
 			case 'd' : 
-				ecsdb.last_direction = DIRECTION::RIGHT;
+				ecsdb.set_last_direction(DIRECTION::RIGHT);
 				break;
 			
 			default:
 			   break;
 		}
-
+		std::cout << "1\n";
 		pbs.process(ecsdb);
+		std::cout << "2\n";
 		its.process(ecsdb);
+		std::cout << "3\n";
 		pos.process(ecsdb);
+		std::cout << "4\n";
 		cos.Process(ecsdb);
+		std::cout << "5\n";
 		ecsdb.update_snake_map();
 
 		if (ecsdb.get_death()){
