@@ -60,15 +60,10 @@ int main(void) {
 			default:
 			   break;
 		}
-		std::cout << "1\n";
 		pbs.process(ecsdb);
-		std::cout << "2\n";
 		its.process(ecsdb);
-		std::cout << "3\n";
 		pos.process(ecsdb);
-		std::cout << "4\n";
 		cos.Process(ecsdb);
-		std::cout << "5\n";
 		ecsdb.update_snake_map();
 
 		if (ecsdb.get_death()){
