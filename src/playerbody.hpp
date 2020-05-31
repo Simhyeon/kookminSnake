@@ -12,7 +12,7 @@ public:
 	PlayerBody();
 	PlayerBody(Position, DIRECTION direction, unsigned int body_size);
 	PlayerBody(Position, std::deque<DIRECTION> copy);
-	const DIRECTION get_direction();
+	const DIRECTION get_direction() const;
 	DIRECTION pop_direction();
 	void push_direction(DIRECTION);
 	void push_direction_front(DIRECTION dir);
@@ -21,7 +21,7 @@ public:
 	void set_pos(const Position);
 	void set_pos(int x, int y);
 
-	std::deque<DIRECTION> get_queue() {return dir_queue;}
+	const std::deque<DIRECTION>& get_dir_queue() const;
 };
 
 #endif

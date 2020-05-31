@@ -12,7 +12,7 @@ PlayerBody::PlayerBody(Position position, std::deque<DIRECTION> copy){
 	dir_queue = copy;
 }
 // const 왜 넣은 거지
-const DIRECTION PlayerBody::get_direction(){
+const DIRECTION PlayerBody::get_direction() const{
 	return dir_queue.front();
 }
 
@@ -40,4 +40,7 @@ void PlayerBody::set_pos(const Position position){
 }
 void PlayerBody::set_pos(int x, int y){
 	pos = Position(x,y);
+}
+const std::deque<DIRECTION>& PlayerBody::get_dir_queue() const{
+	return dir_queue;
 }
