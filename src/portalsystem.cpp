@@ -1,51 +1,94 @@
 #include "commons.hpp"
+#include "ecsdb.hpp"
 #include "playerbody.hpp"
 #include "portal.hpp"
 #include "portalsystem.hpp"
+#include <algorithm>
+#include <array>
 #include <exception>
 
-void PortalSystem::jump_snake(PlayerBody& body, Position destination, DIRECTION portal_dir) {
-	int dirct = static_cast<int>(portal_dir);
-	destination.increment(dirct%2, -dirct/2);
+void PortalSystem::jump_snake(PlayerBody& body, Position destination) {
 	body.set_pos(destination.get_x(), destination.get_y());
 }
 
 // 규칙을 이렇게 단순하게 할 수는 없음. 더 상세하게 디테일을 잡아야 함. 
-DIRECTION PortalSystem::get_direction(Position destination, int width, int height){
+DIRECTION PortalSystem::get_direction(Position destination, ECSDB& db){
+
 	if (destination.get_x() == 0) {
 		return DIRECTION::RIGHT;
-	} else if (destination.get_x() == width -1) {
+	} else if (destination.get_x() == db.get_width() -1) {
 		return DIRECTION::LEFT;
 	} else if (destination.get_y() == 0) {
 		return DIRECTION::DOWN;
-	} else if (destination.get_y() == height - 1) {
+	} else if (destination.get_y() == db.get_height() - 1) {
 		return DIRECTION::UP;
-	} else {
-		std::cerr << "Pos : " << destination.get_x() << "\t" << destination.get_y() << "\n";
-		throw std::exception();
+	} 
+
+	// TODO Modify more
+	std::pair<Position, DIRECTION> target[] = {
+		std::pair<Position, DIRECTION>(	Util::get_modified_pos(destination, DIRECTION::UP),		DIRECTION::UP	),
+		std::pair<Position, DIRECTION>(	Util::get_modified_pos(destination, DIRECTION::RIGHT),	DIRECTION::RIGHT),
+		std::pair<Position, DIRECTION>(	Util::get_modified_pos(destination, DIRECTION::LEFT),	DIRECTION::LEFT	),
+		std::pair<Position, DIRECTION>(	Util::get_modified_pos(destination, DIRECTION::DOWN),	DIRECTION::DOWN	),
+	};
+
+	for (auto pair : target){
+		if (db.get_empty(pair.first) == FILL::EMPTY){
+			return pair.second;
+		}
 	}
+
+	// This is logical error 
+	throw std::exception();
 }
 
-// 현재 wall의 위치를 관리하는 functionality가 없는 상황이다. 
-// portal이 생겼다고 해도 wall의 정보가 사라지지 않는다.  -> 확실히 수정 해야함. 
-// 이건 ecsdb에서 임시로 만든 constructor에서도 동일한 상황이다. 
-Portal PortalSystem::regen_portal(const PosVc& walls) {
+Portal PortalSystem::regen_portal(const Portal& portal, PosVc& walls) {
 	int first, second;
+	int wall_size = walls.size();
+	Position first_pos, second_pos;
 	first = Util::get_rand(0, walls.size() - 1);
+	
+	first_pos = Position(walls[first]);
+
+	std::cout << "Swapping\n";
+	std::cout << walls[wall_size] << "\n";
+	std::cout << walls[first] << "\n";
+	std::swap(walls[first], walls[wall_size]);
+	std::cout << walls[first] << "\n";
+	walls.pop_back();
+	wall_size = walls.size();
+
 	second = Util::get_rand(0, walls.size() - 1);
-	while (first == second || walls[first].get_manhattan(walls[second]) < 2) {
+
+	while (walls[first].get_manhattan(walls[second]) < 2) {
 		second = Util::get_rand(0, walls.size() - 1);
 	}
-	return Portal(walls[first], walls[second]);
+	std::cout << "After while\n";
+
+	second_pos = Position(walls[second]);
+	std::swap(walls[first], walls[wall_size]);
+	walls.pop_back();
+
+	// 포탈 위치에 있던 position을 다시 wall로 집어넣는다. 
+	if (portal.first.get_x() != -1){
+		std::cout << "Putting wall poisition back\n";
+		walls.push_back(portal.first);
+		walls.push_back(portal.second);
+	}
+
+	return Portal(first_pos, second_pos);
 }
 
-std::pair<Position, int> PortalSystem::check_portal_interaction(std::vector<PlayerBody>& bodies, const Portal& portal){
+std::pair<Position, int> PortalSystem::check_portal_interaction(const std::vector<PlayerBody>& bodies, const Portal& portal){
 	// 시원치 않은 방법이지만 임시로 하자. 
+	std::cout << "Chekcing portl inte\n";
 	int counter = 0;
-	for (PlayerBody& body : bodies){
+	for (const PlayerBody& body : bodies){
 		if (body.get_pos() == portal.first){
+			std::cout << "First int\n";
 			return std::pair<Position, int>(Position(portal.second), counter);
 		} else if (body.get_pos() == portal.second){
+			std::cout << "Second int\n";
 			return std::pair<Position, int>(Position(portal.first), counter);
 		}
 		counter++;
@@ -58,12 +101,17 @@ void PortalSystem::process(ECSDB & db) {
 	auto result = check_portal_interaction(db.get_snake(), db.get_portal());
 
 	if (result.first.get_x() != -1){ // 포탈이 부딪히고 있다면 부딪힌 뱀을 이동시킨다. 
-		DIRECTION portal_dir = get_direction(result.first, db.get_measure().first, db.get_measure().second);
-		jump_snake(db.get_snake()[result.second], result.first, portal_dir);
-		db.last_direction = portal_dir;
+		DIRECTION portal_dir = 
+			get_direction(result.first, db);
+
+		Position destination = Util::get_modified_pos(result.first, portal_dir);
+		jump_snake(db.get_mut_snake()[result.second], result.first);
+		db.set_empty(destination, FILL::FILL);
+		db.set_last_direction(portal_dir);
+
 	} else { // 그렇지 않다면 regen 시킨다.
 		if (Util::get_time() - db.get_portal().timestamp >= portal_time) {
-			db.set_portal(regen_portal(db.get_walls()));
+			db.set_portal(regen_portal(db.get_portal(), db.get_mut_walls()));
 		}
 	}
 }
