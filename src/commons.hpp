@@ -7,6 +7,10 @@
 #include <cstdlib>
 #include <iostream>
 
+/** \file 여러 곳에서 쓰이는 클래스, 함수들을 모아놓은 헤더 파일
+ *
+ */
+
 /** \brief 방향값을 나타내는 열거형 
  *
  */
@@ -17,9 +21,43 @@ enum class DIRECTION{
 	LEFT = -1
 };
 
-/** \file 여러 곳에서 쓰이는 클래스, 함수들을 모아놓은 헤더 파일
- *
- */
+enum class FILL{
+	FILL = 1,
+	EMPTY = 0,
+	NEVER = 2,
+};
+
+class RGB{
+	unsigned char r,g,b;
+public:
+	RGB(unsigned char r,unsigned char g,unsigned char b);
+	operator char();
+friend std::ostream& operator<<(std::ostream&, RGB&);
+friend bool operator==(RGB& lhs, RGB& rhs);
+};
+
+
+class Position{
+	private:
+		int x_pos;
+		int y_pos;
+	public:
+		Position(int x = 0, int y = 0);
+		Position(const Position&);
+
+		std::pair<int, int> get_position();
+
+		// Temporary 
+		Position& operator=(const Position& lhs);
+		bool operator==(const Position& pos) const;
+
+		Position& operator+=(const Position& pos);
+		int get_x() const;
+		int get_y() const;
+		void increment(int x, int y);
+		int get_manhattan(const Position&) const;
+	friend std::ostream& operator<<(std::ostream&, const Position&);
+};
 
 /** \breif 유틸리티 클래스
  *	get_rand, get_time 
@@ -42,6 +80,12 @@ public:
 	 */
 	static long get_time();
 	static int get_dir_int(DIRECTION dir);
+
+	static Position get_modified_pos(Position position, DIRECTION direction){
+		int dirct = static_cast<int>(direction);
+		position.increment(dirct%2, -dirct/2);
+		return position;
+	}
 };
 
 
@@ -58,27 +102,6 @@ enum class KEYINPUT{
  *
  * 오퍼레이터 오버로드 검증이 필요하다
  */
-class Position{
-	private:
-		int x_pos;
-		int y_pos;
-	public:
-		Position(int x = 0, int y = 0);
-		Position(const Position&);
-
-		std::pair<int, int> get_position();
-
-		// Temporary 
-		Position& operator=(const Position& lhs);
-		bool operator==(const Position& pos) const;
-
-		Position& operator+=(const Position& pos);
-		int get_x() const;
-		int get_y() const;
-		void increment(int x, int y);
-		int get_manhattan(const Position&) const;
-	friend std::ostream& operator<<(std::ostream&, const Position&);
-};
 // Aliases
 using PosVc=std::vector<Position>;
 

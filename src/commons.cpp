@@ -2,6 +2,40 @@
 #include <cmath>
 #include <iostream>
 
+RGB::RGB(unsigned char r,unsigned char g,unsigned char b) :r(r), g(g), b(b) {}
+
+std::ostream& operator<<(std::ostream& os, RGB& rgb){
+	os << "R : " << rgb.r << " G : " << rgb.g << " B : " << rgb.b << "\n";
+	return os;
+}
+
+//For Debugging
+RGB::operator char(){
+	if (r == 205 &&
+	g == 66 &&
+	b == 66){
+		return '@';
+	} else if (r == 68 &&
+	g == 66 &&
+	b == 205) {
+		return '#';
+	} else if (r == 169 &&
+	g == 169 &&
+	b == 169) {
+		return '*';
+	} else if (r == 0 &&
+	g == 0 &&
+	b == 0) {
+		return 'H';
+	} else {
+		return '`';
+	}
+}
+
+bool operator==(RGB& lhs, RGB& rhs){
+	return (lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b);
+}
+
 int Util::get_rand(int min, int max){
 	// srand((unsigned) time(0)); // 함수를 너무 빨리 부르면 시드가 변하지 않는다. 더 깔끔하게 해결할 것 
 	return (rand() % max) + min;
