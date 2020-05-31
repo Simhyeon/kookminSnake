@@ -7,6 +7,7 @@
 #include "playerbody.hpp"
 #include <vector>
 #include <queue>
+#include <memory>
 
 class ECSDB{
 private:
@@ -18,12 +19,12 @@ private:
 	/** \brief 게임 화면의 너비
 	 *	점수판의 크기와 너비와 동일하다.
 	 */
-	static constexpr int width = 20;
+	int width = 0;
 
 	/** \brief 게임 화면의 크기
 	 *	점수판의 크기와 너비와 동일하다.
 	 */
-	static constexpr int height = 20;
+	int height = 0;
 
 	/** \brief 플레이어의 죽음 여부를 저장하는 변수
 	 *	
@@ -40,10 +41,15 @@ private:
 	 */
 	PosVc walls = PosVc{};
 
+	/** \brief 영구 벽 컴포넌트
+	 *	
+	 */
+	PosVc iwalls = PosVc{};
+
 	/** \brief 빈 공간 컴포넌트
 	 *	
 	 */
-	PosVc empty = PosVc{};
+	std::vector<FILL> empty;
 
 	/** \brief 포탈 컴포넌트
 	 *	
@@ -61,42 +67,88 @@ private:
 	ItmVc poison = ItmVc{};
 
 	std::queue<char> console_inputs; // Placeholder
+
+	DIRECTION last_direction; 
+
+	/** \brief 획득한 growth 아이템 카운터
+	 *	
+	 */
+	int growth_counter = 0;
+
+	/** \brief 획득한 poison 아이템 카운터
+	 *	
+	 */
+	int poison_counter = 0;
 public:
 
 	/** \brief 렌더 정보를 담는 char 2차 배열
-	 *	2차원 배열이 아닌 다른 걸로 구현하는 것이 더 편하고 빠르다.
+	 *	
 	 */
-	char snake_map[width][height];
+	char** snake_map;
 
 	// 나중에 private로 옮겨야 한다.
-	DIRECTION last_direction = DIRECTION::DOWN; // 썩 건전치 않은 초기화
 
+	//Constructor
 	ECSDB();
+	ECSDB(int width, int height, char** snake_map, DIRECTION snake_direction);
 
-	const long get_time() const;
-	const std::pair<int, int> get_measure();
-	//const char** get_snakemap() const;
+	// Update snake_map, should be renderer function
 	void update_snake_map();
-	std::vector<PlayerBody>& get_snake();
-	PlayerBody& get_head();
+
+	// Get time
+	const long get_time() const;
+
+	// Get Death
 	const bool get_death() const;
+
+	// Get measurement
+	const std::pair<int, int> get_measure() const;
+	int get_width() const;
+	int get_height() const;
+
+	// Get Player body or snake
+	const std::vector<PlayerBody>& get_snake() const;
+	std::vector<PlayerBody>& get_mut_snake();
+	const PlayerBody& get_head() const;
+	const PlayerBody& get_tail() const;
 	const PosVc& get_walls() const;
+	PosVc& get_mut_walls();
+
+	const PosVc& get_iwalls() const;
+
 	const Portal& get_portal() const;
-	ItmVc& get_growth();
-	ItmVc& get_poison();
-	PosVc& get_empty();
+
+	const ItmVc& get_growth() const;
+	ItmVc& get_mut_growth();
+
+	const ItmVc& get_poison() const;
+	ItmVc& get_mut_poison();
+
+	const std::vector<FILL>& get_empty() const;
+	const FILL get_empty(int x, int y) const;
+	const FILL get_empty(Position pos) const;
+	std::vector<FILL>& get_mut_empty();
+
+	DIRECTION get_last_direction() const;
+	const std::pair<int, int> get_item_counter() const;
 
 	const std::queue<char> get_inputs(); // Placeholder
 
 	void set_death(bool value);
-	void set_snake(bool increment);
+	void push_snake(PlayerBody body);
+	void pop_snake();
 	void set_portal(Portal);
-	void set_growth(Position);
-	void set_poison(Position);
+	void set_growth(Item);
+	void set_poison(Item);
 	void set_snake_map(Position, char);
-	void remove_empty(Position);
+	void set_empty(Position position, FILL value);
+	void set_empty(int x, int y, FILL value);
 
 	void set_input(char input); // Placeholder
+
+	void set_last_direction(DIRECTION direction);
+	void set_growth_counter(int increment);
+	void set_poison_counter(int increment);
 };
 
 #endif
