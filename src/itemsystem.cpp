@@ -1,5 +1,6 @@
 #include "itemsystem.hpp"
 #include "commons.hpp"
+#include "ecsdb.hpp"
 #include "item.hpp"
 #include "playerbody.hpp"
 #include <algorithm>
@@ -10,18 +11,26 @@
 // 현재 스폰 구조는 3개를 무조건 꽉꽉 채우는 구조다. 
 // 그것도 한번에 지운뒤 한 번씩 차례차례 추가한다. 
 // 3개가 아니면 무조건 칸을 채운다.
-void ItemSystem::spawn_growth(PosVc& empty, ItmVc& growth){
+void ItemSystem::spawn_growth(std::vector<FILL>& empty, ItmVc& growth, int width, int height){
 	if (growth.size() >= item_size){return;}
 	int idx = Util::get_rand(0, empty.size() -1);
-	growth.push_back(Item(empty[idx]));
-	empty.erase(empty.begin() + idx);
+	auto it = empty.begin();
+	while (*(it+idx) != FILL::EMPTY){
+		idx = Util::get_rand(0, empty.size() -1);
+	}
+	growth.push_back(Item(Position(idx % width, idx / width)));
+	empty[idx] = FILL::FILL;
 }
 
-void ItemSystem::spawn_poison(PosVc& empty, ItmVc& poison){
+void ItemSystem::spawn_poison(std::vector<FILL>& empty, ItmVc& poison, int width, int height){
 	if (poison.size() >= item_size){return;}
 	int idx = Util::get_rand(0, empty.size() -1);
-	poison.push_back(Item(empty[idx]));
-	empty.erase(empty.begin() + idx);
+	auto it = empty.begin();
+	while (*(it+idx) != FILL::EMPTY){
+		idx = Util::get_rand(0, empty.size() -1);
+	}
+	poison.push_back(Item(Position(idx % width, idx / height))); 
+	empty[idx] = FILL::FILL;
 }
 
 void ItemSystem::remove_growth(ItmVc& growth){
@@ -32,7 +41,7 @@ void ItemSystem::remove_poison(ItmVc& poison){
 	poison.erase(std::remove_if(poison.begin(), poison.end(), [this](Item& item) { return Util::get_time() - item.timestamp >= item_time; }), poison.end());
 };
 
-ITEMTYPE ItemSystem::check_item_interaction(PlayerBody& head, ItmVc& growth, ItmVc& poison){
+ITEMTYPE ItemSystem::check_item_interaction(const PlayerBody& head, ItmVc& growth, ItmVc& poison){
 	for(auto it = growth.begin(); it != growth.end(); it++){
 		if((*it).pos == head.get_pos()){	
 			growth.erase(it);
@@ -50,7 +59,7 @@ ITEMTYPE ItemSystem::check_item_interaction(PlayerBody& head, ItmVc& growth, Itm
 	return ITEMTYPE::NONE;
 };
 
-Position ItemSystem::get_following_position(PlayerBody& parent) {
+Position ItemSystem::get_following_position(const PlayerBody& parent) {
 	int direction = static_cast<int>(parent.get_direction()) * -1;
 	Position following(direction%2, -direction/2 );
 	following += parent.get_pos();
@@ -58,23 +67,25 @@ Position ItemSystem::get_following_position(PlayerBody& parent) {
 }
 
 void ItemSystem::process(ECSDB& db){
-	ITEMTYPE result = check_item_interaction(db.get_snake()[0], db.get_growth(), db.get_poison());
+	std::cout << "Item process\n";
+	ITEMTYPE result = check_item_interaction(db.get_head(), db.get_mut_growth(), db.get_mut_poison());
 
 	switch (result) {
 		case ITEMTYPE::DEC: {
-			db.get_empty().push_back(db.get_head().get_pos());
-			db.get_snake().pop_back();
+			Position pos = db.get_snake().back().get_pos();
+			db.set_empty(pos.get_x(), pos.get_y(), FILL::EMPTY);
+			db.pop_snake();
 			break;
 		}
 
 		case ITEMTYPE::INC: {
-			PlayerBody& former_tail = db.get_snake().back();
-			PlayerBody new_tail = PlayerBody(get_following_position(former_tail), former_tail.get_queue());
+			const PlayerBody& former_tail = db.get_tail();
+			PlayerBody new_tail = PlayerBody(get_following_position(former_tail), former_tail.get_dir_queue());
 
 			new_tail.push_direction_front(former_tail.get_direction());
 
-			db.get_snake().push_back(new_tail);
-			db.remove_empty(new_tail.get_pos());
+			db.push_snake(new_tail);
+			db.set_empty(new_tail.get_pos().get_x(), new_tail.get_pos().get_y(), FILL::FILL);
 			break;
 		}
 
@@ -86,13 +97,13 @@ void ItemSystem::process(ECSDB& db){
 	}
 	
 	// Check existing items
-	ItmVc& growth = db.get_growth();
+	ItmVc& growth = db.get_mut_growth();
 	growth.erase(std::remove_if(growth.begin(), growth.end(), [](Item& item){return Util::get_time() - item.get_time() >= 5;}), growth.end());
 
-	ItmVc& poison = db.get_poison();
+	ItmVc& poison = db.get_mut_poison();
 	poison.erase(std::remove_if(poison.begin(), poison.end(), [](Item& item){return Util::get_time() - item.get_time() >= 5;}), poison.end());
 
 	// Set_item을 안 쓰는 구조다. 
-	spawn_growth(db.get_empty(), growth);
-	spawn_poison(db.get_empty(), poison);
+	spawn_growth(db.get_mut_empty(), growth, db.get_measure().first, db.get_measure().second);
+	spawn_poison(db.get_mut_empty(), poison, db.get_measure().first, db.get_measure().second);
 };

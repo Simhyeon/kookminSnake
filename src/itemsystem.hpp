@@ -31,14 +31,14 @@ private:
 	 * @param empty growth을 생성할 위치를 저장한 변수
 	 * @param growth 생성된 growth 위치를 저장할 변수
 	 */
-	void spawn_growth(PosVc& empty, ItmVc& growth);
+	void spawn_growth(std::vector<enum FILL>&, ItmVc& growth, int width, int height);
 
 	/** \brief 플레이어 몸체를 줄여주는 아이템을 생성하는 함수
 	 *
 	 * @param empty poison을 생성할 위치를 저장한 변수
 	 * @param poison 생성된 poison 위치를 저장할 변수
 	 */
-	void spawn_poison(PosVc& empty, ItmVc& poison);
+	void spawn_poison(std::vector<enum FILL>&, ItmVc& poison, int width, int height);
 
 	/** \brief 시간이 지난 growth 아이템을 지우는 함수
 	 *
@@ -59,14 +59,14 @@ private:
 	 * @param poison poison 아이템이 저장되어 있는 벡터
 	 * @return 상호작용한 아이템의 타입. 만약 없다면 NONE을 리턴한다.
 	 */
-	ITEMTYPE check_item_interaction(PlayerBody& head, ItmVc& growth, ItmVc& poison);
+	ITEMTYPE check_item_interaction(const PlayerBody& head, ItmVc& growth, ItmVc& poison);
 
 	/** \brief 아이템을 적용하면서 플레이어 꼬리를 생성할 포지션을 계산하는 함수
 	 *
 	 * @param parent 아이템을 적용하기 전의 꼬리 인스턴스
 	 * @return 새로 계산한 위치 인스턴스
 	 */
-	Position get_following_position(PlayerBody& parent);
+	Position get_following_position(const PlayerBody& parent);
 public:
 	/** \brief 아이템 시스템의 역할을 작동시키는 함수
 	 *
