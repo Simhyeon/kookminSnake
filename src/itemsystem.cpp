@@ -18,7 +18,7 @@ void ItemSystem::spawn_growth(std::vector<FILL>& empty, ItmVc& growth, int width
 	while (*(it+idx) != FILL::EMPTY){
 		idx = Util::get_rand(0, empty.size() -1);
 	}
-	growth.push_back(Item(Position(idx % width, idx / width)));
+	growth.push_back(Item(Position(idx / width,idx % width)));
 	empty[idx] = FILL::FILL;
 }
 
@@ -29,16 +29,30 @@ void ItemSystem::spawn_poison(std::vector<FILL>& empty, ItmVc& poison, int width
 	while (*(it+idx) != FILL::EMPTY){
 		idx = Util::get_rand(0, empty.size() -1);
 	}
-	poison.push_back(Item(Position(idx % width, idx / height))); 
+	poison.push_back(Item(Position(idx / width,idx % width)));
 	empty[idx] = FILL::FILL;
 }
 
-void ItemSystem::remove_growth(ItmVc& growth){
-	growth.erase(std::remove_if(growth.begin(), growth.end(), [this](Item& item) { return Util::get_time() - item.timestamp >= item_time; }), growth.end());
+std::pair<bool, Position> ItemSystem::remove_growth(ItmVc& growth){
+	for(auto it = growth.begin(); it != growth.end(); it++){
+		if (Util::get_time() - (*it).timestamp >= item_time){
+			Position cache(it->get_pos());
+			growth.erase(it);
+			return std::pair<bool,Position>(true, cache);
+		}
+	}
+	return std::pair<bool,Position>(false, Position(-1,-1));
 };
 
-void ItemSystem::remove_poison(ItmVc& poison){
-	poison.erase(std::remove_if(poison.begin(), poison.end(), [this](Item& item) { return Util::get_time() - item.timestamp >= item_time; }), poison.end());
+std::pair<bool, Position> ItemSystem::remove_poison(ItmVc& poison){
+	for(auto it = poison.begin(); it != poison.end(); it++){
+		if (Util::get_time() - (*it).timestamp >= item_time){
+			Position cache(it->get_pos());
+			poison.erase(it);
+			return std::pair<bool,Position>(true, cache);
+		}
+	}
+	return std::pair<bool,Position>(false, Position(-1,-1));
 };
 
 ITEMTYPE ItemSystem::check_item_interaction(const PlayerBody& head, ItmVc& growth, ItmVc& poison){
@@ -67,7 +81,6 @@ Position ItemSystem::get_following_position(const PlayerBody& parent) {
 }
 
 void ItemSystem::process(ECSDB& db){
-	std::cout << "Item process\n";
 	ITEMTYPE result = check_item_interaction(db.get_head(), db.get_mut_growth(), db.get_mut_poison());
 
 	switch (result) {
@@ -97,13 +110,17 @@ void ItemSystem::process(ECSDB& db){
 	}
 	
 	// Check existing items
-	ItmVc& growth = db.get_mut_growth();
-	growth.erase(std::remove_if(growth.begin(), growth.end(), [](Item& item){return Util::get_time() - item.get_time() >= 5;}), growth.end());
+	auto growth_result = remove_growth(db.get_mut_growth());
+	if (growth_result.first){
+		db.set_empty(growth_result.second, FILL::EMPTY);
+	}
 
-	ItmVc& poison = db.get_mut_poison();
-	poison.erase(std::remove_if(poison.begin(), poison.end(), [](Item& item){return Util::get_time() - item.get_time() >= 5;}), poison.end());
+	auto poison_result = remove_poison(db.get_mut_poison());
+	if (poison_result.first){
+		db.set_empty(poison_result.second, FILL::EMPTY);
+	}
 
 	// Set_item을 안 쓰는 구조다. 
-	spawn_growth(db.get_mut_empty(), growth, db.get_measure().first, db.get_measure().second);
-	spawn_poison(db.get_mut_empty(), poison, db.get_measure().first, db.get_measure().second);
+	spawn_growth(db.get_mut_empty(), db.get_mut_growth(), db.get_measure().first, db.get_measure().second);
+	spawn_poison(db.get_mut_empty(), db.get_mut_poison(), db.get_measure().first, db.get_measure().second);
 };

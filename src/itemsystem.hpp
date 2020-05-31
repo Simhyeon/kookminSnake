@@ -44,13 +44,13 @@ private:
 	 *
 	 * @param growth 검사할 아이템 벡터
 	 */
-	void remove_growth(ItmVc& growth);
+	std::pair<bool, Position> remove_growth(ItmVc& growth);
 
 	/** \brief 시간이 지난 poison 아이템을 지우는 함수
 	 * 
 	 * @param poison 검사할 아이템 벡터
 	 */
-	void remove_poison(ItmVc& poison);
+	std::pair<bool, Position> remove_poison(ItmVc& poison);
 
 	/** \brief 플레이어와 아이템의 상호작용을 검사하는 함수
 	 *
