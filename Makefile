@@ -2,7 +2,7 @@ CC := g++
 CFLAG := 
 DFLAG := -Wall -W -g
 LDLIBS := -lncurses
-SRC_DIR := src
+SRC_DIR := src/code
 OBJ_DIR := obj
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)

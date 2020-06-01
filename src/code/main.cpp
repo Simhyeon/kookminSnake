@@ -22,7 +22,7 @@ int main(void) {
 	PortalSystem pos;
 	FileManager fpp;
 
-	fpp.load_ppm("gate_test.ppm");
+	fpp.load_ppm("src/assets/ppm/gate_test.ppm");
 	ECSDB ecsdb(fpp.width, fpp.height, fpp.color_map, DIRECTION::UP);
 
 	int count;
