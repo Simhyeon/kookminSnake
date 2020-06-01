@@ -8,3 +8,5 @@ obj/
 Snake_game
 Snake_game_Debug
 ./Snake_game_Debug
+./doc/html/
+./doc/latex/
