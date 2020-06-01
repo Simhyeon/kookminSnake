@@ -29,7 +29,8 @@ private:
 	/** \brief 플레이어의 죽음 여부를 저장하는 변수
 	 *	
 	 */
-	bool player_death= false;
+	bool player_death = false;
+	bool player_success = false;
 
 	/** \brief 플레이어 몸체 컴포넌트
 	 *	
@@ -101,6 +102,7 @@ public:
 
 	// Get Death
 	const bool get_death() const;
+	const bool get_success() const;
 
 	// Get measurement
 	const std::pair<int, int> get_measure() const;
@@ -136,6 +138,7 @@ public:
 	const std::queue<char> get_inputs(); // Placeholder
 
 	void set_death(bool value);
+	void set_sucess(bool value);
 	void push_snake(PlayerBody body);
 	void pop_snake();
 	void set_portal(Portal);

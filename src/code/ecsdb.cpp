@@ -145,6 +145,10 @@ const bool ECSDB::get_death() const{
 	return player_death;
 }
 
+const bool ECSDB::get_success() const{
+	return player_success;
+}
+
 const PosVc& ECSDB::get_walls() const {
 	return walls;
 }
@@ -202,6 +206,10 @@ const std::queue<char> ECSDB::get_inputs(){return console_inputs;}
 // Setter
 void ECSDB::set_death(bool value){ 
 	player_death = value; 
+}
+
+void ECSDB::set_sucess(bool value){ 
+	player_success = value; 
 }
 
 void ECSDB::push_snake(PlayerBody body){
