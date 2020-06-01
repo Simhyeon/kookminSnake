@@ -15,15 +15,14 @@
 int main(void) {
 
 	// Init
+	ECSDB ecsdb;
 	Renderer rend;	
 	PlayerBodySystem pbs;
 	CollisionSystem cos;
 	ItemSystem its;
 	PortalSystem pos;
 	FileManager fpp;
-
-	fpp.load_ppm("src/assets/ppm/gate_test.ppm");
-	ECSDB ecsdb(fpp.width, fpp.height, fpp.color_map, DIRECTION::UP);
+	fpp.process(1, ecsdb);
 
 	int count;
 	char flag;
@@ -71,15 +70,4 @@ int main(void) {
 			return 1;
 		}
 	}
-
-	//initscr();
-	//noecho();
-	//cbreak();
-
-	//while (false) {
-		//// if player input is valid start game
-	//}
-	//// Create two windows each for player screen and score board
-
-	//endwin();
 }
