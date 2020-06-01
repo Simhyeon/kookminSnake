@@ -6,7 +6,7 @@ obj/
 # ignore binary file
 ./Snake_game
 Snake_game
-
-# ignore doxygen directory
-./doc/html
-./doc/latex
+Snake_game_Debug
+./Snake_game_Debug
+./doc/html/
+./doc/latex/

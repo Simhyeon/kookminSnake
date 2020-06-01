@@ -4,21 +4,21 @@
 #include "commons.hpp"
 #include "ecsdb.hpp"
 #include "playerbody.hpp"
-/** \brief 아이템을 처리하는 시스템
+/** \brief 플레이어 행동을 처리하는 시스템
  *
- * 아이템의 생성, 소멸과 아이템 효과의 적용을 처리하는 시스템
+ * 플레이어의 움직임, 방향설정을 처리하는 시스템
  */
 class PlayerBodySystem {
 private:
 
+	/// 플레이어가 유지해야 하는 최소 길이, 이보다 짧아질 경우에는 죽는다.
 	const int min_length = 3;
 
-	/** \brief 방향을 바꾸는 함수
-	 * @param direction 머리에 설정할 방향값
-	 * @param head 방향을 바꿀 머리
-	 * @return 방향 전화에 실패한 경우 참을 리턴, 실패시의 페널티는 죽음
+	/** \brief 플레이어 노드들의 방향을 바꾸는 함수
+	 * @param direction 설정할 방향값
+	 * @param bodies 방향을 설정할 플레이어 노드들
 	 */
-	bool change_direction(DIRECTION direction, PlayerBody& head);
+	void change_direction(DIRECTION direction, std::vector<PlayerBody>& bodies);
 
 	/** \brief 플레이어를 이동시키는 함수
 	 * @param bodies 이동할 모든 PlayerBody 값
@@ -31,8 +31,6 @@ private:
 	 */
 	bool check_length(int size);
 
-	/** \brief 콘솔 입력을 가져오는 함수 : PLACEHOLDER
-	 */
 	std::pair<bool, DIRECTION> get_console_input(char);
 public:	
 
