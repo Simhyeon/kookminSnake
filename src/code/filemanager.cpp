@@ -1,5 +1,10 @@
 #include "filemanager.hpp"
+#include "commons.hpp"
 #include <fstream>
+#include <yaml-cpp/node/node.h>
+#include <yaml-cpp/node/parse.h>
+#include <yaml-cpp/parser.h>
+#include <yaml-cpp/yaml.h>
 
 void FileManager::eat_comment(std::ifstream &f){
 	char linebuff[1024];
@@ -8,6 +13,16 @@ void FileManager::eat_comment(std::ifstream &f){
 		f.get();
 	if (ppp == '#')
 		f.getline(linebuff, 1023);
+}
+
+void FileManager::load_file(const std::string& file){
+	YAML::Node level = YAML::LoadFile(file);
+	snake_direction = level["direction"].as<int>();
+	ppm_name = level["ppm_file"].as<std::string>();
+	growth_counter = level["growth"].as<int>();
+	poison_counter = level["poison"].as<int>();
+	
+	ppm_name.insert(0, "src/assets/ppm/");
 }
 
 void FileManager::load_ppm(const std::string& name){
@@ -86,4 +101,18 @@ void FileManager::load_ppm(const std::string& name){
 
     // close file
     f.close();
+}
+
+void FileManager::process(int level, ECSDB &db){
+	std::string path = level_name.at(level);
+	path.insert(0, "src/assets/level/");
+	load_file(path);
+	load_ppm(ppm_name);
+	db.Init(width, height, color_map, static_cast<DIRECTION>(snake_direction));
+	std::cout << "Width : " << width << "\n";
+	std::cout << "height : " << height << "\n";
+	std::cout << "ppm_name : " << ppm_name << "\n";
+	std::cout << "growth : " << growth_counter << "\n";
+	std::cout << "poison : " << poison_counter << "\n";
+	std::cout << "Direction : " << snake_direction << "\n";
 }

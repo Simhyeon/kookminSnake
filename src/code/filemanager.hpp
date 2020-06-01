@@ -3,32 +3,31 @@
 #include "commons.hpp"
 #include "ecsdb.hpp"
 #include <map>
-
 #include <iostream>
 
 class FileManager{
 private:
-	std::map<RGB, char> char_map;
 	void eat_comment(std::ifstream &f);
-public:
-	// 귀찮아서 잠시 뺴둠
+	void load_file(const std::string& file);
+	void load_ppm(const std::string& ppm);
+	void update_db(ECSDB &db);
+
+	std::string ppm_name;
 	int width, height;
+	int growth_counter, poison_counter;
 	char** color_map;
+	int snake_direction;
 
-	void load_ppm(const std::string& name);
-	void load_file(ECSDB& db);
+	const std::map<int, std::string> level_name = {
+		{1, "1.yml"},
+		{2, "2.yml"},
+		{3, "3.yml"},
+		{4, "4.yml"},
+		{5, "5.yml"}
+	};
 
-	void debug_print(){
-		for (int i =0; i < width; i++){
-			for (int j =0; j < height; j++){
-				//if (color_map[i][j] == '@' ||color_map[i][j] == '#') {
-					//std::cout << i << " " << j << "\n";
-				//}
-				std::cout << color_map[i][j] << " ";
-			}
-			std::cout << "\n";
-		}
-	}
+public:
+	void process(int level, ECSDB &db);
 };
 
 #endif
