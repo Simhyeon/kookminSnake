@@ -1,4 +1,5 @@
 #include "playersystem.hpp"
+#include "commons.hpp"
 #include "playerbody.hpp"
 
 void PlayerBodySystem::change_direction(DIRECTION direction, std::vector<PlayerBody>& bodies){
@@ -40,5 +41,6 @@ void PlayerBodySystem::move(std::vector<PlayerBody>& bodies){
 	for (PlayerBody& body : bodies){
 		int dirct = static_cast<int>(body.pop_direction());
 		body.increment_pos(dirct%2, -dirct/2);
+		body.set_last_dir(static_cast<DIRECTION>(dirct));
 	}
 }
