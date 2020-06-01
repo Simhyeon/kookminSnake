@@ -42,7 +42,7 @@ class Position{
 		int x_pos;
 		int y_pos;
 	public:
-		Position(int x = 0, int y = 0);
+		Position(int x = -1, int y = -1);
 		Position(const Position&);
 
 		std::pair<int, int> get_position();
