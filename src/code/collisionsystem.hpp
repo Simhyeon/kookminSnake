@@ -11,18 +11,21 @@
  */
 class CollisionSystem{
 private:
-	/** \breif 충돌을 감지하는 함수
+
+	/** \brief 충돌을 감지하는 함수
+	 *
+	 * walls 만 받아오고 iwalls를 받아오지 않는 이유는 iwalls는 player가 접근할 수 없는 위치에만 있기 때문이다. 
 	 * @param walls 검사할 벽 정보
 	 * @param bodies 검사할 몸체 정보
 	 * @return 충돌 여부를 표시하는 boolean값
 	 */
-	bool DetectCollision(const PosVc& walls, const std::vector<PlayerBody>& bodies);
+	bool detect_collision(const PosVc& walls, const std::vector<PlayerBody>& bodies);
 public:
 	/** 충돌 시스템의 역할을 작동시키는 함수
 	 *
 	 * @param db ECS 데이터베이스
 	 */
-	void Process(ECSDB&);
+	void process(ECSDB&);
 };
 
 #endif
