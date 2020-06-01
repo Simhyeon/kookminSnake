@@ -91,7 +91,7 @@ Portal PortalSystem::regen_portal(const Portal& portal, PosVc& walls) {
 	wall_size = walls.size();
 
 	second = Util::get_rand(0, walls.size() - 1);
-	while (walls[first].get_manhattan(walls[second]) < 2) {
+	while (walls[first].get_manhattan(walls[second]) <= 2) {
 		second = Util::get_rand(0, walls.size() - 1);
 	}
 
