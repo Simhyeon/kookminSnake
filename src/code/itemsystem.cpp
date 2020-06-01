@@ -74,7 +74,8 @@ ITEMTYPE ItemSystem::check_item_interaction(const PlayerBody& head, ItmVc& growt
 };
 
 Position ItemSystem::get_following_position(const PlayerBody& parent) {
-	int direction = static_cast<int>(parent.get_direction()) * -1;
+	int direction = static_cast<int>(parent.get_last_dir()) * -1;
+	std::cout << "Direction is " << direction << "\n";
 	Position following(direction%2, -direction/2 );
 	following += parent.get_pos();
 	return following;
@@ -95,7 +96,7 @@ void ItemSystem::process(ECSDB& db){
 			const PlayerBody& former_tail = db.get_tail();
 			PlayerBody new_tail = PlayerBody(get_following_position(former_tail), former_tail.get_dir_queue());
 
-			new_tail.push_direction_front(former_tail.get_direction());
+			new_tail.push_direction_front(former_tail.get_last_dir());
 
 			db.push_snake(new_tail);
 			db.set_empty(new_tail.get_pos().get_x(), new_tail.get_pos().get_y(), FILL::FILL);
