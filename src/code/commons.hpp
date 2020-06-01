@@ -1,11 +1,14 @@
 #ifndef COMMONS_H
 #define COMMONS_H
 
+#include <algorithm>
+#include <exception>
 #include <utility>
 #include <vector>
 #include <chrono>
 #include <cstdlib>
 #include <iostream>
+#include <array>
 
 /** \file 여러 곳에서 쓰이는 클래스, 함수들을 모아놓은 헤더 파일
  *
@@ -64,6 +67,7 @@ class Position{
  */
 class Util{
 public:
+	static std::array<int, 4> dir_array;
 	/** \breif 임의의 정수를 가져오는 함수
 	 * 	아직 확실하게 정리된 것 X, Refactor 필요
 	 *	@param min 최소 정수값	
@@ -81,11 +85,9 @@ public:
 	static long get_time();
 	static int get_dir_int(DIRECTION dir);
 
-	static Position get_modified_pos(Position position, DIRECTION direction){
-		int dirct = static_cast<int>(direction);
-		position.increment(dirct%2, -dirct/2);
-		return position;
-	}
+	static DIRECTION get_reverse_dir(DIRECTION direction);
+	static Position get_modified_pos(Position position, DIRECTION direction);
+	static DIRECTION rotate_dir(DIRECTION origin, DIRECTION rotation = DIRECTION::LEFT);
 };
 
 

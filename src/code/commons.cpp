@@ -50,6 +50,33 @@ long Util::get_time() {
 int Util::get_dir_int(DIRECTION dir){
 	return static_cast<int>(dir);
 }
+DIRECTION Util::get_reverse_dir(DIRECTION direction){
+	return static_cast<DIRECTION>(-1 * static_cast<int>(direction));
+}
+Position Util::get_modified_pos(Position position, DIRECTION direction){
+	int dirct = static_cast<int>(direction);
+	position.increment(dirct%2, -dirct/2);
+	return position;
+}
+DIRECTION Util::rotate_dir(DIRECTION origin, DIRECTION rotation){
+	auto it = std::find(dir_array.begin(), dir_array.end(), Util::get_dir_int(origin));
+	if (rotation == DIRECTION::RIGHT){
+		if (it == dir_array.end()-1){
+			return static_cast<DIRECTION>(*(dir_array.end()));
+		} else {
+			return static_cast<DIRECTION>(*(it+1));
+		}
+	} else if (rotation == DIRECTION::LEFT) {
+		if (it == dir_array.begin()){
+			return static_cast<DIRECTION>(*(dir_array.end()-1));
+		} else {
+			return static_cast<DIRECTION>(*(it-1));
+		}
+	} else {
+		throw std::exception();
+	}
+}
+std::array<int, 4> Util::dir_array = {2,1,-2,-1};
 
 Position::Position(int x , int y): x_pos(x), y_pos(y){};
 Position::Position(const Position& pos): x_pos(pos.get_x()), y_pos(pos.get_y()){};
