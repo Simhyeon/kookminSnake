@@ -62,7 +62,7 @@ int main(void) {
 		pbs.process(ecsdb);
 		//its.process(ecsdb);
 		pos.process(ecsdb);
-		//cos.Process(ecsdb);
+		//cos.process(ecsdb);
 		ecsdb.update_snake_map();
 
 		if (ecsdb.get_death()){

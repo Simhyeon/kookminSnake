@@ -13,9 +13,15 @@ enum class ITEMTYPE{
 	DEC 	=-1,
 };
 
+/** \brief Item 정보를 저장하는 클래스
+ *
+ * Growth이건 Poison이건 구분하지 않고 Item으로 통일하여 저장한다.
+ */
 class Item{
 private:
+	/// 아이템이 생성된 시점을 저장하는 timestamp
 	long timestamp;
+	/// 아이템의 위치를 저장하는 좌표 정보
 	Position pos;
 public:
 	Item();

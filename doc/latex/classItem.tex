@@ -1,0 +1,56 @@
+\hypertarget{classItem}{}\doxysection{Item Class Reference}
+\label{classItem}\index{Item@{Item}}
+
+
+\mbox{\hyperlink{classItem}{Item}} 정보를 저장하는 클래스  
+
+
+
+
+{\ttfamily \#include $<$item.\+hpp$>$}
+
+
+
+Collaboration diagram for Item\+:
+% FIG 0
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classItem_ad0e614788111f7d678ad17fd83ae7518}\label{classItem_ad0e614788111f7d678ad17fd83ae7518}} 
+{\bfseries Item} (\mbox{\hyperlink{classPosition}{Position}})
+\item 
+\mbox{\Hypertarget{classItem_a7896793fc677fd86445c30bc5ffbfde5}\label{classItem_a7896793fc677fd86445c30bc5ffbfde5}} 
+long {\bfseries get\+\_\+time} ()
+\item 
+\mbox{\Hypertarget{classItem_a0aa4124d6a44bd206d87bfec20b455d6}\label{classItem_a0aa4124d6a44bd206d87bfec20b455d6}} 
+\mbox{\hyperlink{classPosition}{Position}} {\bfseries get\+\_\+pos} ()
+\item 
+\mbox{\Hypertarget{classItem_a00c1348f4f2537a1744df29bbdf993f1}\label{classItem_a00c1348f4f2537a1744df29bbdf993f1}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classItem}{Item}} \&rhs) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classItem_aacc33a1562264bd1883e1e8b5757e436}\label{classItem_aacc33a1562264bd1883e1e8b5757e436}} 
+long \mbox{\hyperlink{classItem_aacc33a1562264bd1883e1e8b5757e436}{timestamp}}
+\begin{DoxyCompactList}\small\item\em 아이템이 생성된 시점을 저장하는 timestamp \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classItem_aafe5ab35b05b220b0992938cef913547}\label{classItem_aafe5ab35b05b220b0992938cef913547}} 
+\mbox{\hyperlink{classPosition}{Position}} \mbox{\hyperlink{classItem_aafe5ab35b05b220b0992938cef913547}{pos}}
+\begin{DoxyCompactList}\small\item\em 아이템의 위치를 저장하는 좌표 정보 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classItem_aa0199ae91db1b91c7f478374490eef65}\label{classItem_aa0199ae91db1b91c7f478374490eef65}} 
+class {\bfseries Item\+System}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classItem}{Item}} 정보를 저장하는 클래스 
+
+Growth이건 Poison이건 구분하지 않고 Item으로 통일하여 저장한다. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/simon/programming/cpp/ncurses/kookmin\+Snake/src/code/item.\+hpp\item 
+/home/simon/programming/cpp/ncurses/kookmin\+Snake/src/code/item.\+cpp\end{DoxyCompactItemize}

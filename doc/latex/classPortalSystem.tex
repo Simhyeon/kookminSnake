@@ -1,0 +1,138 @@
+\hypertarget{classPortalSystem}{}\doxysection{Portal\+System Class Reference}
+\label{classPortalSystem}\index{PortalSystem@{PortalSystem}}
+
+
+포탈을 처리하는 시스템  
+
+
+
+
+{\ttfamily \#include $<$portalsystem.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classPortalSystem_a1fb9620a4d3bac42409199a4125dcdcd}{process}} (\mbox{\hyperlink{classECSDB}{E\+C\+S\+DB}} \&)
+\begin{DoxyCompactList}\small\item\em 포탈 시스템을 작동시키는 함수 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::pair$<$ \mbox{\hyperlink{classPosition}{Position}}, D\+I\+R\+E\+C\+T\+I\+ON $>$ \mbox{\hyperlink{classPortalSystem_acb2d52e8d3d06cb55fbd46a11e311240}{get\+\_\+jump\+\_\+result}} (\mbox{\hyperlink{classPosition}{Position}} destination, int body\+\_\+number, \mbox{\hyperlink{classECSDB}{E\+C\+S\+DB}} \&db)
+\begin{DoxyCompactList}\small\item\em 포탈의 위치에 따라 플레이어의 방향을 결정하는 함수 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPortalSystem_a04d8fcfdf356822b4fc1b059c14e4950}{jump\+\_\+snake}} (\mbox{\hyperlink{classPlayerBody}{Player\+Body}} \&body, \mbox{\hyperlink{classPosition}{Position}} destination)
+\begin{DoxyCompactList}\small\item\em 포탈의 다음 위치로 플레이어를 이동시키는 함수 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classPortal}{Portal}} \mbox{\hyperlink{classPortalSystem_a7ddde65fbad26aea9328d5c8cd031e3e}{regen\+\_\+portal}} (const \mbox{\hyperlink{classPortal}{Portal}} \&portal, Pos\+Vc \&walls)
+\begin{DoxyCompactList}\small\item\em 포탈을 재생성하는 함수 \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classPosition}{Position}}, int $>$ \mbox{\hyperlink{classPortalSystem_a82ba2f4209e616554a4e37ec63ed8f08}{check\+\_\+portal\+\_\+interaction}} (const std\+::vector$<$ \mbox{\hyperlink{classPlayerBody}{Player\+Body}} $>$ \&bodies, const \mbox{\hyperlink{classPortal}{Portal}} \&portal)
+\begin{DoxyCompactList}\small\item\em 포탈 상호작용을 검사하는 함수 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPortalSystem_ad81c520e0f9f354dfcc04f585d2efd4f}\label{classPortalSystem_ad81c520e0f9f354dfcc04f585d2efd4f}} 
+const double \mbox{\hyperlink{classPortalSystem_ad81c520e0f9f354dfcc04f585d2efd4f}{portal\+\_\+time}} = 5.\+0
+\begin{DoxyCompactList}\small\item\em 포탈의 지속시간 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+포탈을 처리하는 시스템 
+
+포탈의 생성, 소멸과 포탈 효과의 적용을 처리하는 시스템~\newline
+포탈의 검사는 포탈의 검사만을 하기 때문에 벽의 검사보다 먼저 이루어저야 한다. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPortalSystem_a82ba2f4209e616554a4e37ec63ed8f08}\label{classPortalSystem_a82ba2f4209e616554a4e37ec63ed8f08}} 
+\index{PortalSystem@{PortalSystem}!check\_portal\_interaction@{check\_portal\_interaction}}
+\index{check\_portal\_interaction@{check\_portal\_interaction}!PortalSystem@{PortalSystem}}
+\doxysubsubsection{\texorpdfstring{check\_portal\_interaction()}{check\_portal\_interaction()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{classPosition}{Position}}, int $>$ Portal\+System\+::check\+\_\+portal\+\_\+interaction (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classPlayerBody}{Player\+Body}} $>$ \&}]{bodies,  }\item[{const \mbox{\hyperlink{classPortal}{Portal}} \&}]{portal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+포탈 상호작용을 검사하는 함수 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bodies} & 포탈 상호작용을 검사할 플레이어 노드 벡터 \\
+\hline
+{\em portal} & 검사할 포탈 컴포넌트 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+상호작용 여부와 함계 상호작용했다면 그 반대 엔트리 위치 값을 가지는 pair 값 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPortalSystem_acb2d52e8d3d06cb55fbd46a11e311240}\label{classPortalSystem_acb2d52e8d3d06cb55fbd46a11e311240}} 
+\index{PortalSystem@{PortalSystem}!get\_jump\_result@{get\_jump\_result}}
+\index{get\_jump\_result@{get\_jump\_result}!PortalSystem@{PortalSystem}}
+\doxysubsubsection{\texorpdfstring{get\_jump\_result()}{get\_jump\_result()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{classPosition}{Position}}, D\+I\+R\+E\+C\+T\+I\+ON $>$ Portal\+System\+::get\+\_\+jump\+\_\+result (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classPosition}{Position}}}]{destination,  }\item[{int}]{body\+\_\+number,  }\item[{\mbox{\hyperlink{classECSDB}{E\+C\+S\+DB}} \&}]{db }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+포탈의 위치에 따라 플레이어의 방향을 결정하는 함수 
+
+
+\begin{DoxyParams}{Parameters}
+{\em destination} & 방향을 정해야 하는 포탈 위치 \\
+\hline
+{\em body\+\_\+number} & 위치를 이동시켜야 하는 플레이어 노드의 인덱스 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+방향에 따라 플레이어를 이동시켜야 할 Position과 그 방향값 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPortalSystem_a04d8fcfdf356822b4fc1b059c14e4950}\label{classPortalSystem_a04d8fcfdf356822b4fc1b059c14e4950}} 
+\index{PortalSystem@{PortalSystem}!jump\_snake@{jump\_snake}}
+\index{jump\_snake@{jump\_snake}!PortalSystem@{PortalSystem}}
+\doxysubsubsection{\texorpdfstring{jump\_snake()}{jump\_snake()}}
+{\footnotesize\ttfamily void Portal\+System\+::jump\+\_\+snake (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classPlayerBody}{Player\+Body}} \&}]{body,  }\item[{\mbox{\hyperlink{classPosition}{Position}}}]{destination }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+포탈의 다음 위치로 플레이어를 이동시키는 함수 
+
+
+\begin{DoxyParams}{Parameters}
+{\em head} & 이동시킬 플레이어 노드 \\
+\hline
+{\em destination} & 이동시킬 포탈의 위치 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPortalSystem_a1fb9620a4d3bac42409199a4125dcdcd}\label{classPortalSystem_a1fb9620a4d3bac42409199a4125dcdcd}} 
+\index{PortalSystem@{PortalSystem}!process@{process}}
+\index{process@{process}!PortalSystem@{PortalSystem}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily void Portal\+System\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classECSDB}{E\+C\+S\+DB}} \&}]{db }\end{DoxyParamCaption})}
+
+
+
+포탈 시스템을 작동시키는 함수 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & E\+CS 데이터베이스 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPortalSystem_a7ddde65fbad26aea9328d5c8cd031e3e}\label{classPortalSystem_a7ddde65fbad26aea9328d5c8cd031e3e}} 
+\index{PortalSystem@{PortalSystem}!regen\_portal@{regen\_portal}}
+\index{regen\_portal@{regen\_portal}!PortalSystem@{PortalSystem}}
+\doxysubsubsection{\texorpdfstring{regen\_portal()}{regen\_portal()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPortal}{Portal}} Portal\+System\+::regen\+\_\+portal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classPortal}{Portal}} \&}]{portal,  }\item[{Pos\+Vc \&}]{walls }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+포탈을 재생성하는 함수 
+
+
+\begin{DoxyParams}{Parameters}
+{\em walls} & 포탈을 생설할 벽의 위치를 참조할 변수 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+생성한 포탈의 인스턴스 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/simon/programming/cpp/ncurses/kookmin\+Snake/src/code/portalsystem.\+hpp\item 
+/home/simon/programming/cpp/ncurses/kookmin\+Snake/src/code/portalsystem.\+cpp\end{DoxyCompactItemize}

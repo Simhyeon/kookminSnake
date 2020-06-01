@@ -1,0 +1,113 @@
+\hypertarget{classPlayerBodySystem}{}\doxysection{Player\+Body\+System Class Reference}
+\label{classPlayerBodySystem}\index{PlayerBodySystem@{PlayerBodySystem}}
+
+
+플레이어 행동을 처리하는 시스템  
+
+
+
+
+{\ttfamily \#include $<$playersystem.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classPlayerBodySystem_a091682e3ae2baed3ec74ae792ae0bd77}{process}} (\mbox{\hyperlink{classECSDB}{E\+C\+S\+DB}} \&)
+\begin{DoxyCompactList}\small\item\em 플레이어 바디 시스템의 역할을 작동시키는 함수 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classPlayerBodySystem_af846e65b36a0fd63f6597296ffb5db01}{change\+\_\+direction}} (D\+I\+R\+E\+C\+T\+I\+ON direction, std\+::vector$<$ \mbox{\hyperlink{classPlayerBody}{Player\+Body}} $>$ \&bodies)
+\begin{DoxyCompactList}\small\item\em 플레이어 노드들의 방향을 바꾸는 함수 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPlayerBodySystem_ac8e14054bab446699fd9a08448c35853}{move}} (std\+::vector$<$ \mbox{\hyperlink{classPlayerBody}{Player\+Body}} $>$ \&bodies)
+\begin{DoxyCompactList}\small\item\em 플레이어를 이동시키는 함수 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPlayerBodySystem_a6f1f45560abb06f8171c7c5fdcc18d3f}{check\+\_\+length}} (int size)
+\begin{DoxyCompactList}\small\item\em 플레이어를 길이를 검사하는 함수 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPlayerBodySystem_afaa61055236ae0cd366a844fd7aebfb7}\label{classPlayerBodySystem_afaa61055236ae0cd366a844fd7aebfb7}} 
+std\+::pair$<$ bool, D\+I\+R\+E\+C\+T\+I\+ON $>$ {\bfseries get\+\_\+console\+\_\+input} (char)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPlayerBodySystem_a3383a84c59d7c0b17a2f6a09e7826c95}\label{classPlayerBodySystem_a3383a84c59d7c0b17a2f6a09e7826c95}} 
+const int \mbox{\hyperlink{classPlayerBodySystem_a3383a84c59d7c0b17a2f6a09e7826c95}{min\+\_\+length}} = 3
+\begin{DoxyCompactList}\small\item\em 플레이어가 유지해야 하는 최소 길이, 이보다 짧아질 경우에는 죽는다. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+플레이어 행동을 처리하는 시스템 
+
+플레이어으 움직임, 방향설정을 처리하는 시스템 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPlayerBodySystem_af846e65b36a0fd63f6597296ffb5db01}\label{classPlayerBodySystem_af846e65b36a0fd63f6597296ffb5db01}} 
+\index{PlayerBodySystem@{PlayerBodySystem}!change\_direction@{change\_direction}}
+\index{change\_direction@{change\_direction}!PlayerBodySystem@{PlayerBodySystem}}
+\doxysubsubsection{\texorpdfstring{change\_direction()}{change\_direction()}}
+{\footnotesize\ttfamily void Player\+Body\+System\+::change\+\_\+direction (\begin{DoxyParamCaption}\item[{D\+I\+R\+E\+C\+T\+I\+ON}]{direction,  }\item[{std\+::vector$<$ \mbox{\hyperlink{classPlayerBody}{Player\+Body}} $>$ \&}]{bodies }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+플레이어 노드들의 방향을 바꾸는 함수 
+
+
+\begin{DoxyParams}{Parameters}
+{\em direction} & 설정할 방향값 \\
+\hline
+{\em bodies} & 방향을 설정할 플레이어 노드들 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPlayerBodySystem_a6f1f45560abb06f8171c7c5fdcc18d3f}\label{classPlayerBodySystem_a6f1f45560abb06f8171c7c5fdcc18d3f}} 
+\index{PlayerBodySystem@{PlayerBodySystem}!check\_length@{check\_length}}
+\index{check\_length@{check\_length}!PlayerBodySystem@{PlayerBodySystem}}
+\doxysubsubsection{\texorpdfstring{check\_length()}{check\_length()}}
+{\footnotesize\ttfamily bool Player\+Body\+System\+::check\+\_\+length (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+플레이어를 길이를 검사하는 함수 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & 검사할 길이 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+최소값 충족 여부 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPlayerBodySystem_ac8e14054bab446699fd9a08448c35853}\label{classPlayerBodySystem_ac8e14054bab446699fd9a08448c35853}} 
+\index{PlayerBodySystem@{PlayerBodySystem}!move@{move}}
+\index{move@{move}!PlayerBodySystem@{PlayerBodySystem}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily void Player\+Body\+System\+::move (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classPlayerBody}{Player\+Body}} $>$ \&}]{bodies }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+플레이어를 이동시키는 함수 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bodies} & 이동할 모든 \mbox{\hyperlink{classPlayerBody}{Player\+Body}} 값 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPlayerBodySystem_a091682e3ae2baed3ec74ae792ae0bd77}\label{classPlayerBodySystem_a091682e3ae2baed3ec74ae792ae0bd77}} 
+\index{PlayerBodySystem@{PlayerBodySystem}!process@{process}}
+\index{process@{process}!PlayerBodySystem@{PlayerBodySystem}}
+\doxysubsubsection{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily void Player\+Body\+System\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classECSDB}{E\+C\+S\+DB}} \&}]{db }\end{DoxyParamCaption})}
+
+
+
+플레이어 바디 시스템의 역할을 작동시키는 함수 
+
+
+\begin{DoxyParams}{Parameters}
+{\em db} & E\+CS 데이터베이스 \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/simon/programming/cpp/ncurses/kookmin\+Snake/src/code/playersystem.\+hpp\item 
+/home/simon/programming/cpp/ncurses/kookmin\+Snake/src/code/playersystem.\+cpp\end{DoxyCompactItemize}

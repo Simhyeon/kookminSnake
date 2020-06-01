@@ -1,0 +1,103 @@
+\hypertarget{classPosition}{}\doxysection{Position Class Reference}
+\label{classPosition}\index{Position@{Position}}
+
+
+좌표를 나타내는 클래스  
+
+
+
+
+{\ttfamily \#include $<$commons.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPosition_aeaa3f8c527d3536d98981faa1d5bdbca}\label{classPosition_aeaa3f8c527d3536d98981faa1d5bdbca}} 
+{\bfseries Position} (int x=-\/1, int y=-\/1)
+\item 
+\mbox{\Hypertarget{classPosition_a63750e368482cc5ef45180d3672b1c55}\label{classPosition_a63750e368482cc5ef45180d3672b1c55}} 
+{\bfseries Position} (const \mbox{\hyperlink{classPosition}{Position}} \&)
+\item 
+\mbox{\Hypertarget{classPosition_a83d3820b1ab35400236ad27ab02db001}\label{classPosition_a83d3820b1ab35400236ad27ab02db001}} 
+std\+::pair$<$ int, int $>$ {\bfseries get\+\_\+position} ()
+\item 
+\mbox{\Hypertarget{classPosition_a77d74df20473739242e13a903ed65906}\label{classPosition_a77d74df20473739242e13a903ed65906}} 
+\mbox{\hyperlink{classPosition}{Position}} \& {\bfseries operator=} (const \mbox{\hyperlink{classPosition}{Position}} \&lhs)
+\item 
+\mbox{\Hypertarget{classPosition_abbcd55e2e1c2f64c81c1514fb104ef51}\label{classPosition_abbcd55e2e1c2f64c81c1514fb104ef51}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classPosition}{Position}} \&pos) const
+\item 
+\mbox{\Hypertarget{classPosition_ab5cf34a93bd9d0d1dc54bad6852db278}\label{classPosition_ab5cf34a93bd9d0d1dc54bad6852db278}} 
+\mbox{\hyperlink{classPosition}{Position}} \& {\bfseries operator+=} (const \mbox{\hyperlink{classPosition}{Position}} \&pos)
+\item 
+\mbox{\Hypertarget{classPosition_a3ebf0e250853a052617ef44dd50ef734}\label{classPosition_a3ebf0e250853a052617ef44dd50ef734}} 
+int {\bfseries get\+\_\+x} () const
+\item 
+\mbox{\Hypertarget{classPosition_a6d4bc53c94a588bdc5771174e6fb5309}\label{classPosition_a6d4bc53c94a588bdc5771174e6fb5309}} 
+int {\bfseries get\+\_\+y} () const
+\item 
+void \mbox{\hyperlink{classPosition_a8f1634fbf5c12cffb87529426b1906cb}{increment}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em 주어진 좌표값만큼 증가시키는 함수 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classPosition_a5b61df8f9382dabe3156d7adc31382d3}{get\+\_\+manhattan}} (const \mbox{\hyperlink{classPosition}{Position}} \&position) const
+\begin{DoxyCompactList}\small\item\em 주어진 좌표와의 맨해탄 거리를 계산하는 함수 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPosition_a6cb3e38125b4026014b77b4c3972d938}\label{classPosition_a6cb3e38125b4026014b77b4c3972d938}} 
+int {\bfseries x\+\_\+pos}
+\item 
+\mbox{\Hypertarget{classPosition_afc2e3634ee4ffa6bfc0f503ea145161b}\label{classPosition_afc2e3634ee4ffa6bfc0f503ea145161b}} 
+int {\bfseries y\+\_\+pos}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPosition_a6551d31bbbe8782a92659b2b1ad68d4a}\label{classPosition_a6551d31bbbe8782a92659b2b1ad68d4a}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&, const \mbox{\hyperlink{classPosition}{Position}} \&)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+좌표를 나타내는 클래스 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPosition_a5b61df8f9382dabe3156d7adc31382d3}\label{classPosition_a5b61df8f9382dabe3156d7adc31382d3}} 
+\index{Position@{Position}!get\_manhattan@{get\_manhattan}}
+\index{get\_manhattan@{get\_manhattan}!Position@{Position}}
+\doxysubsubsection{\texorpdfstring{get\_manhattan()}{get\_manhattan()}}
+{\footnotesize\ttfamily int Position\+::get\+\_\+manhattan (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classPosition}{Position}} \&}]{position }\end{DoxyParamCaption}) const}
+
+
+
+주어진 좌표와의 맨해탄 거리를 계산하는 함수 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & 거리를 계산할 좌표 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPosition_a8f1634fbf5c12cffb87529426b1906cb}\label{classPosition_a8f1634fbf5c12cffb87529426b1906cb}} 
+\index{Position@{Position}!increment@{increment}}
+\index{increment@{increment}!Position@{Position}}
+\doxysubsubsection{\texorpdfstring{increment()}{increment()}}
+{\footnotesize\ttfamily void Position\+::increment (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+주어진 좌표값만큼 증가시키는 함수 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & x값 \\
+\hline
+{\em x} & y값 \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/simon/programming/cpp/ncurses/kookmin\+Snake/src/code/commons.\+hpp\item 
+/home/simon/programming/cpp/ncurses/kookmin\+Snake/src/code/commons.\+cpp\end{DoxyCompactItemize}

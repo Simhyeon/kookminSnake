@@ -11,7 +11,6 @@ void PortalSystem::jump_snake(PlayerBody& body, Position destination) {
 	body.set_pos(destination.get_x(), destination.get_y());
 }
 
-// 규칙을 이렇게 단순하게 할 수는 없음. 더 상세하게 디테일을 잡아야 함. 
 std::pair<Position, DIRECTION> PortalSystem::get_jump_result(Position destination,int body_nubmer, ECSDB& db){
 
 	if (destination.get_x() == 0) {
