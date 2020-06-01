@@ -15,7 +15,7 @@ private:
 	 *
 	 * Readable한 시간으로 나타나진 않으며 지나간 시간을 검사하는데 쓰인다.
 	 */
-	const long start_time;
+	long start_time;
 	/** \brief 게임 화면의 너비
 	 *	점수판의 크기와 너비와 동일하다.
 	 */
@@ -91,6 +91,7 @@ public:
 	//Constructor
 	ECSDB();
 	ECSDB(int width, int height, char** snake_map, DIRECTION snake_direction);
+	void Init(int width, int height, char** snake_map, DIRECTION snake_direction);
 
 	// Update snake_map, should be renderer function
 	void update_snake_map();

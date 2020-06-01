@@ -14,6 +14,33 @@
 // Functions	
 // Constructor
 // Currently for Debuggin
+ECSDB::ECSDB(){}
+void ECSDB::Init(int width, int height, char** snake_map, DIRECTION snake_direction) {
+	this->width = width;
+	this->height = height;
+	this->snake_map = snake_map;
+	start_time = Util::get_time(); 
+
+	empty = std::vector<FILL>(width * height, FILL::NEVER);
+
+	for(int i =0; i < width; i++){
+		for(int j =0; j < height; j++){
+			if (snake_map[i][j] == char_map.at("wall")){
+				walls.push_back(Position(i,j));
+			} else if (snake_map[i][j] == char_map.at("head") ||
+					snake_map[i][j] == char_map.at("tail") ){
+				int size = snake.size();
+				snake.push_back(PlayerBody(Position(i,j), snake_direction, size));
+				std::cout << "Putting snake to " << Position(i,j) << "\n";
+				set_empty(i,j, FILL::FILL);
+			} else if (snake_map[i][j] == char_map.at("iwall")) {
+				iwalls.push_back(Position(i,j));
+			} else {
+				set_empty(i,j, FILL::EMPTY);
+			}
+		}
+	}
+}
 ECSDB::ECSDB(int width, int height, char** snake_map, DIRECTION snake_direction)
 	: width(width), height(height), snake_map(snake_map), start_time(Util::get_time()) {
 	// Initialize empty
