@@ -1,0 +1,4 @@
+direction: 2
+growth: 5
+poison: 3
+ppm_file: "gate_test.ppm"
