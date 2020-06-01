@@ -24,7 +24,7 @@ private:
 	 * @param height 현재 window의 크기
 	 * @return 플레이어의 방향값
 	 */
-	DIRECTION get_direction(Position destination, ECSDB& db);
+	std::pair<Position, DIRECTION> get_jump_result(Position destination,int body_number, ECSDB& db);
 
 	/** \brief 포탈의 다음 위치로 플레이어를 이동시키는 함수
 	 * @param head 이동시킬 플레이어의 머리
@@ -45,7 +45,7 @@ private:
 	 * @param portal 검사할 포탈 컴포넌트
 	 * @return 상호작용 여부와, 상호작용했다면 그 끝(end)의 위치 값을 가지는 pair 값
 	 */
-	std::pair<GateEntry, int> check_portal_interaction(const std::vector<PlayerBody>& bodies, const Portal& portal);
+	std::pair<Position, int> check_portal_interaction(const std::vector<PlayerBody>& bodies, const Portal& portal);
 public:	
 	/** \brief 포탈 시스템을 작동시키는 함수
 	 *
