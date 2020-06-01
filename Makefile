@@ -1,7 +1,7 @@
 CC := g++
 CFLAG := 
 DFLAG := -Wall -W -g
-LDLIBS := -lncurses
+LDLIBS := -lncurses -lyaml-cpp
 SRC_DIR := src/code
 OBJ_DIR := obj
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
