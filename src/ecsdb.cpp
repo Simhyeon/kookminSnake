@@ -15,8 +15,7 @@
 // Constructor
 // Currently for Debuggin
 ECSDB::ECSDB(int width, int height, char** snake_map, DIRECTION snake_direction)
-	: width(width), height(height), snake_map(snake_map),  
-	portal(Position(-1,-1), Position(-1,-1)), start_time(Util::get_time()) {
+	: width(width), height(height), snake_map(snake_map), start_time(Util::get_time()) {
 	// Initialize empty
 	empty = std::vector<FILL>(width * height, FILL::NEVER);
 
