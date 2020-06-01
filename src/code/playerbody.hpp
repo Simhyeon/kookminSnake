@@ -8,6 +8,7 @@ class PlayerBody{
 private:
 	std::deque<DIRECTION> dir_queue;
 	Position pos;
+	DIRECTION last_direction;
 public:
 	PlayerBody();
 	PlayerBody(Position, DIRECTION direction, unsigned int body_size);
@@ -20,6 +21,8 @@ public:
 	void increment_pos(int x, int y);
 	void set_pos(const Position);
 	void set_pos(int x, int y);
+	DIRECTION get_last_dir() const;
+	void set_last_dir(DIRECTION);
 
 	const std::deque<DIRECTION>& get_dir_queue() const;
 };

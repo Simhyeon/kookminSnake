@@ -6,6 +6,7 @@ PlayerBody::PlayerBody(){}
 PlayerBody::PlayerBody(Position position, DIRECTION direction, unsigned int body_size){
 	pos = position;
 	dir_queue = std::deque<DIRECTION>(std::queue<DIRECTION>::container_type(body_size, direction));
+	last_direction = direction;
 }
 PlayerBody::PlayerBody(Position position, std::deque<DIRECTION> copy){
 	pos = position;
@@ -43,4 +44,10 @@ void PlayerBody::set_pos(int x, int y){
 }
 const std::deque<DIRECTION>& PlayerBody::get_dir_queue() const{
 	return dir_queue;
+}
+DIRECTION PlayerBody::get_last_dir() const{
+	return last_direction;
+}
+void PlayerBody::set_last_dir(DIRECTION dir){
+	last_direction = dir;
 }
