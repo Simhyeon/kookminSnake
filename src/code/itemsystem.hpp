@@ -5,6 +5,7 @@
 #include "ecsdb.hpp"
 #include "commons.hpp"
 #include "playerbody.hpp"
+#include "aliases.hpp"
 
 /** \brief 아이템을 처리하는 시스템
  *

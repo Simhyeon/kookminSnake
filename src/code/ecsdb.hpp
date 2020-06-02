@@ -8,6 +8,7 @@
 #include <vector>
 #include <queue>
 #include <memory>
+#include "aliases.hpp"
 
 /** \brief 게임에서 사용할 모든 정보를 저장하는 클래스
  *

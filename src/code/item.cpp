@@ -3,6 +3,7 @@
 
 Item::Item(): timestamp(Util::get_time()){}
 Item::Item(Position pos): timestamp(Util::get_time()), pos(pos) {}
+
 long Item::get_time(){
 	return timestamp;
 }

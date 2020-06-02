@@ -68,11 +68,13 @@ class Position{
 		int get_y() const;
 
 		/** \brief 주어진 좌표값만큼 증가시키는 함수
+		 *
 		 * @param x x값
 		 * @param x y값
 		 */
 		void increment(int x, int y);
 		/** \brief 주어진 좌표와의 맨해탄 거리를 계산하는 함수
+		 *
 		 * @param position 거리를 계산할 좌표
 		 */
 		int get_manhattan(const Position& position) const;
@@ -84,6 +86,7 @@ class Position{
  */
 class Util{
 public:
+
 	/** \brief rotate_dir에서 사용하는 방향 배열
 	 *
 	 */
@@ -149,12 +152,5 @@ enum class KEYINPUT{
 	RIGHT = -1,
 	LEFT = 1,
 };
-
-/** \brief 위치를 나타내는 클래스
- *
- * 오퍼레이터 오버로드 검증이 필요하다
- */
-// Aliases
-using PosVc=std::vector<Position>;
 
 #endif

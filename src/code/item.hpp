@@ -32,7 +32,5 @@ public:
 friend class ItemSystem;
 };
 
-// Aliases
-using ItmVc=std::vector<Item>;
 
 #endif

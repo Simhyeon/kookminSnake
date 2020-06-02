@@ -4,6 +4,7 @@
 #include "ecsdb.hpp"
 #include "commons.hpp"
 #include "playerbody.hpp"
+#include "aliases.hpp"
 #include <vector>
 
 /** \brief 포탈을 처리하는 시스템

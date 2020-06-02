@@ -4,6 +4,7 @@
 #include "commons.hpp"
 #include "ecsdb.hpp"
 #include "playerbody.hpp"
+#include "aliases.hpp"
 
 /** \brief 충돌을 처리하는 시스템
  *
