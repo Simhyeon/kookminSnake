@@ -1,0 +1,4 @@
+direction: -1
+growth: 10
+poison: 10
+ppm_file: "20x20_christ.ppm"

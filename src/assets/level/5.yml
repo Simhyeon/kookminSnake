@@ -1,0 +1,4 @@
+direction: 2
+growth: 12
+poison: 12
+ppm_file: "20x20_angled.ppm"

@@ -1,0 +1,4 @@
+direction: 2
+growth: 5
+poison: 5
+ppm_file: "15x15_normal.ppm"

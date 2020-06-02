@@ -1,0 +1,4 @@
+direction: -1
+growth: 7
+poison: 7
+ppm_file: "20x20_normal.ppm"
