@@ -84,9 +84,9 @@ void FileManager::load_ppm(const std::string& name){
 	    return ;
 	}
 
-	color_map = new char*[width];
+	color_map.clear();
 	for(int i = 0; i < width; ++i) {
-	    color_map[i] = new char[height];
+		color_map.push_back(std::vector<char>());
 	}
 
 	int r,g,b;
@@ -95,7 +95,7 @@ void FileManager::load_ppm(const std::string& name){
 			f >> r;
 			f >> g;
 			f >> b;
-			color_map[j][i] = static_cast<char>(RGB(r,g,b));
+			color_map[j].push_back(static_cast<char>(RGB(r,g,b)));
 		}
 	}
 
@@ -108,11 +108,6 @@ void FileManager::process(int level, ECSDB &db){
 	path.insert(0, "src/assets/level/");
 	load_file(path);
 	load_ppm(ppm_name);
-	db.Init(width, height, color_map, static_cast<DIRECTION>(snake_direction));
-	std::cout << "Width : " << width << "\n";
-	std::cout << "height : " << height << "\n";
-	std::cout << "ppm_name : " << ppm_name << "\n";
-	std::cout << "growth : " << growth_counter << "\n";
-	std::cout << "poison : " << poison_counter << "\n";
-	std::cout << "Direction : " << snake_direction << "\n";
+	db.Init(width, height, color_map, static_cast<DIRECTION>(snake_direction), growth_counter, poison_counter);
+	std::cout << db.get_snake_map().size() << "\n";
 }

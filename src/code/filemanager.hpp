@@ -42,7 +42,8 @@ private:
 	/// 성공에 필요한 아이템 개수
 	int growth_counter, poison_counter;
 	/// 읽어온 최초 레벨의 문자 지도
-	char** color_map;
+	//char** color_map;
+	std::vector<std::vector<char>> color_map;
 	/// 처음 주어지는 뱀의 방향값
 	int snake_direction;
 
