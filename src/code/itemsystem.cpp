@@ -75,7 +75,6 @@ ITEMTYPE ItemSystem::check_item_interaction(const PlayerBody& head, ItmVc& growt
 
 Position ItemSystem::get_following_position(const PlayerBody& parent) {
 	int direction = static_cast<int>(parent.get_last_dir()) * -1;
-	std::cout << "Direction is " << direction << "\n";
 	Position following(direction%2, -direction/2 );
 	following += parent.get_pos();
 	return following;

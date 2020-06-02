@@ -28,7 +28,6 @@ int main(void) {
 
 	std::vector<int>::iterator level_it = levels.begin();
 	fpp.process(*level_it, ecsdb);
-	std::cout << "SNake map size: " << ecsdb.get_snake_map().size() << "\n";
 
 	int count;
 	char flag;

@@ -30,7 +30,7 @@ void FileManager::load_ppm(const std::string& name){
 	std::ifstream f(name.c_str(), std::ios::binary);
 	if (f.fail())
 	{
-		std::cout << "Could not open file: " << name << std::endl;
+		std::cerr << "Could not open file: " << name << std::endl;
 	    return;
 	}
 	
@@ -60,26 +60,26 @@ void FileManager::load_ppm(const std::string& name){
 	// error checking
 	if (mode != 3)
 	{
-		std::cout << "Only ascii file format is accepted" << std::endl;
+		std::cerr << "Only ascii file format is accepted" << std::endl;
 	    f.close();
 	    return ;
 	}
 	
 	if (width < 1)
 	{
-		std::cout << "Width is too short" << std::endl;
+		std::cerr << "Width is too short" << std::endl;
 	    f.close();
 	    return ;
 	}
 	if (height < 1)
 	{
-		std::cout << "Height is too short" << std::endl;
+		std::cerr << "Height is too short" << std::endl;
 	    f.close();
 	    return ;
 	}
 	if (bits != 255)
 	{
-		std::cout << "Only 255 color is supported" << std::endl;
+		std::cerr << "Only 255 color is supported" << std::endl;
 	    f.close();
 	    return ;
 	}
@@ -109,5 +109,4 @@ void FileManager::process(int level, ECSDB &db){
 	load_file(path);
 	load_ppm(ppm_name);
 	db.Init(width, height, color_map, static_cast<DIRECTION>(snake_direction), growth_counter, poison_counter);
-	std::cout << db.get_snake_map().size() << "\n";
 }

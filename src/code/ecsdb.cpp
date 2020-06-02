@@ -19,7 +19,6 @@ void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map
 	this->width = width;
 	this->height = height;
 	this->snake_map = std::vector<std::vector<char>>(snake_map);
-	std::cout << "Snake map size: " << snake_map.size() << "\n";
 	start_time = Util::get_time(); 
 	player_death = false;
 	player_success = false;
@@ -45,7 +44,6 @@ void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map
 					snake_map[i][j] == char_map.at("tail") ){
 				int size = snake.size();
 				snake.push_back(PlayerBody(Position(i,j), snake_direction, size));
-				std::cout << "Putting snake to " << Position(i,j) << "\n";
 				set_empty(i,j, FILL::FILL);
 			} else if (snake_map[i][j] == char_map.at("iwall")) {
 				iwalls.push_back(Position(i,j));
@@ -54,7 +52,6 @@ void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map
 			}
 		}
 	}
-	std::cout << "Snake map size: " << snake_map.size() << "\n";
 }
 ECSDB::ECSDB(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction)
 	: width(width), height(height), snake_map(snake_map), start_time(Util::get_time()) {
@@ -69,7 +66,6 @@ ECSDB::ECSDB(int width, int height, std::vector<std::vector<char>> snake_map, DI
 					snake_map[i][j] == char_map.at("tail") ){
 				int size = snake.size();
 				snake.push_back(PlayerBody(Position(i,j), snake_direction, size));
-				std::cout << "Putting snake to " << Position(i,j) << "\n";
 				set_empty(i,j, FILL::FILL);
 			} else if (snake_map[i][j] == char_map.at("iwall")) {
 				iwalls.push_back(Position(i,j));
@@ -82,43 +78,32 @@ ECSDB::ECSDB(int width, int height, std::vector<std::vector<char>> snake_map, DI
 
 // This function is for renderer should be moved to proper position
 void ECSDB::update_snake_map(){
-	std::cout << "Update\n";
-	std::cout << "Snake map size: " << snake_map.size() << "\n";
-	std::cout << "Snake map[0] size: " << snake_map[0].size() << "\n";
 	for (int i =0; i < width; i++){
 		for (int j =0; j < height; j++){
 			snake_map[i][j] = char_map.at("empty");
 		}
 	}
-	std::cout << "1\n";
-	std::cout << growth.size() << "\n";
 	for (Item& item: growth){
 		snake_map[item.get_pos().get_x()][item.get_pos().get_y()] = char_map.at("growth");
 	}
-	std::cout << "2\n";
 	for (Item& item: poison){
 		snake_map[item.get_pos().get_x()][item.get_pos().get_y()] = char_map.at("poison");
 	}
-	std::cout << "3\n";
 
 	for (PlayerBody& player: snake){
 		snake_map[player.get_pos().get_x()][player.get_pos().get_y()] = char_map.at("tail");
 	}
 	// Set head char
-	std::cout << "4\n";
 	snake_map[snake[0].get_pos().get_x()][snake[0].get_pos().get_y()] = char_map.at("head");
 
-	std::cout << "5\n";
 	for (Position& pos: walls){
 		snake_map[pos.get_x()][pos.get_y()] = char_map.at("wall");
 	}
 
-	std::cout << "6\n";
 	for (Position& pos: iwalls){
 		snake_map[pos.get_x()][pos.get_y()] = char_map.at("iwall");
 	}
 
-	std::cout << "7\n";
 	if (portal.get_first_pos().get_x() != -1){
 		snake_map[portal.get_first_pos().get_x()][portal.get_first_pos().get_y()] = char_map.at("gate");
 		snake_map[portal.get_second_pos().get_x()][portal.get_second_pos().get_y()] = char_map.at("gate");

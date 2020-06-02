@@ -77,7 +77,6 @@ std::pair<Position, DIRECTION> PortalSystem::get_jump_result(Position destinatio
 }
 
 Portal PortalSystem::regen_portal(const Portal& portal, PosVc& walls) {
-	std::cout << "Regening portal\n";
 	int first, second;
 	int wall_size = walls.size();
 	Position first_pos, second_pos;
@@ -100,7 +99,6 @@ Portal PortalSystem::regen_portal(const Portal& portal, PosVc& walls) {
 
 	// 포탈 위치에 있던 position을 다시 wall로 집어넣는다. 
 	if (portal.get_first_pos().get_x() != -1){
-		std::cout << "Putting wall poisition back\n";
 		walls.push_back(portal.get_first_pos());
 		walls.push_back(portal.get_second_pos());
 	}
@@ -111,14 +109,11 @@ Portal PortalSystem::regen_portal(const Portal& portal, PosVc& walls) {
 
 std::pair<Position, int> PortalSystem::check_portal_interaction(const std::vector<PlayerBody>& bodies, const Portal& portal){
 	// 시원치 않은 방법이지만 임시로 하자. 
-	std::cout << "Chekcing portl inte\n";
 	int counter = 0;
 	for (const PlayerBody& body : bodies){
 		if (body.get_pos() == portal.get_first_pos()){
-			std::cout << "First int\n";
 			return std::pair<Position, int>(portal.second_entry, counter);
 		} else if (body.get_pos() == portal.get_second_pos()){
-			std::cout << "Second int\n";
 			return std::pair<Position, int>(portal.first_entry, counter);
 		}
 		counter++;
@@ -127,7 +122,6 @@ std::pair<Position, int> PortalSystem::check_portal_interaction(const std::vecto
 }
 
 void PortalSystem::process(ECSDB & db) {
-	std::cout << "Portal processing\n";
 	auto result = check_portal_interaction(db.get_snake(), db.get_portal());
 
 	if (result.second != -1){ // 포탈이 부딪히고 있다면 부딪힌 뱀을 이동시킨다. 
@@ -138,11 +132,7 @@ void PortalSystem::process(ECSDB & db) {
 		db.set_last_direction(jump_for.second);
 
 	} else { // 그렇지 않다면 regen 시킨다.
-		std::cout << "Checking regen\n";
-		std::cout << Util::get_time() << "\n";
-		std::cout << db.get_portal().timestamp << "\n";
 		if (Util::get_time() - db.get_portal().timestamp >= portal_time) {
-			std::cout << "Regenning\n";
 			Portal portal = regen_portal(db.get_portal(), db.get_mut_walls());
 			db.set_portal(portal);
 		}

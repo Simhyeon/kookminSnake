@@ -37,7 +37,6 @@ std::pair<bool, DIRECTION> PlayerBodySystem::get_console_input(char input) {
 }
 
 void PlayerBodySystem::move(std::vector<PlayerBody>& bodies){
-	std::cout << "Move called\n";
 	for (PlayerBody& body : bodies){
 		int dirct = static_cast<int>(body.pop_direction());
 		body.increment_pos(dirct%2, -dirct/2);
