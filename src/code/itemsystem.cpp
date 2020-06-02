@@ -89,6 +89,7 @@ void ItemSystem::process(ECSDB& db){
 			Position pos = db.get_snake().back().get_pos();
 			db.set_empty(pos.get_x(), pos.get_y(), FILL::EMPTY);
 			db.pop_snake();
+			db.set_poison_counter(1);
 			break;
 		}
 
@@ -100,6 +101,7 @@ void ItemSystem::process(ECSDB& db){
 
 			db.push_snake(new_tail);
 			db.set_empty(new_tail.get_pos().get_x(), new_tail.get_pos().get_y(), FILL::FILL);
+			db.set_growth_counter(1);
 			break;
 		}
 

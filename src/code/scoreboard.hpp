@@ -1,14 +1,11 @@
 #ifndef SCORE_H
 #define SCORE_H
 
-class ScoreBoard{
-private:
-
-public:
-};
+#include "ecsdb.hpp"
 
 class ScoreSystem{
-
+	public:
+		void process(ECSDB& db);
 };
 
 #endif

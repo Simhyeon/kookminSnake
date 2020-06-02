@@ -9,11 +9,13 @@
 #include "itemsystem.hpp"
 #include "portalsystem.hpp"
 #include "filemanager.hpp"
+#include "scoreboard.hpp"
 
 #include <iostream>
 
 int main(void) {
 
+	std::vector<int> levels = {1,2,3,4,5};
 	// Init
 	ECSDB ecsdb;
 	Renderer rend;	
@@ -22,7 +24,11 @@ int main(void) {
 	ItemSystem its;
 	PortalSystem pos;
 	FileManager fpp;
-	fpp.process(1, ecsdb);
+	ScoreSystem sss;
+
+	std::vector<int>::iterator level_it = levels.begin();
+	fpp.process(*level_it, ecsdb);
+	std::cout << "SNake map size: " << ecsdb.get_snake_map().size() << "\n";
 
 	int count;
 	char flag;
@@ -60,14 +66,24 @@ int main(void) {
 			   break;
 		}
 		pbs.process(ecsdb);
-		//its.process(ecsdb);
+		its.process(ecsdb);
 		pos.process(ecsdb);
-		//cos.process(ecsdb);
+		cos.process(ecsdb);
+		sss.process(ecsdb);
 		ecsdb.update_snake_map();
 
 		if (ecsdb.get_death()){
 			std::cout << "Player died\n";
 			return 1;
+		}
+		if (ecsdb.get_success()){
+			std::cout << "Player success!\n";
+			if (++level_it != levels.end()){
+				fpp.process(*level_it, ecsdb);
+				ecsdb.update_snake_map();
+			} else {
+				return 1;
+			}
 		}
 	}
 }
