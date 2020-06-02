@@ -15,11 +15,25 @@
 // Constructor
 // Currently for Debuggin
 ECSDB::ECSDB(){}
-void ECSDB::Init(int width, int height, char** snake_map, DIRECTION snake_direction) {
+void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count) {
 	this->width = width;
 	this->height = height;
-	this->snake_map = snake_map;
+	this->snake_map = std::vector<std::vector<char>>(snake_map);
+	std::cout << "Snake map size: " << snake_map.size() << "\n";
 	start_time = Util::get_time(); 
+	player_death = false;
+	player_success = false;
+	snake.clear();
+	walls.clear();
+	iwalls.clear();
+	growth.clear();
+	poison.clear();
+	set_portal(Portal());
+	growth_qual = growth_count;
+	poison_qual = poison_count;
+	growth_counter = 0;
+	poison_counter = 0;
+	last_direction = snake_direction;
 
 	empty = std::vector<FILL>(width * height, FILL::NEVER);
 
@@ -40,8 +54,9 @@ void ECSDB::Init(int width, int height, char** snake_map, DIRECTION snake_direct
 			}
 		}
 	}
+	std::cout << "Snake map size: " << snake_map.size() << "\n";
 }
-ECSDB::ECSDB(int width, int height, char** snake_map, DIRECTION snake_direction)
+ECSDB::ECSDB(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction)
 	: width(width), height(height), snake_map(snake_map), start_time(Util::get_time()) {
 	// Initialize empty
 	empty = std::vector<FILL>(width * height, FILL::NEVER);
@@ -68,6 +83,8 @@ ECSDB::ECSDB(int width, int height, char** snake_map, DIRECTION snake_direction)
 // This function is for renderer should be moved to proper position
 void ECSDB::update_snake_map(){
 	std::cout << "Update\n";
+	std::cout << "Snake map size: " << snake_map.size() << "\n";
+	std::cout << "Snake map[0] size: " << snake_map[0].size() << "\n";
 	for (int i =0; i < width; i++){
 		for (int j =0; j < height; j++){
 			snake_map[i][j] = char_map.at("empty");
@@ -253,4 +270,24 @@ void ECSDB::set_growth_counter(int increment){
 
 void ECSDB::set_poison_counter(int increment){
 	poison_counter += increment;
+}
+int ECSDB::get_growth_qual() const{
+	return growth_qual;
+}
+int ECSDB::get_poison_qual() const{
+	return poison_qual;
+}
+
+int ECSDB::get_growth_counter() const{
+	return growth_counter;
+}
+
+int ECSDB::get_poison_counter() const{
+	return poison_counter;
+}
+const std::vector<std::vector<char>>& ECSDB::get_snake_map() const{
+	return snake_map;
+}
+std::vector<std::vector<char>>& ECSDB::get_mut_snake_map(){
+	return snake_map;
 }

@@ -35,6 +35,12 @@ private:
 	/// 플레이어의 성공 여부를 저장하는 변수
 	bool player_success = false;
 
+	/** \brief 렌더 정보를 담는 char 2차 배열
+	 *
+	 *	의미하는 char는 string.hpp 파일에 포함되어 있다.
+	 */
+	std::vector<std::vector<char>> snake_map;
+
 	/** \brief 플레이어 몸체 컴포넌트
 	 *	PlayerBody 벡터로 구성되며 가장 첫번째 PlayerBody가 head의 역할을 한다.
 	 */
@@ -67,32 +73,36 @@ private:
 	std::queue<char> console_inputs; // Placeholder
 
 	/** \brief 마지막으로 입력된 방향 값을 저장하는 변수
+	 *
 	 * 새로운 입력이 없다면 이 변수를 재사용한다.
 	 */
 	DIRECTION last_direction; 
 
+	///레벨에서 성공에 필요한 growth 아이템 개수
+	int growth_qual = 3;
+
 	/** \brief 획득한 growth 아이템 카운터
+	 *
 	 *	레벨 성공 여부를 결정한다.
 	 */
 	int growth_counter = 0;
 
+	///레벨에서 성공에 필요한 poison 아이템 개수
+	int poison_qual = 3;
+
 	/** \brief 획득한 poison 아이템 카운터
+	 *
 	 *	레벨 성공 여부를 결정한다.
 	 */
 	int poison_counter = 0;
 public:
 
-	/** \brief 렌더 정보를 담는 char 2차 배열
-	 *
-	 *	의미하는 char는 string.hpp 파일에 포함되어 있다.
-	 */
-	char** snake_map;
 
 	/// 빈 생성자
 	ECSDB();
 	/// 변수를 받는 생성자
-	ECSDB(int width, int height, char** snake_map, DIRECTION snake_direction);
-	void Init(int width, int height, char** snake_map, DIRECTION snake_direction);
+	ECSDB(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction);
+	void Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count);
 
 	// Update snake_map, should be renderer function
 	void update_snake_map();
@@ -107,6 +117,9 @@ public:
 	const std::pair<int, int> get_measure() const;
 	int get_width() const;
 	int get_height() const;
+
+	const std::vector<std::vector<char>>& get_snake_map() const;
+	std::vector<std::vector<char>>& get_mut_snake_map();
 
 	const std::vector<PlayerBody>& get_snake() const;
 	std::vector<PlayerBody>& get_mut_snake();
@@ -130,6 +143,12 @@ public:
 	std::vector<FILL>& get_mut_empty();
 
 	DIRECTION get_last_direction() const;
+
+	int get_growth_qual() const;
+	int get_poison_qual() const;
+
+	int get_growth_counter() const;
+	int get_poison_counter() const;
 
 	void push_snake(PlayerBody body);
 	void pop_snake();
