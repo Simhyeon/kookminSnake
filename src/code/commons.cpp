@@ -42,7 +42,7 @@ int Util::get_rand(int min, int max){
 }
 long Util::get_time() {
 	auto now = std::chrono::system_clock::now();
-    auto now_second = std::chrono::time_point_cast<std::chrono::seconds>(now);
+    auto now_second = std::chrono::time_point_cast<std::chrono::milliseconds>(now);
     auto value = now_second.time_since_epoch();
     long duration = value.count();
 	return duration;

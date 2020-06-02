@@ -17,7 +17,7 @@ private:
 	const int item_size = 3;
 
 	/// 아이템의 지속 시간
-	const double item_time = 5;
+	const double item_time = 5000;
 
 	/** \brief 플레이어 몸체를 늘려주는 아이템을 생성하는 함수
 	 *
