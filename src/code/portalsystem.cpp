@@ -116,7 +116,7 @@ Portal PortalSystem::regen_portal(const Portal& portal, PosVc& walls) {
 
 	// 게이트를 생성할 위치를 가진 벽 컴포넌트를 
 	// 마지막 인덱스 벽 컴포넌트와 스왑한 뒤
-	// pop 하면 insert연산 없이 지울 수 있다.
+	// pop 하면 delete연산 없이 지울 수 있다.
 	// 순서가 중요하지 않기 때문에 실질적으로 erase와 동일하다.
 	std::swap(walls[first], walls[wall_size-1]);
 	walls.pop_back();
@@ -143,9 +143,9 @@ Portal PortalSystem::regen_portal(const Portal& portal, PosVc& walls) {
 	return Portal(first_pos, second_pos, DIRECTION::UP, DIRECTION::UP);
 }
 
-// 모든 플레이어 노드를 순회하면서 게이트와 동일한 위체 있는가를 검사한다.
+// 모든 플레이어 노드를 순회하면서 게이트와 동일한 위치에 있는가를 검사한다.
 // 게이트와 동일한 위치에 있다면(게이트와 상호작용 했다면)
-// 반대편 게이트으 위치와 상호작용한 바디의 인덱스를 반환한다.
+// 반대편 게이트의 위치와 상호작용한 바디의 인덱스를 반환한다.
 std::pair<Position, int> PortalSystem::check_portal_interaction(const std::vector<PlayerBody>& bodies, const Portal& portal){
 	// TODO 
 	int counter = 0;

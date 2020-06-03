@@ -81,6 +81,7 @@ int main(void) {
 				fpp.process(*level_it, ecsdb);
 				ecsdb.update_snake_map();
 			} else {
+				std::cout << "Game Clear!!!\n";
 				return 1;
 			}
 		}
