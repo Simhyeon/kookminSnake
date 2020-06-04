@@ -96,6 +96,18 @@ private:
 	 *	레벨 성공 여부를 결정한다.
 	 */
 	int poison_counter = 0;
+
+	///레벨에서 성공에 필요한 게이트 통과 회수
+	int gate_qual = 3;
+
+	/** \brief 획득한 poison 아이템 카운터
+	 *
+	 *	레벨 성공 여부를 결정한다.
+	 */
+	int gate_counter = 0;
+
+	///레벨에서 성공에 필요한 뱀의 길이
+	int length_qual = 0;
 public:
 
 
@@ -103,7 +115,7 @@ public:
 	ECSDB();
 	/// 변수를 받는 생성자
 	ECSDB(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction);
-	void Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count);
+	void Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count, int gate_count, int length);
 
 	// Update snake_map, should be renderer function
 	void update_snake_map();

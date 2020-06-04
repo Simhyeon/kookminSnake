@@ -1,4 +1,6 @@
 direction: 2
 growth: 12
 poison: 12
+gate: 5
+length: 20
 ppm_file: "20x20_angled.ppm"

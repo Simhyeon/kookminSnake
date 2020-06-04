@@ -41,6 +41,10 @@ private:
 	int width, height;
 	/// 성공에 필요한 아이템 개수
 	int growth_counter, poison_counter;
+	/// 성공에 필요한 뱀의 길이
+	int length;
+	/// 성공에 필요한 게이트의 개수
+	int gate_counter;
 	/// 읽어온 최초 레벨의 문자 지도
 	//char** color_map;
 	std::vector<std::vector<char>> color_map;

@@ -1,4 +1,6 @@
 direction: 2
 growth: 5
 poison: 5
+gate: 2
+length: 12
 ppm_file: "15x15_normal.ppm"

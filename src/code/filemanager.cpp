@@ -28,6 +28,8 @@ void FileManager::load_file(const std::string& file){
 	ppm_name = level["ppm_file"].as<std::string>();
 	growth_counter = level["growth"].as<int>();
 	poison_counter = level["poison"].as<int>();
+	gate_counter = level["gate"].as<int>();
+	length = level["length"].as<int>();
 	
 	ppm_name.insert(0, "src/assets/ppm/");
 }
@@ -118,5 +120,5 @@ void FileManager::process(int level, ECSDB &db){
 	path.insert(0, "src/assets/level/");
 	load_file(path);
 	load_ppm(ppm_name);
-	db.Init(width, height, color_map, static_cast<DIRECTION>(snake_direction), growth_counter, poison_counter);
+	db.Init(width, height, color_map, static_cast<DIRECTION>(snake_direction), growth_counter, poison_counter, gate_counter, length);
 }

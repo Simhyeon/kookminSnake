@@ -15,7 +15,7 @@
 // Constructor
 // Currently for Debuggin
 ECSDB::ECSDB(){}
-void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count) {
+void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count, int gate_counter, int length) {
 
 	// Init 하면서 내부 변수를 모두 초기화 한다.
 	this->width = width;
@@ -32,8 +32,11 @@ void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map
 	set_portal(Portal());
 	growth_qual = growth_count;
 	poison_qual = poison_count;
+	gate_qual = gate_counter;
 	growth_counter = 0;
 	poison_counter = 0;
+	gate_counter = 0;
+	length_qual = length;
 	last_direction = snake_direction;
 	empty = std::vector<FILL>(width * height, FILL::NEVER);
 
