@@ -30,6 +30,7 @@ void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map
 	growth.clear();
 	poison.clear();
 	set_portal(Portal());
+
 	growth_qual = growth_count;
 	poison_qual = poison_count;
 	gate_qual = gate_counter;
@@ -37,6 +38,12 @@ void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map
 	poison_counter = 0;
 	gate_counter = 0;
 	length_qual = length;
+
+	growth_ok = false;
+	poison_ok = false;
+	length_ok = false;
+	gate_ok = false;
+
 	last_direction = snake_direction;
 	empty = std::vector<FILL>(width * height, FILL::NEVER);
 
@@ -273,4 +280,20 @@ const std::vector<std::vector<char>>& ECSDB::get_snake_map() const{
 }
 std::vector<std::vector<char>>& ECSDB::get_mut_snake_map(){
 	return snake_map;
+}
+
+bool ECSDB::get_gate_ok() const{
+	return gate_ok;
+}
+
+bool ECSDB::get_growth_ok() const{
+	return growth_ok;
+}
+
+bool ECSDB::get_poison_ok() const{
+	return poison_ok;
+}
+
+bool ECSDB::get_lengt_ok() const{
+	return length_ok;
 }

@@ -108,6 +108,11 @@ private:
 
 	///레벨에서 성공에 필요한 뱀의 길이
 	int length_qual = 0;
+
+	bool gate_ok = false;
+	bool growth_ok = false;
+	bool poison_ok = false;
+	bool length_ok = false;
 public:
 
 
@@ -159,9 +164,17 @@ public:
 
 	int get_growth_qual() const;
 	int get_poison_qual() const;
+	int get_gate_qual() const;
+	int get_length_qual() const;
 
 	int get_growth_counter() const;
 	int get_poison_counter() const;
+	int get_gate_counter() const;
+
+	bool get_gate_ok() const;
+	bool get_growth_ok() const;
+	bool get_poison_ok() const;
+	bool get_lengt_ok() const;
 
 	void push_snake(PlayerBody body);
 	void pop_snake();
