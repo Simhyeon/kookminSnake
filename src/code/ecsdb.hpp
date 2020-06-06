@@ -9,6 +9,7 @@
 #include <queue>
 #include <memory>
 #include "aliases.hpp"
+#include <ncurses.h>
 
 /** \brief 게임에서 사용할 모든 정보를 저장하는 클래스
  *
@@ -25,6 +26,9 @@ private:
 	 *	점수판의 크기와 너비와 동일하다.
 	 */
 	int width = 0;
+
+	WINDOW *playboard;
+	WINDOW *scoreboard;
 
 	/** \brief 게임 화면의 크기
 	 *	점수판의 크기와 너비와 동일하다.
@@ -118,6 +122,7 @@ public:
 
 	/// 빈 생성자
 	ECSDB();
+	~ECSDB();
 	/// 변수를 받는 생성자
 	ECSDB(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction);
 	void Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count, int gate_count, int length);
@@ -174,11 +179,15 @@ public:
 	bool get_gate_ok() const;
 	bool get_growth_ok() const;
 	bool get_poison_ok() const;
-	bool get_lengt_ok() const;
+	bool get_length_ok() const;
 
 	void push_snake(PlayerBody body);
 	void pop_snake();
 
+	WINDOW* get_scoreboard() const;
+	WINDOW* get_playboard() const;
+
+	// setter
 	void set_death(bool value);
 	void set_sucess(bool value);
 	void set_portal(Portal);
@@ -188,13 +197,16 @@ public:
 	void set_empty(Position position, FILL value);
 	void set_empty(int x, int y, FILL value);
 	void set_last_direction(DIRECTION direction);
+	void set_gate_counter(int increment);
 	void set_growth_counter(int increment);
 	void set_poison_counter(int increment);
 
-	/// Placeholder
-	void set_input(char input); 
-	/// Placeholder for input
-	const std::queue<char> get_inputs(); 
+	void set_screen(WINDOW*, WINDOW*);
+
+	void set_gate_ok(bool value);
+	void set_growth_ok(bool value);
+	void set_poison_ok(bool value);
+	void set_length_ok(bool value);
 };
 
 #endif

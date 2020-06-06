@@ -15,6 +15,11 @@
 // Constructor
 // Currently for Debuggin
 ECSDB::ECSDB(){}
+ECSDB::~ECSDB(){
+	delwin(playboard);
+	delwin(scoreboard);
+	endwin();
+}
 void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count, int gate_counter, int length) {
 
 	// Init 하면서 내부 변수를 모두 초기화 한다.
@@ -208,8 +213,6 @@ DIRECTION ECSDB::get_last_direction() const{
 	return last_direction;
 }
 
-const std::queue<char> ECSDB::get_inputs(){return console_inputs;}
-
 // Setter
 void ECSDB::set_death(bool value){ 
 	player_death = value; 
@@ -224,6 +227,13 @@ void ECSDB::push_snake(PlayerBody body){
 }
 void ECSDB::pop_snake(){
 	snake.pop_back();
+}
+
+WINDOW* ECSDB::get_scoreboard() const{
+	return scoreboard;
+}
+WINDOW* ECSDB::get_playboard() const{
+	return playboard;
 }
 
 void ECSDB::set_portal(Portal portal){
@@ -261,11 +271,24 @@ void ECSDB::set_growth_counter(int increment){
 void ECSDB::set_poison_counter(int increment){
 	poison_counter += increment;
 }
+
+void ECSDB::set_gate_counter(int increment){
+	gate_counter += increment;
+}
+
 int ECSDB::get_growth_qual() const{
 	return growth_qual;
 }
 int ECSDB::get_poison_qual() const{
 	return poison_qual;
+}
+
+int ECSDB::get_length_qual() const{
+	return length_qual;
+}
+
+int ECSDB::get_gate_qual() const{
+	return gate_qual;
 }
 
 int ECSDB::get_growth_counter() const{
@@ -274,6 +297,10 @@ int ECSDB::get_growth_counter() const{
 
 int ECSDB::get_poison_counter() const{
 	return poison_counter;
+}
+
+int ECSDB::get_gate_counter() const{
+	return gate_counter;
 }
 const std::vector<std::vector<char>>& ECSDB::get_snake_map() const{
 	return snake_map;
@@ -294,6 +321,15 @@ bool ECSDB::get_poison_ok() const{
 	return poison_ok;
 }
 
-bool ECSDB::get_lengt_ok() const{
+bool ECSDB::get_length_ok() const{
 	return length_ok;
 }
+
+void ECSDB::set_screen(WINDOW* play, WINDOW* score){
+	scoreboard = score;
+	playboard = play;
+}
+void ECSDB::set_gate_ok(bool value){gate_ok = value;}
+void ECSDB::set_growth_ok(bool value){growth_ok = value;}
+void ECSDB::set_poison_ok(bool value){poison_ok = value;}
+void ECSDB::set_length_ok(bool value){length_ok = value;}
