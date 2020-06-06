@@ -1,5 +1,4 @@
 #include <cstdlib>
-#include <ncurses.h>
 #include "commons.hpp"
 #include "playerbody.hpp"
 #include "playersystem.hpp"
@@ -19,7 +18,7 @@ int main(void) {
 	std::vector<int> levels = {1,2,3,4,5};
 	// Init
 	ECSDB ecsdb;
-	Renderer rend;	
+	Renderer rend;
 	PlayerBodySystem pbs;
 	CollisionSystem cos;
 	ItemSystem its;
@@ -28,46 +27,48 @@ int main(void) {
 	ScoreSystem sss;
 	InputManager im;
 	std::vector<int>::iterator level_it = levels.begin();
+
+	/// Init
 	fpp.process(*level_it, ecsdb);
-
-	int count;
-	char flag;
-	std::cin >> flag;
-	std::cin >> count;
+	rend.init(ecsdb);
 	ecsdb.update_snake_map();
+	rend.process(ecsdb);
 
-	// Main Loop
-	char input;
-
+	/// Main Loop
+	long time_delay = Util::get_time();
 	while (true){
-		
-		if (flag == 'c'){
-			system("clear");
-		}
 
-		
-		
-		pbs.process(ecsdb);
-		its.process(ecsdb);
-		pos.process(ecsdb);
-		cos.process(ecsdb);
-		sss.process(ecsdb);
-		rend.process(ecsdb);
 		im.process(ecsdb);
-		ecsdb.update_snake_map();
 
-		if (ecsdb.get_death()){
-			//std::cout << "Player died\n";
-			return 1;
-		}
-		if (ecsdb.get_success()){
-			//std::cout << "Player success!\n";
-			if (++level_it != levels.end()){
-				fpp.process(*level_it, ecsdb);
-				ecsdb.update_snake_map();
-			} else {
+		// 바로 이전의 호출 시점보다 0.5초 이후에 다시 호출함. 
+		// 숫자 단위는 밀리세컨드 500밀리초 = 0.5초
+		if (Util::get_time() - time_delay >= 500){
+			time_delay = Util::get_time();
+
+			pbs.process(ecsdb);
+			its.process(ecsdb);
+			pos.process(ecsdb);
+			cos.process(ecsdb);
+			sss.process(ecsdb);
+			ecsdb.update_snake_map();
+
+			if (ecsdb.get_death()){
 				return 1;
 			}
+
+			if (ecsdb.get_success()){
+				// 왜 막아 두었는가 하면 현재 코드는 width, height가 변하지 않는 것을 가정하고 있다.
+				// 그런데 현재 ppm 맵들은 크기가 제각각이다.
+				return 0;
+				//if (++level_it != levels.end()){
+					//fpp.process(*level_it, ecsdb);
+					//ecsdb.update_snake_map();
+				//} else {
+					//return 1;
+				//}
+			}
+
+			rend.process(ecsdb);
 		}
 	}
 }
