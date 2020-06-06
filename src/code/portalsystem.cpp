@@ -169,7 +169,7 @@ void PortalSystem::process(ECSDB & db) {
 		jump_snake(db.get_mut_snake()[result.second], destination);
 		db.set_empty(destination, FILL::FILL);
 		db.set_last_direction(jump_for.second);
-
+		if (result.second == 0) {db.set_gate_counter(1);}
 	} else { 
 		if (Util::get_time() - db.get_portal().timestamp >= portal_time) {
 			Portal portal = regen_portal(db.get_portal(), db.get_mut_walls());
