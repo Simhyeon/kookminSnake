@@ -1,69 +1,78 @@
 #include "renderer.hpp"
+#include <cstring>
+#include <curses.h>
 #include <iostream>
-Renderer::Renderer(){
+#include <string>
+
+Renderer::Renderer(){}
+
+void Renderer::init(ECSDB& ecsdb){
+
 	initscr();
-	
-  	noecho(); //no echo for the key pressed
+	noecho(); //no echo for the key pressed
 	cbreak();
-	int x,y;
-	getmaxyx(stdscr, y, x);
-  	curs_set(1);  //no cursor show
-}
-Renderer::~Renderer(){
-	delwin(playboard);
-	delwin(scoreboard);
-	endwin();
+	curs_set(1);  //no cursor show
+
+	int width = ecsdb.get_width();
+	int height = ecsdb.get_height();
+	ecsdb.set_screen(
+			newwin(height*2,width*2,0,0),
+			newwin(height,30,0,width*2)
+			); //height,width,starty,startx	
+	nodelay(ecsdb.get_playboard(),true); //if there wasn't any key pressed don't wait for keypress
 }
 
 void Renderer::process(ECSDB & ecsdb){ //STARTGAME
-	//scoreboard
-	int length =  ecsdb.get_snake().size();
-	int growth_counter =  ecsdb.get_growth_counter(); 
-	int growth_qual = ecsdb.get_growth_qual();
-	int poison_counter = ecsdb.get_poison_counter();
-	int poison_qual = ecsdb.get_poison_qual();
-	//int gate_counter = ecsdb.get_gate_counter();
-	//int gate_qual = ecsdb.get_gate_qual();
-
-	//playboard
-	int width = ecsdb.get_measure().first;
-	int height = ecsdb.get_measure().first;
-	this->playboard = newwin(height,width,0,0);//height,width,starty,startx	
-	nodelay(playboard,true); //if there wasn't any key pressed don't wait for keypress
- 	keypad(playboard,true);  //turn on keypad pressed
-	this->scoreboard = newwin(height/2,width + 10,0,width + 3);//height,width,starty,startx
 	refresh();
-	wrefresh(playboard);
-		
-	while(!ecsdb.get_death()){
-			draw(playboard,ecsdb,height,width);
-			printScore(scoreboard,length,growth_counter,growth_qual,poison_counter,poison_qual);
-			if(ecsdb.get_death()) break;
-		}
+	wrefresh(ecsdb.get_playboard());
+	wrefresh(ecsdb.get_scoreboard());
+
+	draw(ecsdb);
+	printScore(ecsdb);
 }
 
-void Renderer::draw(WINDOW* win,ECSDB& db,int height, int width){
+void Renderer::draw(ECSDB& db){
+	WINDOW* win = db.get_playboard();
 	werase(win);
-	box(win,0,0);
+	//box(win,0,0);
 	int ch;
 	auto snake_map = db.get_snake_map();
-	for (int i =0; i< width; i++){
-		for (int j =0; j< height; j++){
+	for (int i =0; i< db.get_width(); i++){
+		for (int j =0; j< db.get_height(); j++){
 			ch = snake_map[j][i];
-			mvwaddch(win, j, i , ch);
+			mvwaddch(win, i*2, j*2, ch);
 		}
 	}
 	wrefresh(win);
 }
 
 
-void Renderer::printScore(WINDOW* score, int length, int growth_counter, int growth_qual, int poison_counter,int poison_qual){
+void Renderer::printScore(ECSDB& db){
+	WINDOW* score = db.get_scoreboard();
 	werase(score);
-	mvwprintw(score, 0, 0,  "length: %d", length);
-	mvwprintw(score, 1, 0,  "growth: %d", growth_counter);
-	mvwprintw(score, 1, 10, "/ %d", growth_qual);
-	mvwprintw(score, 2, 0,  "poison: %d", poison_counter);
-	mvwprintw(score, 2, 10, "/ %d", poison_qual);
+	//mvwprintw(score, 0, 0,  "Time: %ld", Util::get_time());
+	mvwprintw(score, 0, 0,  "length: %d/%d (%c)", 
+			db.get_snake().size(), 
+			db.get_length_qual(),
+			db.get_length_ok() ? 'O' : 'X'
+			);
+	mvwprintw(score, 1, 0,  "growth: %d/%d (%c)", 
+			db.get_growth_counter(),
+			db.get_growth_qual(),
+			db.get_growth_ok() ? 'O' : 'X'
+			);
+	mvwprintw(score, 2, 0,  "poison: %d/%d (%c)", 
+			db.get_poison_counter(), 
+			db.get_poison_qual(),
+			db.get_poison_ok() ? 'O' : 'X'
+			);
+	mvwprintw(score, 3, 0,  "gate: %d/%d (%c)", 
+			db.get_gate_counter(), 
+			db.get_gate_qual(),
+			db.get_gate_ok() ? 'O' : 'X'
+			);
+	mvwprintw(score, 4,0,  "Time : %ld", Util::get_time());
+	mvwprintw(score, 5,0,  "Last input : %d", db.get_last_direction());
 	wrefresh(score);
 }
 
