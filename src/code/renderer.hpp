@@ -7,8 +7,14 @@
 #include "scoreboard.hpp"
 
 class Renderer {
-	public:
-		void process(ECSDB&);
+private:
+	WINDOW *playboard;
+	WINDOW *scoreboard;
+public:
+	Renderer();
+	~Renderer();
+	void process(ECSDB&);
+	void draw(WINDOW* win,ECSDB& db,int height, int width);
+	void printScore(WINDOW* win, int,int,int,int,int);
 };
-
 #endif

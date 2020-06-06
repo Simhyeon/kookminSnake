@@ -10,6 +10,7 @@
 #include "portalsystem.hpp"
 #include "filemanager.hpp"
 #include "scoreboard.hpp"
+#include "inputmanager.hpp"
 
 #include <iostream>
 
@@ -25,7 +26,7 @@ int main(void) {
 	PortalSystem pos;
 	FileManager fpp;
 	ScoreSystem sss;
-
+	InputManager im;
 	std::vector<int>::iterator level_it = levels.begin();
 	fpp.process(*level_it, ecsdb);
 
@@ -37,46 +38,30 @@ int main(void) {
 
 	// Main Loop
 	char input;
+
 	while (true){
+		
 		if (flag == 'c'){
 			system("clear");
 		}
-		rend.process(ecsdb);
 
-		std::cin >> input;	
-		switch (input) {
-			case 'w' : 
-				ecsdb.set_last_direction(DIRECTION::UP);
-				break;
-
-			case 'a' : 
-				ecsdb.set_last_direction(DIRECTION::LEFT);
-				break;
-
-			case 's' : 
-				ecsdb.set_last_direction(DIRECTION::DOWN);
-				break;
-
-			case 'd' : 
-				ecsdb.set_last_direction(DIRECTION::RIGHT);
-				break;
-			
-			default:
-			   break;
-		}
+		
+		
 		pbs.process(ecsdb);
 		its.process(ecsdb);
 		pos.process(ecsdb);
 		cos.process(ecsdb);
 		sss.process(ecsdb);
+		rend.process(ecsdb);
+		im.process(ecsdb);
 		ecsdb.update_snake_map();
 
 		if (ecsdb.get_death()){
-			std::cout << "Player died\n";
+			//std::cout << "Player died\n";
 			return 1;
 		}
 		if (ecsdb.get_success()){
-			std::cout << "Player success!\n";
+			//std::cout << "Player success!\n";
 			if (++level_it != levels.end()){
 				fpp.process(*level_it, ecsdb);
 				ecsdb.update_snake_map();
