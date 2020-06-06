@@ -8,13 +8,11 @@
 
 class Renderer {
 private:
-	WINDOW *playboard;
-	WINDOW *scoreboard;
+	void draw(ECSDB&);
+	void printScore(ECSDB&);
 public:
 	Renderer();
-	~Renderer();
+	void init(ECSDB&);
 	void process(ECSDB&);
-	void draw(WINDOW* win,ECSDB& db,int height, int width);
-	void printScore(WINDOW* win, int,int,int,int,int);
 };
 #endif
