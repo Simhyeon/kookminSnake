@@ -5,6 +5,7 @@
 #include "commons.hpp"
 #include "ecsdb.hpp"
 #include "scoreboard.hpp"
+#include <iostream>
 
 class Renderer {
 private:
@@ -14,5 +15,7 @@ public:
 	Renderer();
 	void init(ECSDB&);
 	void process(ECSDB&);
+	bool playAgain(ECSDB& db);
+	void printTitle(ECSDB&);
 };
 #endif

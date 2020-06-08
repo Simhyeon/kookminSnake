@@ -23,8 +23,9 @@ void Renderer::init(ECSDB& ecsdb){
 	int width = ecsdb.get_width();
 	int height = ecsdb.get_height();
 	ecsdb.set_screen(
-			newwin(height*2,width*2,0,0),
-			newwin(height,30,0,width*2)
+			newwin(height*2,width*2,11,30),
+			newwin(height,30,11,width*2+30),
+			newwin(12,width*2+30,0,30)
 			); //height,width,starty,startx	
 	nodelay(ecsdb.get_playboard(),true); //if there wasn't any key pressed don't wait for keypress
 }
@@ -33,16 +34,17 @@ void Renderer::process(ECSDB & ecsdb){ //STARTGAME
 	refresh();
 	wrefresh(ecsdb.get_playboard());
 	wrefresh(ecsdb.get_scoreboard());
-
 	draw(ecsdb);
 	printScore(ecsdb);
+	printTitle(ecsdb);
+	
 }
 
 void Renderer::draw(ECSDB& db){
 	
 	WINDOW* win = db.get_playboard();
 	werase(win);
-	//box(win,0,0);
+	box(win,0,0);
 	int ch;
 	auto snake_map = db.get_snake_map();
 	for (int i =0; i< db.get_width(); i++){
@@ -73,10 +75,29 @@ void Renderer::draw(ECSDB& db){
 			
 		}
 	}
+	//wborder(win, '#','#','#','#','#','#','#','#');
 	wrefresh(win);
+}	
+
+void Renderer::printTitle(ECSDB& db){
+	WINDOW* title = db.get_titleboard();
+	mvwprintw(title,1,1,"       _________                 __            ");
+	mvwprintw(title,2,1,"     /   _____/  ____  _____   |  | __  ____  ");
+	mvwprintw(title,3,1,"     \\_____  \\  /    \\ \\__  \\  |  |/ /_/ __ \\ ");
+	mvwprintw(title,4,1,"     /        \\|   |  \\ / __ \\_|    < \\  ___/ ");
+	mvwprintw(title,5,1,"    /_______  /|___|  /(____  /|__|_ \\ \\___>");
+	mvwprintw(title,6,1,"         ________                          ");
+	mvwprintw(title,7,1,"        /  _____/ _____     _____    ____  ");
+	mvwprintw(title,8,1,"       /   \\  ___ \\__  \\   /     \\ _/ __ \\ ");
+	mvwprintw(title,9,1,"       \\    \\_\\  \\ / __ \\_|  Y Y  \\  ___/ ");
+	mvwprintw(title,10,1,"        \\______  /(____  /|__|_|  / \\___>");
+
+
+	
+	box(title,0,0);
+	wrefresh(title);
+
 }
-
-
 void Renderer::printScore(ECSDB& db){
 	WINDOW* score = db.get_scoreboard();
 	
@@ -104,9 +125,29 @@ void Renderer::printScore(ECSDB& db){
 			);
 	//mvwprintw(score, 4,0,  "Time : %ld", Util::get_time());
 	//mvwprintw(score, 5,0,  "Last input : %d", db.get_last_direction());
-	wborder(score, '#','#','#','#','#','#','#','#');
+	box(score,0,0);
 	wrefresh(score);
 }
 
 
+bool Renderer::playAgain(ECSDB& db ){
+	WINDOW* endwin = newwin(2,COLS, LINES-2, 0);
+	keypad(endwin, TRUE);
+	mvwprintw(endwin, 0, 0, "Press [Spacebar]/[Enter] to play again.");
+	mvwprintw(endwin, 1, 0, "Press [q] to quit.");
+	int c;
+	do{
+		c = wgetch(endwin);
+	}while(c!=10 && c!=' ' && c!='q' && c!='Q');
+	werase(endwin);
+	wrefresh(endwin);
+	delwin(endwin);
+	if (c == 'q' || c == 'Q'){
+		return false;
+	}else if (c == ' ' || c == 10){
+		db.set_death(true);
+		db.update_snake_map();
+		return true;
+	}
+}
 

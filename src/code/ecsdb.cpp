@@ -235,6 +235,9 @@ WINDOW* ECSDB::get_scoreboard() const{
 WINDOW* ECSDB::get_playboard() const{
 	return playboard;
 }
+WINDOW* ECSDB::get_titleboard() const{
+	return titleboard;
+}
 
 void ECSDB::set_portal(Portal portal){
 	this->portal = portal;
@@ -325,9 +328,10 @@ bool ECSDB::get_length_ok() const{
 	return length_ok;
 }
 
-void ECSDB::set_screen(WINDOW* play, WINDOW* score){
+void ECSDB::set_screen(WINDOW* play, WINDOW* score,WINDOW* title){
 	scoreboard = score;
 	playboard = play;
+	titleboard = title;
 }
 void ECSDB::set_gate_ok(bool value){gate_ok = value;}
 void ECSDB::set_growth_ok(bool value){growth_ok = value;}

@@ -29,6 +29,7 @@ private:
 
 	WINDOW *playboard;
 	WINDOW *scoreboard;
+	WINDOW *titleboard;
 
 	/** \brief 게임 화면의 크기
 	 *	점수판의 크기와 너비와 동일하다.
@@ -186,6 +187,8 @@ public:
 
 	WINDOW* get_scoreboard() const;
 	WINDOW* get_playboard() const;
+	WINDOW* get_titleboard() const;
+
 
 	// setter
 	void set_death(bool value);
@@ -201,7 +204,7 @@ public:
 	void set_growth_counter(int increment);
 	void set_poison_counter(int increment);
 
-	void set_screen(WINDOW*, WINDOW*);
+	void set_screen(WINDOW*, WINDOW*,WINDOW*);
 
 	void set_gate_ok(bool value);
 	void set_growth_ok(bool value);
