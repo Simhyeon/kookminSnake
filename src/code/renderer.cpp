@@ -23,9 +23,9 @@ void Renderer::init(ECSDB& ecsdb){
 	int width = ecsdb.get_width();
 	int height = ecsdb.get_height();
 	ecsdb.set_screen(
-			newwin(height*2,width*2,11,30),
-			newwin(height,30,11,width*2+30),
-			newwin(12,width*2+30,0,30)
+			newwin(height*2,width*2,9,30),
+			newwin(height,30,9,width*2+40),
+			newwin(7,width*2+40,0,30)
 			); //height,width,starty,startx	
 	nodelay(ecsdb.get_playboard(),true); //if there wasn't any key pressed don't wait for keypress
 }
@@ -44,7 +44,7 @@ void Renderer::draw(ECSDB& db){
 	
 	WINDOW* win = db.get_playboard();
 	werase(win);
-	box(win,0,0);
+	//box(win,0,0);
 	int ch;
 	auto snake_map = db.get_snake_map();
 	for (int i =0; i< db.get_width(); i++){
@@ -81,16 +81,12 @@ void Renderer::draw(ECSDB& db){
 
 void Renderer::printTitle(ECSDB& db){
 	WINDOW* title = db.get_titleboard();
-	mvwprintw(title,1,1,"       _________                 __            ");
-	mvwprintw(title,2,1,"     /   _____/  ____  _____   |  | __  ____  ");
-	mvwprintw(title,3,1,"     \\_____  \\  /    \\ \\__  \\  |  |/ /_/ __ \\ ");
-	mvwprintw(title,4,1,"     /        \\|   |  \\ / __ \\_|    < \\  ___/ ");
-	mvwprintw(title,5,1,"    /_______  /|___|  /(____  /|__|_ \\ \\___>");
-	mvwprintw(title,6,1,"         ________                          ");
-	mvwprintw(title,7,1,"        /  _____/ _____     _____    ____  ");
-	mvwprintw(title,8,1,"       /   \\  ___ \\__  \\   /     \\ _/ __ \\ ");
-	mvwprintw(title,9,1,"       \\    \\_\\  \\ / __ \\_|  Y Y  \\  ___/ ");
-	mvwprintw(title,10,1,"        \\______  /(____  /|__|_|  / \\___>");
+	mvwprintw(title,1,1,"   _________                 __            	   _________    _____   ____  ");
+	mvwprintw(title,2,1," /   _____/  ____  _____   |  | __  ____  	  / ___\\__  \\  /     \\_/ __ \\ ");
+	mvwprintw(title,3,1," \\_____  \\  /    \\ \\__  \\  |  |/ /_/ __ \\ 	 / /_/  > __ \\|  Y Y  \\  ___/ ");
+	mvwprintw(title,4,1," /        \\|   |  \\ / __ \\_|    < \\  ___/ 	 \\___  (____  /__|_|  /\\___  >");
+	mvwprintw(title,5,1,"/_______  /|___|  /(____  /|__|_ \\ \\___>	/_____/     \\/      \\/     \\/ ");
+	
 
 
 	

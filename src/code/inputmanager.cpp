@@ -25,14 +25,14 @@ void InputManager::process(ECSDB& db){
 			case 'P':
 			case 'p': 
 			char c;
-			wattron(db.get_playboard(), A_BOLD);
-			mvwprintw(db.get_playboard(), db.get_height()/2, db.get_width()/2, "PAUSE");
-			wattroff(db.get_playboard(), A_BOLD);
-			nodelay(db.get_playboard(), FALSE);
+			wattron(db.get_scoreboard(), A_BOLD);
+			mvwprintw(db.get_scoreboard(), db.get_height()/2, db.get_width()/2, "PAUSE");
+			wattroff(db.get_scoreboard(), A_BOLD);
+			nodelay(db.get_scoreboard(), FALSE);
 			do{
-				c = wgetch(db.get_playboard());
+				c = wgetch(db.get_scoreboard());
 			}while(c!='p' && c!='P');
-			nodelay(db.get_playboard(), TRUE);
+			nodelay(db.get_scoreboard(), TRUE);
 			break;
 			
 			default:
