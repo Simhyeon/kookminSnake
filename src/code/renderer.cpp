@@ -15,6 +15,8 @@ void Renderer::init(ECSDB& ecsdb){
 	init_pair(3, COLOR_YELLOW,COLOR_BLACK); //growth_Color
 	init_pair(4, COLOR_RED, COLOR_BLACK);  //poison_color
 	init_pair(5, COLOR_WHITE , COLOR_BLACK); //portal_Color
+	init_pair(6, COLOR_MAGENTA , COLOR_BLACK); //portal_Color
+	init_pair(7, COLOR_CYAN , COLOR_BLACK); //portal_Color
 
 	noecho(); //no echo for the key pressed
 	cbreak();
@@ -67,6 +69,13 @@ void Renderer::draw(ECSDB& db){
 				mvwaddch(win, i*2, j*2, ch | COLOR_PAIR(5));
 				break;
 				
+				case '#':
+				mvwaddch(win, i*2, j*2, ch | COLOR_PAIR(6));
+				break;
+
+				case '@':
+				mvwaddch(win, i*2, j*2, ch | COLOR_PAIR(7));
+				break;
 
 				default:
 				mvwaddch(win, i*2, j*2, ch | COLOR_PAIR(1));
@@ -75,7 +84,6 @@ void Renderer::draw(ECSDB& db){
 			
 		}
 	}
-	//wborder(win, '#','#','#','#','#','#','#','#');
 	wrefresh(win);
 }	
 
@@ -119,7 +127,7 @@ void Renderer::printScore(ECSDB& db){
 			db.get_gate_qual(),
 			db.get_gate_ok() ? 'O' : 'X'
 			);
-	//mvwprintw(score, 4,0,  "Time : %ld", Util::get_time());
+	mvwprintw(score, 4,1,  "Time : %ld", Util::get_time());
 	//mvwprintw(score, 5,0,  "Last input : %d", db.get_last_direction());
 	box(score,0,0);
 	wrefresh(score);
