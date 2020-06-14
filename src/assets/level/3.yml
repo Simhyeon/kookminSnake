@@ -1,6 +1,6 @@
-direction: -1
+direction: 2
 growth: 7
 poison: 7
 gate: 3
 length: 14
-ppm_file: "20x20_normal.ppm"
+ppm_file: "30_30_rectangle.ppm"

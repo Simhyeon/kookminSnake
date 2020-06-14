@@ -1,6 +1,6 @@
-direction: 2
+direction: -1
 growth: 3
 poison: 3
 gate: 1
 length: 10
-ppm_file: "10x10_normal.ppm"
+ppm_file: "30_30_blank.ppm"

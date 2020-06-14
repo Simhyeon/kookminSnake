@@ -3,4 +3,4 @@ growth: 5
 poison: 5
 gate: 2
 length: 12
-ppm_file: "15x15_normal.ppm"
+ppm_file: "30_30_doubleline.ppm"

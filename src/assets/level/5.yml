@@ -3,4 +3,4 @@ growth: 12
 poison: 12
 gate: 5
 length: 20
-ppm_file: "20x20_angled.ppm"
+ppm_file: "30_30_cross.ppm"
