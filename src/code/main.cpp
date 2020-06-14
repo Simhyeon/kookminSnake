@@ -15,7 +15,8 @@
 //bool playAgain(ECSDB& db );
 int main(void) {
 
-	int level_count = 4;
+	int level_count = 1;
+	int max_level = 4;
 	// Init
 	ECSDB ecsdb;
 	Renderer rend;
@@ -32,6 +33,7 @@ int main(void) {
 	rend.init(ecsdb);
 	ecsdb.update_snake_map();
 	rend.process(ecsdb);
+	srand(time(NULL));
 
 	/// Main Loop
 		long time_delay = Util::get_time();
@@ -41,7 +43,7 @@ int main(void) {
 
 			// 바로 이전의 호출 시점보다 0.5초 이후에 다시 호출함. 
 			// 숫자 단위는 밀리세컨드 500밀리초 = 0.5초
-			if (Util::get_time() - time_delay >= 500){
+			if (Util::get_time() - time_delay >= 200){
 				time_delay = Util::get_time();
 
 				pbs.process(ecsdb);
@@ -67,7 +69,7 @@ int main(void) {
 				}
 
 				if (ecsdb.get_success()){
-					if (--level_count != 0){
+					if (++level_count != max_level){
 						fpp.process(level_count, ecsdb);
 						ecsdb.update_snake_map();
 					} else {
