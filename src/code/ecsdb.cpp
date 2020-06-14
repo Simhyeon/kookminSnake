@@ -18,9 +18,10 @@ ECSDB::ECSDB(){}
 ECSDB::~ECSDB(){
 	delwin(playboard);
 	delwin(scoreboard);
+	delwin(titleboard);
 	endwin();
 }
-void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count, int gate_counter, int length) {
+void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count, int gate_counter, int length, int max_length) {
 
 	// Init 하면서 내부 변수를 모두 초기화 한다.
 	this->width = width;
@@ -43,6 +44,7 @@ void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map
 	poison_counter = 0;
 	gate_counter = 0;
 	length_qual = length;
+	max_length = max_length;
 
 	growth_ok = false;
 	poison_ok = false;
@@ -326,6 +328,10 @@ bool ECSDB::get_poison_ok() const{
 
 bool ECSDB::get_length_ok() const{
 	return length_ok;
+}
+
+int ECSDB::get_max_length() const{
+	return max_length;
 }
 
 void ECSDB::set_screen(WINDOW* play, WINDOW* score,WINDOW* title){

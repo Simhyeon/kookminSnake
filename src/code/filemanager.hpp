@@ -43,6 +43,8 @@ private:
 	int growth_counter, poison_counter;
 	/// 성공에 필요한 뱀의 길이
 	int length;
+	/// 최대로 가질 수 있는 뱀의 길이
+	int max_length;
 	/// 성공에 필요한 게이트의 개수
 	int gate_counter;
 	/// 읽어온 최초 레벨의 문자 지도
@@ -56,8 +58,7 @@ private:
 		{1, "1.yml"},
 		{2, "2.yml"},
 		{3, "3.yml"},
-		{4, "4.yml"},
-		{5, "5.yml"}
+		{4, "4.yml"}
 	};
 
 public:

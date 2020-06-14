@@ -15,7 +15,7 @@
 //bool playAgain(ECSDB& db );
 int main(void) {
 
-	std::vector<int> levels = {1,2,3,4,5};
+	int level_count = 4;
 	// Init
 	ECSDB ecsdb;
 	Renderer rend;
@@ -26,10 +26,9 @@ int main(void) {
 	FileManager fpp;
 	ScoreSystem sss;
 	InputManager im;
-	std::vector<int>::iterator level_it = levels.begin();
 
 	/// Init
-	fpp.process(*level_it, ecsdb);
+	fpp.process(level_count, ecsdb);
 	rend.init(ecsdb);
 	ecsdb.update_snake_map();
 	rend.process(ecsdb);
@@ -56,7 +55,7 @@ int main(void) {
 				if (ecsdb.get_death()){
 					if(rend.playAgain(ecsdb)){
 						ecsdb.set_death(false);
-						fpp.process(*level_it, ecsdb);
+						fpp.process(level_count, ecsdb);
 						rend.init(ecsdb);
 						ecsdb.update_snake_map();
 						rend.process(ecsdb);
@@ -68,25 +67,17 @@ int main(void) {
 				}
 
 				if (ecsdb.get_success()){
-					// 왜 막아 두었는가 하면 현재 코드는 width, height가 변하지 않는 것을 가정하고 있다.
-					// 그런데 현재 ppm 맵들은 크기가 제각각이다.
-					return 0;
-					//if (++level_it != levels.end()){
-						//fpp.process(*level_it, ecsdb);
-						//ecsdb.update_snake_map();
-					//} else {
-						//return 1;
-					//}
+					if (--level_count != 0){
+						fpp.process(level_count, ecsdb);
+						ecsdb.update_snake_map();
+					} else {
+						return 0;
+					}
 				}
 
 				rend.process(ecsdb);
 			}
 		}
-	delwin(ecsdb.get_titleboard());
-	delwin(ecsdb.get_scoreboard());
-	delwin(ecsdb.get_playboard());
-	endwin();
-	
 }
 
 

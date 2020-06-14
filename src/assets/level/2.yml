@@ -1,6 +1,7 @@
-direction: 2
+direction: -1
 growth: 5
 poison: 5
 gate: 2
+max_length: 100
 length: 12
-ppm_file: "30_30_doubleline.ppm"
+ppm_file: "21x21_doubleline.ppm"

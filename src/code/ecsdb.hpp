@@ -118,6 +118,7 @@ private:
 	bool growth_ok = false;
 	bool poison_ok = false;
 	bool length_ok = false;
+	int max_length = 0;
 public:
 
 
@@ -126,7 +127,7 @@ public:
 	~ECSDB();
 	/// 변수를 받는 생성자
 	ECSDB(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction);
-	void Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count, int gate_count, int length);
+	void Init(int width, int height, std::vector<std::vector<char>> snake_map, DIRECTION snake_direction, int growth_count, int poison_count, int gate_count, int length, int max_length);
 
 	// Update snake_map, should be renderer function
 	void update_snake_map();
@@ -181,6 +182,7 @@ public:
 	bool get_growth_ok() const;
 	bool get_poison_ok() const;
 	bool get_length_ok() const;
+	int get_max_length() const;
 
 	void push_snake(PlayerBody body);
 	void pop_snake();

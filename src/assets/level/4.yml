@@ -1,6 +1,7 @@
-direction: -1
+direction: 2
 growth: 10
 poison: 10
 gate: 4
+max_length: 100
 length: 16
-ppm_file: "30_30_arch.ppm"
+ppm_file: "21x21_rectangle.ppm"

@@ -15,7 +15,7 @@
 class PortalSystem{
 private:
 	/// 포탈의 지속시간
-	const long portal_time = 5000;
+	const long portal_time = 10000;
 
 	/** \brief 포탈의 위치에 따라 플레이어의 방향을 결정하는 함수
 	 * @param destination 방향을 정해야 하는 포탈 위치
