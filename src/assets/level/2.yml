@@ -1,6 +1,6 @@
 direction: -1
 growth: 5
-poison: 5
+poison: 3
 gate: 2
 max_length: 100
 length: 12
