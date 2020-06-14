@@ -16,6 +16,7 @@ public:
 	void init(ECSDB&);
 	void process(ECSDB&);
 	bool playAgain(ECSDB& db);
+	bool victory();
 	void printTitle(ECSDB&);
 };
 #endif

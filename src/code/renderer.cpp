@@ -25,7 +25,7 @@ void Renderer::init(ECSDB& ecsdb){
 	int width = ecsdb.get_width();
 	int height = ecsdb.get_height();
 	ecsdb.set_screen(
-			newwin(height*2,width*2,9,30),
+			newwin(height*2 + 1,width*2 + 2,9,30),
 			newwin(height,30,9,width*2+40),
 			newwin(7,width*2+40,0,30)
 			); //height,width,starty,startx	
@@ -46,7 +46,7 @@ void Renderer::draw(ECSDB& db){
 	
 	WINDOW* win = db.get_playboard();
 	werase(win);
-	//box(win,0,0);
+	box(win,0,0);
 	int ch;
 	auto snake_map = db.get_snake_map();
 	for (int i =0; i< db.get_width(); i++){
@@ -54,31 +54,31 @@ void Renderer::draw(ECSDB& db){
 			ch = snake_map[j][i];
 			switch(ch){
 				case '*':
-				mvwaddch(win, i*2, j*2, ch | COLOR_PAIR(2));
+				mvwaddch(win, i*2+1, j*2+1, ch | COLOR_PAIR(2));
 				break;
 
 				case 'P':
-				mvwaddch(win, i*2, j*2, ch | COLOR_PAIR(3));
+				mvwaddch(win, i*2+1, j*2+1, ch | COLOR_PAIR(3));
 				break;
 
 				case 'X':
-				mvwaddch(win, i*2, j*2, ch | COLOR_PAIR(4));
+				mvwaddch(win, i*2+1, j*2+1, ch | COLOR_PAIR(4));
 				break;
 
 				case 'O':
-				mvwaddch(win, i*2, j*2, ch | COLOR_PAIR(5));
+				mvwaddch(win, i*2+1, j*2+1, ch | COLOR_PAIR(5));
 				break;
 				
 				case '#':
-				mvwaddch(win, i*2, j*2, ch | COLOR_PAIR(6));
+				mvwaddch(win, i*2+1, j*2+1, ch | COLOR_PAIR(6));
 				break;
 
 				case '@':
-				mvwaddch(win, i*2, j*2, ch | COLOR_PAIR(7));
+				mvwaddch(win, i*2+1, j*2+1, ch | COLOR_PAIR(7));
 				break;
 
 				default:
-				mvwaddch(win, i*2, j*2, ch | COLOR_PAIR(1));
+				mvwaddch(win, i*2+1, j*2+1, ch | COLOR_PAIR(1));
 				break;
 			}
 			
@@ -107,27 +107,28 @@ void Renderer::printScore(ECSDB& db){
 	
 	werase(score);
 	//mvwprintw(score, 0, 0,  "Time: %ld", Util::get_time());
-	mvwprintw(score, 1, 1,  "length: %d/%d (%c)", 
+	mvwprintw(score, 1, 1,  "length: \t%d/%d (%c)", 
 			db.get_snake().size(), 
 			db.get_length_qual(),
 			db.get_length_ok() ? 'O' : 'X'
 			);
-	mvwprintw(score, 2, 1,  "growth: %d/%d (%c)", 
+	mvwprintw(score, 2, 1,  "growth: \t%d/%d (%c)", 
 			db.get_growth_counter(),
 			db.get_growth_qual(),
 			db.get_growth_ok() ? 'O' : 'X'
 			);
-	mvwprintw(score, 3, 1,  "poison: %d/%d (%c)", 
+	mvwprintw(score, 3, 1,  "poison: \t%d/%d (%c)", 
 			db.get_poison_counter(), 
 			db.get_poison_qual(),
 			db.get_poison_ok() ? 'O' : 'X'
 			);
-	mvwprintw(score, 4, 1,  "gate: %d/%d (%c)", 
+	mvwprintw(score, 4, 1,  "gate: \t\t%d/%d (%c)", 
 			db.get_gate_counter(), 
 			db.get_gate_qual(),
 			db.get_gate_ok() ? 'O' : 'X'
 			);
-	mvwprintw(score, 4,1,  "Time : %ld", Util::get_time());
+	mvwprintw(score, 5,1,  "Time past: \t%ld", (Util::get_time() - db.get_time()) / 1000);
+	mvwprintw(score, 7,1,  "Max snake length : %d", db.get_max_length());
 	//mvwprintw(score, 5,0,  "Last input : %d", db.get_last_direction());
 	box(score,0,0);
 	wrefresh(score);
@@ -155,3 +156,23 @@ bool Renderer::playAgain(ECSDB& db ){
 	}
 }
 
+bool Renderer::victory(){
+	WINDOW* endwin = newwin(2,COLS, LINES-2, 0);
+	keypad(endwin, TRUE);
+	mvwprintw(endwin, 0, 0, "Congratulations you won!");
+	mvwprintw(endwin, 1, 0, "Press [q] to quit. or [R] to restart from start.");
+	int c;
+	do{
+		c = wgetch(endwin);
+	}while(c!=10 && c!=' ' && c!='q' && c!='Q' && c!='r' && c!='R');
+	werase(endwin);
+	wrefresh(endwin);
+	delwin(endwin);
+	if (c == 'R' || c == 'r'){
+		/// Restart == true
+		return true;
+	}else if (c == ' ' || c == 10 || c == 'q' || c == 'Q'){
+		/// Restart == false
+		return false;
+	}
+}

@@ -16,7 +16,7 @@
 int main(void) {
 
 	int level_count = 1;
-	int max_level = 4;
+	int max_level = 1;
 	// Init
 	ECSDB ecsdb;
 	Renderer rend;
@@ -67,17 +67,25 @@ int main(void) {
 						break;
 					}
 				}
+				
+				rend.process(ecsdb);
 
 				if (ecsdb.get_success()){
-					if (++level_count != max_level){
+					if (level_count != max_level){
+						level_count++;
 						fpp.process(level_count, ecsdb);
 						ecsdb.update_snake_map();
 					} else {
-						return 0;
+						if (rend.victory()){
+							level_count = 1;
+							fpp.process(level_count, ecsdb);
+							ecsdb.update_snake_map();
+						} else {
+							return 0;
+						}
 					}
 				}
 
-				rend.process(ecsdb);
 			}
 		}
 }

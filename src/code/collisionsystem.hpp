@@ -22,7 +22,7 @@ private:
 	 */
 	bool detect_collision(const PosVc& walls, const std::vector<PlayerBody>& bodies);
 public:
-	/** 충돌 시스템의 역할을 작동시키는 함수
+	/** \brief 충돌 시스템의 역할을 작동시키는 함수
 	 *
 	 * @param db ECS 데이터베이스
 	 */
