@@ -44,7 +44,7 @@ void ECSDB::Init(int width, int height, std::vector<std::vector<char>> snake_map
 	poison_counter = 0;
 	gate_counter = 0;
 	length_qual = length;
-	max_length = max_length;
+	this->max_length = max_length;
 
 	growth_ok = false;
 	poison_ok = false;

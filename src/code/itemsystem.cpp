@@ -118,9 +118,9 @@ void ItemSystem::process(ECSDB& db){
 		// 새로운 꼬리의 방향 큐는 '좌, 상, 상'의 앞에 '좌' 를 넣어
 		// 최종적으로는 '좌, 좌, 상, 상'이 된다.
 		case ITEMTYPE::INC: {
-			// if (db.get_max_length() <= db.get_snake().size()){
-			// 	break;
-			// }
+			if (db.get_max_length() <= db.get_snake().size()){
+				break;
+			}
 			const PlayerBody& former_tail = db.get_tail();
 			PlayerBody new_tail = PlayerBody(get_following_position(former_tail), former_tail.get_dir_queue());
 
