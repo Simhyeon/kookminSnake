@@ -1,6 +1,7 @@
 #include "inputmanager.hpp"
 #include <curses.h>
 
+//switch문을 활용하여 playboard에 표준입력된 문자에 따라 뱀의 방향을 결정해준다
 void InputManager::process(ECSDB& db){
 	switch (wgetch(db.get_playboard())) {
 			case 'w' :
@@ -22,6 +23,9 @@ void InputManager::process(ECSDB& db){
 	            db.set_last_direction(DIRECTION::RIGHT);
 			break;
 
+			//playboard에 표준입력된 문자가 'P'라면 게임을 일시정지 해준다.
+			//scoreboard에 게임이 일시정지 되었다는 문구를 출력해준다
+			//'P'가 다시 입력될때까지 게임을 계속 일지 중지시키고 'P'를 입력시키면 게임을 재개한다
 			case 'P':
 			case 'p': 
 			char c;
