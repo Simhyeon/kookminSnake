@@ -2,6 +2,7 @@
 int main(void) {
 	Manager m;
 	m.start_game();
+
 }
 
 
