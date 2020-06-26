@@ -9,24 +9,25 @@
 
 ### 참여인 
 - 20150803 사법학과 육심현
-- 20191587          류희재
+- 20191587 소프트웨어융합학과 류희재
 
 ### 맡은 역할
 
 육심현
-- 플레이어 시스템, 충돌 시스템, 아이템 시스템, 게이트 시스템 
+- 플레이어 시스템, 충돌 시스템, 아이템 시스템, 게이트 시스템, 파일 매니저 
 
 류희재
 - 사용자 입력, 점수판, 렌더러, 게임 매니저
 
 ### 작업 환경
 - POP\_OS 20.04 (Ubuntu 기반)
-- ...
-- CI/CD : Ubuntu 가상 머신 + ncurses 라이브러리
+- Fedora 31
+- Ubuntu Virtual machine 
 
 ### 빌드방법
 
 ```
+// 현재 Ubuntu 18.04, Ubuntu 20.04, Fedora 31에서만 컴파일 확인
 // Ubuntu 18.04
 // 의존성 파일 설치 후 컴파일
 sudo add-apt-repository universe
@@ -42,7 +43,7 @@ make no_dep
 // 의존성 파일 설치 없이 할 경우 
 make 
 
-// clone 또는 tarball 이용
+// 클론하여 설치 
 git clone https://github.com/Simhyeon/kookminSnake
 cd kookminSnake
 make
