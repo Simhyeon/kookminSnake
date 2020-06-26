@@ -81,6 +81,7 @@ void Manager::start_game(){
 							fpp.process(level_count, ecsdb);
 							ecsdb.update_snake_map();
 						} else {
+							return;
 						}
 					}
 				}

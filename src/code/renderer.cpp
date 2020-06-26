@@ -192,9 +192,6 @@ bool Renderer::victory(){
 	do{
 		c = wgetch(endwin);
 	}while(c!='q' && c!='Q' && c!='r' && c!='R');
-	werase(endwin);
-	wrefresh(endwin);
-	delwin(endwin);
 	if (c == 'R' || c == 'r'){
 		/// Restart == true
 		return true;

@@ -9,6 +9,7 @@ EXE := Snake_game
 DEBUG := Snake_game_Debug
 DEP := libncurses5-dev libncursesw5-dev libyaml-cpp-dev libyaml-cpp0.5v5
 all: env $(EXE)
+no_dep: $(EXE)
 
 ${EXE} : ${OBJ} 
 	@${CC} ${CFLAG} $^ ${LDLIBS} -o $@
@@ -35,4 +36,4 @@ uninstall :
 clean : 
 	@$(RM) -r $(OBJ_DIR)
 
-.PHONY: all clean Debug env
+.PHONY: all clean Debug env no_dep
