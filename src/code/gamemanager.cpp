@@ -43,7 +43,7 @@ void Manager::start_game(){
 
 			// 바로 이전의 호출 시점보다 0.5초 이후에 다시 호출함. 
 			// 숫자 단위는 밀리세컨드 500밀리초 = 0.5초
-			if (Util::get_time() - time_delay >= 200){
+			if (Util::get_time() - time_delay >= 500){
 				time_delay = Util::get_time();
 
 				pbs.process(ecsdb);

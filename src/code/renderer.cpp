@@ -194,9 +194,15 @@ bool Renderer::victory(){
 	}while(c!='q' && c!='Q' && c!='r' && c!='R');
 	if (c == 'R' || c == 'r'){
 		/// Restart == true
+		werase(endwin);
+		wrefresh(endwin);
+		delwin(endwin);
 		return true;
 	}else if (c == 'q' || c == 'Q'){
 		/// Restart == false
+		werase(endwin);
+		wrefresh(endwin);
+		delwin(endwin);
 		return false;
 	}
 }
