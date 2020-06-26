@@ -1,7 +1,7 @@
 direction: -1
-growth: 1
-poison: 1
+growth: 2
+poison: 2
 gate: 0
 max_length: 100
-length: 6
+length: 8
 ppm_file: "21x21_blank.ppm"

@@ -16,7 +16,7 @@
 
 void Manager::start_game(){
 	int level_count = 1;
-	int max_level = 1;
+	int max_level = 4;
 	// Init
 	ECSDB ecsdb;
 	Renderer rend;
