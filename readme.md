@@ -27,8 +27,21 @@
 ### 빌드방법
 
 ```
-// 의존 라이브러리 설치 필요
-sudo apt-get install -y libncurses5-dev libncursesw5-dev
+// Ubuntu 18.04
+// 의존성 파일 설치 후 컴파일
+sudo add-apt-repository universe
+sudo apt-get update
+sudo apt-get install -y libncurses5-dev libncursesw5-dev libyaml-cpp-dev libyaml-cpp0.5v5
+make no_dep
+
+// Ubuntu 20.04
+// 의존성 파일 설치 후 컴파일
+sudo apt-get install -y libncurses5-dev libncursesw5-dev libyaml-cpp-dev libyaml-cpp0.6
+make no_dep
+
+// 의존성 파일 설치 없이 할 경우 
+make 
+
 // clone 또는 tarball 이용
 git clone https://github.com/Simhyeon/kookminSnake
 cd kookminSnake
