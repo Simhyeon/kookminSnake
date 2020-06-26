@@ -1,3 +1,10 @@
+/**
+ * @file portal.cpp
+ *
+ * @author 육심현
+ *
+ */
+
 #include "portal.hpp"
 #include "commons.hpp"
 #include <chrono>

@@ -1,3 +1,10 @@
+/**
+ * @file collisionsystem.hpp
+ *
+ * @author 육심현
+ *
+ */
+
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
@@ -9,6 +16,7 @@
 /** \brief 충돌을 처리하는 시스템
  *
  * 플레이어 몸체나 벽과의 충돌을 감지하는 시스템
+ * 
  */
 class CollisionSystem{
 private:

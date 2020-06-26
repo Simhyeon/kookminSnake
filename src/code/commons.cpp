@@ -1,3 +1,10 @@
+/**
+ * @file commons.cpp
+ *
+ * @author 육심현
+ *
+ */
+
 #include "commons.hpp"
 #include <cmath>
 #include <iostream>

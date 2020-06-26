@@ -1,3 +1,10 @@
+/**
+ * @file ecsdb.cpp
+ *
+ * @author 육심현 류희재
+ *
+ */
+
 #include "ecsdb.hpp"
 #include "portal.hpp"
 #include "commons.hpp"

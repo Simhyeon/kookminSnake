@@ -1,3 +1,10 @@
+/**
+ * @file commons.hpp
+ *
+ * @author 육심현
+ *
+ */
+
 #ifndef COMMONS_H
 #define COMMONS_H
 

@@ -1,3 +1,10 @@
+/**
+ * @file playerbody.cpp
+ *
+ * @author 육심현
+ *
+ */
+
 #include "playerbody.hpp"
 #include "commons.hpp"
 #include <iostream>

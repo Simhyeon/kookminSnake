@@ -1,3 +1,10 @@
+/**
+ * @file playersystem.hpp
+ *
+ * @author 육심현
+ *
+ */
+
 #ifndef PLAYER_H
 #define PLAYER_H
 

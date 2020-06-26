@@ -1,3 +1,10 @@
+/**
+ * @file renderer.cpp
+ *
+ * @author 류희재
+ *
+ */
+
 #include "renderer.hpp"
 #include <cstring>
 #include <curses.h>

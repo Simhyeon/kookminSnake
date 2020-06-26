@@ -1,3 +1,10 @@
+/**
+ * @file item.cpp
+ *
+ * @author 육심현
+ *
+ */
+
 #include "item.hpp"
 #include "commons.hpp"
 

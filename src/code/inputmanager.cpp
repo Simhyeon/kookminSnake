@@ -1,3 +1,10 @@
+/**
+ * @file inputmanager.cpp
+ *
+ * @author 류희재
+ *
+ */
+
 #include "inputmanager.hpp"
 #include <curses.h>
 

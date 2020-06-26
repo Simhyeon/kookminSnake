@@ -1,3 +1,10 @@
+/**
+ * @file item.hpp
+ *
+ * @author 육심현
+ *
+ */
+
 #ifndef ITEMSYS_H
 #define ITEMSYS_H
 

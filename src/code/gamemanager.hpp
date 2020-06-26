@@ -1,3 +1,10 @@
+/**
+ * @file gamemanager.hpp
+ *
+ * @author 류희재
+ *
+ */
+
 #ifndef MANAGER_H
 #define MANAGER_H
 #include <cstdlib>

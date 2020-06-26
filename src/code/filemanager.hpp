@@ -1,3 +1,10 @@
+/**
+ * @file filemanager.hpp
+ *
+ * @author 육심현
+ *
+ */
+
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 #include "commons.hpp"

@@ -1,3 +1,10 @@
+/**
+ * @file renderer.hpp
+ *
+ * @author 류희재
+ *
+ */
+
 #ifndef RENDERER_H 
 #define RENDERER_H
 

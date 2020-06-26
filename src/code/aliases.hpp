@@ -1,3 +1,10 @@
+/**
+ * @file aliases.hpp
+ *
+ * @author 육심현
+ *
+ */
+
 #ifndef ALISES_H
 #define ALISES_H
 

@@ -1,3 +1,10 @@
+/**
+ * @file itemsystem.cpp
+ *
+ * @author 육심현
+ *
+ */
+
 #include "itemsystem.hpp"
 #include "commons.hpp"
 #include "ecsdb.hpp"

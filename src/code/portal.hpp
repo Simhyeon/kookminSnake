@@ -1,3 +1,10 @@
+/**
+ * @file portal.hpp
+ *
+ * @author 육심현
+ *
+ */
+
 #ifndef PORTAL_H
 #define PORTAL_H
 

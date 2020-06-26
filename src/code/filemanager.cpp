@@ -1,3 +1,10 @@
+/**
+ * @file filemanager.cpp
+ *
+ * @author 육심현
+ *
+ */
+
 #include "filemanager.hpp"
 #include "commons.hpp"
 #include <fstream>

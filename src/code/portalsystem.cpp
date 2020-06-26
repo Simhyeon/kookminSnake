@@ -1,3 +1,10 @@
+/**
+ * @file portalsystem.cpp
+ *
+ * @author 육심현
+ *
+ */
+
 #include "commons.hpp"
 #include "ecsdb.hpp"
 #include "playerbody.hpp"

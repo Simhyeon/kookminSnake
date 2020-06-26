@@ -1,3 +1,10 @@
+/**
+ * @file playersystem.cpp
+ *
+ * @author 육심현
+ *
+ */
+
 #include "playersystem.hpp"
 #include "commons.hpp"
 #include "playerbody.hpp"

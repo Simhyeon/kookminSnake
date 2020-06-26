@@ -1,3 +1,10 @@
+/**
+ * @file string.cpp
+ *
+ * @author 육심현
+ *
+ */
+
 #include "string.hpp"
 #include <map>
 

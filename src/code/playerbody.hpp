@@ -1,3 +1,10 @@
+/**
+ * @file playerbody.hpp
+ *
+ * @author 육심현
+ *
+ */
+
 #ifndef PLAYERBODY_H
 #define PLAYERBODY_H
 

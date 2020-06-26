@@ -1,3 +1,10 @@
+/**
+ * @file string.hpp
+ *
+ * @author 육심현
+ *
+ */
+
 #ifndef STRING_HPP
 #define STRING_HPP
 

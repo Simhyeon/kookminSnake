@@ -1,3 +1,10 @@
+/**
+ * @file gamemanager.cpp
+ *
+ * @author 류희재
+ *
+ */
+
 #include "gamemanager.hpp"
 #include <cstdlib>
 #include "commons.hpp"

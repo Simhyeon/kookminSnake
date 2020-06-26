@@ -1,3 +1,10 @@
+/**
+ * @file portalsystem.hpp
+ *
+ * @author 육심현
+ *
+ */
+
 #ifndef PORTALSYS_H
 #define PORTALSYS_H
 

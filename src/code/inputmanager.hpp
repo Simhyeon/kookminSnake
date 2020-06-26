@@ -1,3 +1,10 @@
+/**
+ * @file inputmanager.hpp
+ *
+ * @author 류희재
+ *
+ */
+
 #ifndef INPUTMANAGER_H
 #define INPUTMANAGER_H
 #include <ncurses.h>

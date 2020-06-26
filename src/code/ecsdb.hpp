@@ -1,3 +1,10 @@
+/**
+ * @file ecsdb.hpp
+ *
+ * @author 육심현 류희재
+ *
+ */
+
 #ifndef ECSDB_H
 #define ECSDB_H
 
