@@ -1,7 +1,7 @@
 /**
  * @file inputmanager.hpp
  *
- * @author 류희재
+ * @author 류희재(20191587)
  *
  */
 
@@ -12,13 +12,17 @@
 
 
 /** \brief 표준 입력을 처리하는 시스템
-	 *
-	 *	뱀의 이동 및 게임의 흐름을 제어하는 시스템
-	 */
+ * 
+ * @author 류희재(20191587)
+ * 
+ * 뱀의 이동 및 게임의 흐름을 제어하는 시스템
+ */
 class InputManager{
 public:
 /** \brief 표준 입력 시스템의 역할을 작동시키는 함수
 	 *
+	 * @author 류희재(20191587)
+	 * 
 	 * @param db ECS 데이터베이스
 	 */
     void process(ECSDB&);

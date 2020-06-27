@@ -1,7 +1,7 @@
 /**
  * @file renderer.hpp
  *
- * @author 류희재
+ * @author 류희재(20191587)
  *
  */
 
@@ -10,8 +10,10 @@
 
 #include "ecsdb.hpp"
 
+/// @author 류희재(20191587)
 class ScoreSystem{
 	public:
+		/// @author 류희재(20191587)
 		void process(ECSDB& db);
 };
 

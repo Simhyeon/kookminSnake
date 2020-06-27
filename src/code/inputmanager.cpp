@@ -1,7 +1,7 @@
 /**
  * @file inputmanager.cpp
  *
- * @author 류희재
+ * @author 류희재(20191587)
  *
  */
 
@@ -9,6 +9,7 @@
 #include <curses.h>
 
 //switch문을 활용하여 playboard에 표준입력된 문자에 따라 뱀의 방향을 결정해준다
+/// @author 류희재(20191587)
 void InputManager::process(ECSDB& db){
 	switch (wgetch(db.get_playboard())) {
 			case 'w' :

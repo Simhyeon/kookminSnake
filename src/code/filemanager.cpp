@@ -1,7 +1,7 @@
 /**
  * @file filemanager.cpp
  *
- * @author 육심현
+ * @author 육심현(20150803)
  *
  */
 
@@ -15,6 +15,7 @@
 
 // ppm 파일은 헤더에서 주석이 아무때나 나올 수 있는데 
 // 해당 주석은 읽어들인뒤 사용하지 않고 버린다.
+/// @author 육심현(20150803)
 void FileManager::eat_comment(std::ifstream &f){
 	char linebuff[1024];
 	char ppp;
@@ -29,6 +30,7 @@ void FileManager::eat_comment(std::ifstream &f){
 // 뱀의 방향
 // ppm 파일의 이름
 // 성공 조건 (성장 아이템, 독 아이템)
+/// @author 육심현(20150803)
 void FileManager::load_file(const std::string& file){
 	YAML::Node level = YAML::LoadFile(file);
 	snake_direction = level["direction"].as<int>();
@@ -44,6 +46,7 @@ void FileManager::load_file(const std::string& file){
 
 // PPM 파일을 읽어서 RGB로 저장한 뒤 그에 해당하는 
 // 캐릭터 변환자를 통해 캐릭터 2차 배열을 생성한다.
+/// @author 육심현(20150803)
 void FileManager::load_ppm(const std::string& name){
 
 	std::ifstream f(name.c_str(), std::ios::binary);
@@ -123,6 +126,7 @@ void FileManager::load_ppm(const std::string& name){
 }
 
 // 트리거가 작동되면 db에 모든 레벨 정보를 저장한다.
+/// @author 육심현(20150803)
 void FileManager::process(int level, ECSDB &db){
 	std::string path = level_name.at(level);
 	path.insert(0, "src/assets/level/");

@@ -1,7 +1,7 @@
 /**
  * @file itemsystem.cpp
  *
- * @author 육심현
+ * @author 육심현(20150803)
  *
  */
 
@@ -19,6 +19,7 @@
 // 아이템은 최대 개수인 경우에는 생성하지 않는다.
 // 아이템을 생성할 공간은 empty 배열에서 랜덤하게 인덱스를 설정한 뒤 
 // 해당 인덱스에 해당하는 좌표값을 계산하여 정한다.
+/// @author 육심현(20150803)
 void ItemSystem::spawn_growth(std::vector<FILL>& empty, ItmVc& growth, int width, int height){
 	if (growth.size() >= item_size){return;}
 	int idx = Util::get_rand(0, empty.size() -1);
@@ -31,6 +32,7 @@ void ItemSystem::spawn_growth(std::vector<FILL>& empty, ItmVc& growth, int width
 }
 
 // spawn_growth 와 동일한 메커니즘이다. 
+/// @author 육심현(20150803)
 void ItemSystem::spawn_poison(std::vector<FILL>& empty, ItmVc& poison, int width, int height){
 	if (poison.size() >= item_size){return;}
 	int idx = Util::get_rand(0, empty.size() -1);
@@ -44,6 +46,7 @@ void ItemSystem::spawn_poison(std::vector<FILL>& empty, ItmVc& poison, int width
 
 // 아이템을 순환하며 아이템의 지속시간이 다했는가를 검사한다.
 // 지속시간이 지난 아이템은 삭제하고 삭제 여부를 리턴한다.
+/// @author 육심현(20150803)
 std::pair<bool, Position> ItemSystem::remove_growth(ItmVc& growth){
 	for(auto it = growth.begin(); it != growth.end(); it++){
 		if (Util::get_time() - (*it).timestamp >= item_time){
@@ -56,6 +59,7 @@ std::pair<bool, Position> ItemSystem::remove_growth(ItmVc& growth){
 };
 
 // remove_growth 와 동일한 메커니즘이다. 
+/// @author 육심현(20150803)
 std::pair<bool, Position> ItemSystem::remove_poison(ItmVc& poison){
 	for(auto it = poison.begin(); it != poison.end(); it++){
 		if (Util::get_time() - (*it).timestamp >= item_time){
@@ -70,6 +74,7 @@ std::pair<bool, Position> ItemSystem::remove_poison(ItmVc& poison){
 // 아이템들을 순환하며 플레이어가 아이템을 먹었는지 확인한다.
 // 플레이어와 아이템의 위치가 동일하다면 아이템을 먹은 것으로 한다.
 // 아이템과 상호작용한 경우에는 상호작용의 종류를 리턴한다.
+/// @author 육심현(20150803)
 ITEMTYPE ItemSystem::check_item_interaction(const PlayerBody& head, ItmVc& growth, ItmVc& poison){
 	// 증가 아이템을 검사한다.
 	for(auto it = growth.begin(); it != growth.end(); it++){
@@ -93,6 +98,7 @@ ITEMTYPE ItemSystem::check_item_interaction(const PlayerBody& head, ItmVc& growt
 // 아이템을 생성할 위치를 알아오는 함수로써 
 // 플레이어의 꼬리 위치에서 꼬리의 마지막 방향으로 -1 만큼 이동한
 // 좌표를 반환한다.
+/// @author 육심현(20150803)
 Position ItemSystem::get_following_position(const PlayerBody& parent) {
 	int direction = static_cast<int>(parent.get_last_dir()) * -1;
 	Position following(direction%2, -direction/2 );
@@ -101,6 +107,7 @@ Position ItemSystem::get_following_position(const PlayerBody& parent) {
 }
 
 // 아이템 시스템의 모든 일을 트리거한다.
+/// @author 육심현(20150803)
 void ItemSystem::process(ECSDB& db){
 	// 아이템 상호작용 여부를 검사하고
 	ITEMTYPE result = check_item_interaction(db.get_head(), db.get_mut_growth(), db.get_mut_poison());

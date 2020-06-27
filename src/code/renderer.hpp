@@ -1,7 +1,7 @@
 /**
  * @file renderer.hpp
  *
- * @author 류희재
+ * @author 류희재(20191587)
  *
  */
 
@@ -14,22 +14,29 @@
 #include "scoreboard.hpp"
 #include <iostream>
 
+/// @author 류희재(20191587)
 class Renderer {
 private:
 	/** \brief playboard를 출력해주는 함수
 	 *
+	 * @author 류희재(20191587)
+	 * 
 	 * @param db ECS 데이터베이스
 	 */
 	void draw(ECSDB&);
 
 	/** \brief scoreboard를 출력해주는 함수
 	 *
+	 * @author 류희재(20191587)
+	 * 
 	 * @param db ECS 데이터베이스
 	 */
 	void printScore(ECSDB&);
 
 	/** \brief titleboard를 그려주는 함수
 	 *
+	 * @author 류희재(20191587)
+	 * 
 	 * @param db ECS 데이터베이스
 	 */
 	void printTitle(ECSDB&);
@@ -38,24 +45,31 @@ public:
 
 	/** \brief Renderer 클래스 생성자
 	 *
+	 * @author 류희재(20191587)
 	 * 
 	 */
 	Renderer();
 
 	/** \brief playboard를 그려주는 함수
 	 *
+	 * @author 류희재(20191587)
+	 * 
 	 * @param db ECS 데이터베이스
 	 */
 	void init(ECSDB&);
 
 	/** \brief 랜더링 시스템을 처리하는 시스템
 	 *
+	 * @author 류희재(20191587)
+	 * 
 	 * @param db ECS 데이터베이스
 	 */
 	void process(ECSDB&);
 
 	/** \brief 죽었을때 게임을 다시 시작할 수 있는지 선택하는 함수
 	 *
+	 * @author 류희재(20191587)
+	 * 
 	 * @param db ECS 데이터베이스
 	 */
 	bool playAgain(ECSDB& db);
@@ -63,6 +77,7 @@ public:
 
 	/** \brief 이겼을 때 다음 스테이지로 넘어가는 함수
 	 *
+	 * @author 류희재(20191587)
 	 * 
 	 */
 	bool victory();

@@ -1,7 +1,7 @@
 /**
  * @file string.hpp
  *
- * @author 육심현
+ * @author 육심현(20150803)
  *
  */
 

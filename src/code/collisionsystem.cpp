@@ -1,13 +1,14 @@
 /**
  * @file collisionsystem.cpp
  *
- * @author 육심현
+ * @author 육심현(20150803)
  *
  */
 
 #include "collisionsystem.hpp"
 #include "playerbody.hpp"
 
+/// @author 육심현(20150803)
 void CollisionSystem::process(ECSDB & db){
 	// 만약 플레이어가 다른 오브젝트와 충돌 했다면 죽는다.
 	if (detect_collision(db.get_walls(), db.get_snake())){
@@ -16,6 +17,7 @@ void CollisionSystem::process(ECSDB & db){
 }
 
 // 플레이어가 다른 오브젝트와 충돌했는가를 검사한다.
+/// @author 육심현(20150803)
 bool CollisionSystem::detect_collision(const PosVc& walls,const std::vector<PlayerBody>& bodies){
 
 	const PlayerBody& head = bodies[0];

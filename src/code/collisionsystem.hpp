@@ -1,7 +1,7 @@
 /**
  * @file collisionsystem.hpp
  *
- * @author 육심현
+ * @author 육심현(20150803)
  *
  */
 
@@ -17,12 +17,16 @@
  *
  * 플레이어 몸체나 벽과의 충돌을 감지하는 시스템
  * 
+ *  @author 육심현(20150803)
+ * 
  */
 class CollisionSystem{
 private:
 
 	/** \brief 충돌을 감지하는 함수
 	 *
+	 * @author 육심현(20150803)
+	 * 
 	 * walls 만 받아오고 iwalls를 받아오지 않는 이유는 iwalls는 player가 접근할 수 없는 위치에만 있기 때문이다. 
 	 * @param walls 검사할 벽 정보
 	 * @param bodies 검사할 몸체 정보
@@ -32,6 +36,8 @@ private:
 public:
 	/** \brief 충돌 시스템의 역할을 작동시키는 함수
 	 *
+	 * @author 육심현(20150803)
+	 * 
 	 * @param db ECS 데이터베이스
 	 */
 	void process(ECSDB&);

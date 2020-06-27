@@ -1,7 +1,7 @@
 /**
  * @file gamemanager.cpp
  *
- * @author 류희재
+ * @author 류희재(20191587)
  *
  */
 
@@ -21,6 +21,7 @@
 
 #include <iostream>
 
+/// @author 류희재(20191587)
 void Manager::start_game(){
 	int level_count = 1;
 	int max_level = 4;

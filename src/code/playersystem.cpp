@@ -1,7 +1,7 @@
 /**
  * @file playersystem.cpp
  *
- * @author 육심현
+ * @author 육심현(20150803)
  *
  */
 
@@ -11,6 +11,7 @@
 
 // 플레이어 노드(PlayerBody)들의 방향을 바꾸는 함수
 // 노드들을 순회하며 각각의 큐에 방향 값을 뒤에 넣는다. 
+/// @author 육심현(20150803)
 void PlayerBodySystem::change_direction(DIRECTION direction, std::vector<PlayerBody>& bodies){
 	for(PlayerBody& item: bodies){
   		item.push_direction(direction);
@@ -19,6 +20,7 @@ void PlayerBodySystem::change_direction(DIRECTION direction, std::vector<PlayerB
 
 // 플레이어 노드 길이를 검사하는 함수
 // 특정 길이를 만족하지 못한다면 false를 반환한다.
+/// @author 육심현(20150803)
 bool PlayerBodySystem::check_length(int size) {
 	if (size < min_length) {
 		return true;
@@ -28,6 +30,7 @@ bool PlayerBodySystem::check_length(int size) {
 }
 
 // 플레이어 바디 시스템의 역할을 트리거하는 함수
+/// @author 육심현(20150803)
 void PlayerBodySystem::process(ECSDB& db) {
 	// 길이가 부족하다면 다른 연산을 실행하지 않는다.
 	// 그리고 플레이어를 죽은 것으로 한다.
@@ -68,6 +71,7 @@ void PlayerBodySystem::process(ECSDB& db) {
 // 독자적인 큐 데이터를 통해서 구현할 경우
 // 노드 (컴포넌트)들은 시스템에 의해서 독립 실행 연산의 
 // 대상이 될 수 있다. 즉 DOD에 더 적합한 구현이다.
+/// @author 육심현(20150803)
 void PlayerBodySystem::move(std::vector<PlayerBody>& bodies){
 	for (PlayerBody& body : bodies){
 		int dirct = static_cast<int>(body.pop_direction());

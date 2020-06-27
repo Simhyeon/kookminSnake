@@ -1,7 +1,7 @@
 /**
  * @file portalsystem.cpp
  *
- * @author 육심현
+ * @author 육심현(20150803)
  *
  */
 
@@ -15,6 +15,7 @@
 #include <exception>
 
 // 그저 게이트에 도달한 플레이어 노드(PlayerBody) 이동시키는 역할이다.
+/// @author 육심현(20150803)
 void PortalSystem::jump_snake(PlayerBody& body, Position destination) {
 	body.set_pos(destination.get_x(), destination.get_y());
 }
@@ -24,6 +25,7 @@ void PortalSystem::jump_snake(PlayerBody& body, Position destination) {
 // 게이트의 위치가 지도의 중앙에 있다면 
 // 정방향, 시계 방향, 역시계 방향, 역방향 순서로 비어있는 공간을 검색한 뒤
 // 먼저 비어있는 공간을 찾으면 해당 공간과 그 공간으로의 방향을 같이 반환한다.
+/// @author 육심현(20150803)
 std::pair<Position, DIRECTION> PortalSystem::get_jump_result(Position destination,int body_nubmer, ECSDB& db){
 
 	// 게이트가 지도 가장자리에 있는 경우엔 정해진 위치와 방향을 반환한다.
@@ -114,6 +116,7 @@ std::pair<Position, DIRECTION> PortalSystem::get_jump_result(Position destinatio
 //
 // 위와 같은 경우에는 게이트를 타는 방향에 따라서는
 // 살 수 있다.
+/// @author 육심현(20150803)
 Portal PortalSystem::regen_portal(const Portal& portal, PosVc& walls) {
 	int first, second;
 	int wall_size = walls.size();
@@ -153,6 +156,7 @@ Portal PortalSystem::regen_portal(const Portal& portal, PosVc& walls) {
 // 모든 플레이어 노드를 순회하면서 게이트와 동일한 위체 있는가를 검사한다.
 // 게이트와 동일한 위치에 있다면(게이트와 상호작용 했다면)
 // 반대편 게이트으 위치와 상호작용한 바디의 인덱스를 반환한다.
+/// @author 육심현(20150803)
 std::pair<Position, int> PortalSystem::check_portal_interaction(const std::vector<PlayerBody>& bodies, const Portal& portal){
 	// TODO 
 	int counter = 0;
@@ -167,6 +171,7 @@ std::pair<Position, int> PortalSystem::check_portal_interaction(const std::vecto
 	return std::pair<Position, int>(Position(-1,-1), -1);
 }
 
+/// @author 육심현(20150803)
 void PortalSystem::process(ECSDB & db) {
 	auto result = check_portal_interaction(db.get_snake(), db.get_portal());
 	// 게이트와 부딪힌 플레이어 노드를 이동시킨다.

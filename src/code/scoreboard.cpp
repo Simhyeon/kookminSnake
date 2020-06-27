@@ -1,12 +1,12 @@
 /**
  * @file scoreboard.cpp
  *
- * @author 류희재
+ * @author 류희재(20191587)
  *
  */
 
 #include "scoreboard.hpp"
-
+/// @author 류희재(20191587)
 void ScoreSystem::process(ECSDB &db){
 
 	if (db.get_growth_qual() <= db.get_growth_counter()){

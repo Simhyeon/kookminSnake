@@ -1,7 +1,7 @@
 /**
  * @file renderer.cpp
  *
- * @author 류희재
+ * @author 류희재(20191587)
  *
  */
 
@@ -11,8 +11,9 @@
 #include <iostream>
 #include <string>
 
+/// @author 류희재(20191587)
 Renderer::Renderer(){}
-
+/// @author 류희재(20191587)
 void Renderer::init(ECSDB& ecsdb){
 
 	initscr();
@@ -43,7 +44,7 @@ void Renderer::init(ECSDB& ecsdb){
 	nodelay(ecsdb.get_playboard(),true); ///if there wasn't any key pressed don't wait for keypress
 }
 
-	
+/// @author 류희재(20191587)
 void Renderer::process(ECSDB & ecsdb){ 
 	refresh();
 	wrefresh(ecsdb.get_playboard());

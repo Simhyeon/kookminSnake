@@ -1,7 +1,7 @@
 /**
  * @file main.cpp
  *
- * @author 류희재
+ * @author 류희재(20191587)
  *
  */
 
